@@ -1,0 +1,10 @@
+@import url(./search/mainBarContactSearch.scss);
+@import url(./body/mainBarContactBody.scss);
+.contact-side {
+  width: 100%;
+  min-height: 100%;
+}
+.contact-side__loader-block {
+  width: 100%;
+  height: calc(100vh - 114px);
+}

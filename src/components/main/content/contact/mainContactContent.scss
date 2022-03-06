@@ -1,0 +1,16 @@
+@import "../../../../styles/helper/helper.scss";
+@import url(./profile/contactProfile.scss);
+@import url(./about/contactAbout.scss);
+@import url(./wrapper/contactWrapper.scss);
+.content-contact {
+  min-width: 100%;
+  min-height: 100vh;
+  @include adaptive-value("padding-left", 1376, 500, 56, 20);
+  @include adaptive-value("padding-right", 1376, 500, 56, 20);
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.content-contact__flex {
+  display: flex;
+  justify-content: space-between;
+}

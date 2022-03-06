@@ -1,0 +1,13 @@
+.title_container {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.title_text {
+  font-size: 25px;
+  font-style: italic;
+  color: rgba(0, 0, 255, 0.884);
+}

@@ -1,0 +1,7 @@
+@mixin adaptive-value($property, $maxViev, $minViev, $maxSize, $minSize) {
+  $addSize: $maxSize - $minSize;
+  $addViev: $maxViev - $minViev;
+  #{$property}: calc(
+    #{$minSize + px} + #{$addSize} * ((100vw - #{$minViev + px}) / #{$addViev})
+  );
+}

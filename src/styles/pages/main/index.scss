@@ -1,0 +1,20 @@
+@import url("../../../components/main/bar/mainBar.scss");
+@import url("../../../components/main/side/mainSideBar.scss");
+@import url("../../../components/main/content/mainContent.scss");
+
+.main {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.main__container {
+  width: 100%;
+  max-width: 1440px;
+  min-height: 100vh;
+}
+.main__block {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+}

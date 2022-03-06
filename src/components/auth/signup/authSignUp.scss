@@ -1,0 +1,56 @@
+.signup-auth {
+  min-height: 95vh;
+  position: relative;
+}
+.signup-auth__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.signup-auth__avatar {
+  display: block;
+  width: 96px;
+  height: 96px;
+  background-color: #d5dae2;
+  border-radius: 50%;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.signup-auth__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.signup-auth__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.signup-auth__name {
+  margin-bottom: 16px;
+}
+.signup-auth__lastname {
+  margin-bottom: 25px;
+}
+.signup-auth__mail {
+  margin-bottom: 16px;
+}
+.signup-auth__password {
+  margin-bottom: 16px;
+}
+.signup-auth__submit {
+  margin-bottom: 16px;
+}
+.signup-auth__submit:hover {
+  background-color: #248bf2;
+  color: white;
+}
+.signup-auth__text {
+  margin-top: 16px;
+}
+.signup-auth__text span {
+  font-weight: 600;
+}

@@ -1,0 +1,12 @@
+@import url(./contact/mainContactContent.scss);
+@import url(./chat/mainContentChat.scss);
+@import "../../../styles/helper/helper.scss";
+
+.content {
+  @include adaptive-value("flex-basis", 1376, 700, 1016, 476);
+  flex-grow: 1;
+  max-width: 1016px;
+  min-width: 476px;
+  height: 100vh;
+  overflow-y: auto;
+}

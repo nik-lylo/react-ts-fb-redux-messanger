@@ -1,0 +1,29 @@
+.group-card {
+  display: flex;
+  padding: 6px 0px;
+  &__avatar {
+    height: 40px;
+    width: 40px;
+    margin-right: 16px;
+  }
+  &__block {
+  }
+  &__name {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #171a1f;
+  }
+  &__amount {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.24px;
+    color: #71747a;
+  }
+}

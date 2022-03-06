@@ -1,0 +1,73 @@
+.bar {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 0 0 64px;
+  background: #f2f3f5;
+  padding: 16px 0 26px 0;
+}
+.bar__logo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.bar-link {
+  font-size: 21px;
+  height: 56px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #71747a;
+  position: relative;
+  z-index: 5;
+}
+
+.bar-link:hover::after {
+  content: "";
+  width: 3px;
+  height: 48px;
+  border-radius: 0px 100px 100px 0px;
+  background: #248bf2;
+  position: absolute;
+  top: 4px;
+  left: 0px;
+}
+.link-chosen {
+  color: #248bf2;
+}
+.link-chosen::after {
+  content: "";
+  width: 3px;
+  height: 48px;
+  border-radius: 0px 100px 100px 0px;
+  background: #248bf2;
+  position: absolute;
+  top: 4px;
+  left: 0px;
+}
+
+.bar-link-top {
+  display: flex;
+  flex-direction: column;
+}
+
+.bar-link-bottom__board {
+  font-size: 21px;
+}
+.bar-link-top_compas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 56px;
+  font-size: 21px;
+  color: red;
+}
+.bar-link-top_compas:hover {
+  color: aqua;
+  border-left: 2px solid #248bf2;
+}

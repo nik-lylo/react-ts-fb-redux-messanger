@@ -1,0 +1,67 @@
+@import url(./info/contactAboutInfo.scss);
+.contact-about {
+  flex: 0 1 536px;
+  padding: 16px;
+  &__title {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: #171a1f;
+    margin-bottom: 12px;
+  }
+  &__text {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #171a1f;
+    margin-bottom: 8px;
+  }
+}
+.contact-about-info {
+  display: flex;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  &__column_left {
+    max-width: 246px;
+    flex: 1 1 auto;
+    margin-right: 16px;
+  }
+  &__column_right {
+    max-width: 246px;
+    flex: 1 1 auto;
+  }
+}
+.about-group {
+  &__title {
+    padding: 12px 0px;
+    display: flex;
+    align-items: center;
+  }
+  &__title__text {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: #171a1f;
+    margin-right: 10px;
+  }
+  &__title__number {
+    font-family: SF Pro Text;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #9d9fa3;
+  }
+  &__container {
+  }
+}

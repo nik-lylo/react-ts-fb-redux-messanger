@@ -1,0 +1,71 @@
+.contact-profile {
+  max-width: 272px;
+  flex: 1 1 272px;
+  padding: 0px 16px;
+  margin-right: 16px;
+
+  &__avatar {
+    margin-bottom: 16px;
+  }
+  &__fullname {
+    font-family: SFProDisplay;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.38px;
+    color: #171a1f;
+    margin-bottom: 4px;
+  }
+  &__status {
+    margin-bottom: 16px;
+  }
+  &__btn {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #248bf2;
+    border-radius: 8px;
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.24px;
+    color: #ffffff;
+    margin-bottom: 16px;
+  }
+}
+.card-nav {
+  width: 100%;
+  &__row {
+    display: flex;
+    padding: 12px 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    width: 100%;
+    background: none;
+  }
+  &__icon {
+    margin-right: 16px;
+    background: none;
+    font-size: 21px;
+    color: #71747a;
+  }
+  &__text {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #171a1f;
+  }
+}
+
+.card-nav__row:hover {
+  background-color: #d2d7e0b4;
+}

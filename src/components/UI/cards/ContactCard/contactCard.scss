@@ -1,0 +1,88 @@
+.contact-card {
+  width: 100%;
+  display: flex;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+.contact-card_blue {
+  background: #398fe5;
+}
+.contact-card_blue .contact-card__fullname {
+  color: white;
+}
+
+.contact-card_blue:hover {
+  background: #398fe5 !important;
+}
+
+.contact-card_blue:hover button {
+  display: none !important;
+}
+
+.contact-card__avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+  outline: 1px solid rgba(211, 211, 211, 0.521);
+}
+.contact-card__avatar__container {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.contact-card__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.contact-card_indicator {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #248bf2;
+  outline: 2px solid #ffffff;
+  z-index: 9999;
+  bottom: 2px;
+  right: 3px;
+}
+.contact-card__content {
+  display: flex;
+  justify-content: space-between;
+  flex: 1 1 auto;
+}
+.content-card__btn {
+  height: 100%;
+  width: 40px;
+  text-align: right;
+  background: none !important;
+  font-size: 21px;
+  color: #71747a;
+  display: none;
+}
+.content-card__btn:hover {
+  color: #248bf2c7;
+}
+
+.contact-card__fullname {
+  font-family: SFProText;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: -0.24px;
+}
+.contact-card:hover {
+  background: #f2f3f5;
+}
+.contact-card:hover button {
+  display: block;
+}
+.contact-card_choosen {
+  background: #398fe5;
+  color: white !important ;
+}
