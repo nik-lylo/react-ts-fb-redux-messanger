@@ -1,3 +1,4 @@
+import { IMessage } from "../../../lib/models/IMessage";
 import { IUser } from "../../../lib/models/IUser";
 
 export interface IChatState {
@@ -5,6 +6,8 @@ export interface IChatState {
   selectedChat: IUser;
   chatError: string | null;
   myChatList: IUser[];
+  messageSnapList: IMessage[];
+  messageList: IMessage[];
 }
 
 export enum ChatActionEnum {
@@ -12,6 +15,8 @@ export enum ChatActionEnum {
   SET_IS_CHAT_LOADING = "SET_IS_CHAT_LOADING",
   SET_CHAT_ERROR = "SET_CHAT_ERROR",
   SET_MY_CHAT_LIST = "SET_MY_CHAT_LIST",
+  SET_MESSAGE_SNAP_LIST = "SET_MESSAGE_SNAP_LIST",
+  SET_MESSAGE_LIST = "SET_MESSAGE_LIST",
 }
 
 export interface SetSelectedChat {
@@ -30,9 +35,19 @@ export interface SetMyChatList {
   type: ChatActionEnum.SET_MY_CHAT_LIST;
   payload: IUser[];
 }
+export interface SetMessageSnapList {
+  type: ChatActionEnum.SET_MESSAGE_SNAP_LIST;
+  payload: IMessage[];
+}
+export interface SetMessageList {
+  type: ChatActionEnum.SET_MESSAGE_LIST;
+  payload: IMessage[];
+}
 
 export type ChatAction =
   | SetSelectedChat
   | SetChatError
   | SetIsChatLoading
-  | SetMyChatList;
+  | SetMyChatList
+  | SetMessageSnapList
+  | SetMessageList;

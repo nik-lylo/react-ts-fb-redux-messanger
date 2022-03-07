@@ -1,8 +1,11 @@
+import { IMessage } from "../../../../lib/models/IMessage";
 import { IUser } from "../../../../lib/models/IUser";
 import {
   ChatActionEnum,
   SetChatError,
   SetIsChatLoading,
+  SetMessageList,
+  SetMessageSnapList,
   SetMyChatList,
   SetSelectedChat,
 } from "../types";
@@ -22,6 +25,14 @@ export const ChatActionCreators = {
   }),
   setMyChatList: (list: IUser[]): SetMyChatList => ({
     type: ChatActionEnum.SET_MY_CHAT_LIST,
+    payload: list,
+  }),
+  setMessageSnapList: (list: IMessage[]): SetMessageSnapList => ({
+    type: ChatActionEnum.SET_MESSAGE_SNAP_LIST,
+    payload: list,
+  }),
+  setMessageList: (list: IMessage[]): SetMessageList => ({
+    type: ChatActionEnum.SET_MESSAGE_LIST,
     payload: list,
   }),
 };
