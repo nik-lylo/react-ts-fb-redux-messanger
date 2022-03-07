@@ -1,4 +1,3 @@
-
 import { AuthActionCreators } from "./auth/action-creators/reducer_action_creators";
 import { AsyncAuthActionCreators } from "./auth/action-creators/async_action_creators";
 import { AuthOnStateActionCreators } from "./auth/action-creators/on_auth_state_action_creators";
@@ -10,6 +9,8 @@ import { ContactActionCreators } from "./contact/action_creators/reducer_action_
 import { AsyncContactActionCreators } from "./contact/action_creators/async_action_creator";
 import { ControllAuthActionCreators } from "./auth/action-creators/controll_action_creatots";
 import { ControllContactActionCreators } from "./contact/action_creators/controll_action_creator";
+import { ChatActionCreators } from "./chat/action-creators/reducer_action_creators";
+import { AsyncChatActionCreators } from "./chat/action-creators/async_action_creators";
 
 export const allActionCreators = {
   ...AuthActionCreators,
@@ -23,4 +24,6 @@ export const allActionCreators = {
   ...AsyncContactActionCreators,
   ...ControllAuthActionCreators,
   ...ControllContactActionCreators,
+  ...ChatActionCreators,
+  ...AsyncChatActionCreators,
 };

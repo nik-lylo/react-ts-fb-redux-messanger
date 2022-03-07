@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import AvatarRound from "../../AvatarRound/AvatarRound";
+import AvatarRound from "../../AvatarCustom/AvatarRound/AvatarRound";
 import "./groupCard.scss";
 interface GroupCardProps {
   urlAvatar: string;

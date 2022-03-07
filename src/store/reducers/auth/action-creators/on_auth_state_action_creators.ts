@@ -5,6 +5,7 @@ import { AuthActionCreators } from "./reducer_action_creators";
 import { IUser } from "../../../../lib/models/IUser";
 import { ProfileActionCreators } from "../../profile/action-creators/reducer_action_creators";
 import { fetchUser } from "../../../../api/user/fetchUser";
+
 export const AuthOnStateActionCreators = {
   setOnAuthStateChange: () => async (dispatch: AppDispatch) => {
     onAuthStateChanged(firebaseAuth, async (user) => {

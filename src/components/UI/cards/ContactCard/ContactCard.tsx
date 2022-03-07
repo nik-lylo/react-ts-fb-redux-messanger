@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { useActions } from "../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../lib/hooks/useTypedSelector";
 import { IUser } from "../../../../lib/models/IUser";
+import AvatarOnline from "../../AvatarCustom/AvatarOnline/AvatarOnline";
 import UserStatus from "../../user-status/UserStatus";
 import "./contactCard.scss";
 
@@ -47,12 +48,12 @@ const ContactCard: FC<ContactCardProps> = ({ contact, my }) => {
       }
       onClick={handleClickSelect}
     >
-      <div className="contact-card__avatar">
-        {contact.online && <div className="contact-card_indicator"></div>}
-        <div className="contact-card__avatar__container">
-          <img src={contact.urlPhoto} alt="Avatar" />
-        </div>
-      </div>
+      <AvatarOnline
+        contact={contact}
+        width="40px"
+        height="40px"
+        hover={contact.userID === selectedContact.userID}
+      />
       <div className="contact-card__content">
         <div className="contact-card__block">
           <div className="contact-card__fullname">{contact.fullname}</div>

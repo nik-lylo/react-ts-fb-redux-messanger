@@ -19,37 +19,6 @@
   display: none !important;
 }
 
-.contact-card__avatar {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 16px;
-  outline: 1px solid rgba(211, 211, 211, 0.521);
-}
-.contact-card__avatar__container {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
-}
-.contact-card__avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.contact-card_indicator {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #248bf2;
-  outline: 2px solid #ffffff;
-  z-index: 9999;
-  bottom: 2px;
-  right: 3px;
-}
 .contact-card__content {
   display: flex;
   justify-content: space-between;

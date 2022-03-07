@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useActions } from "../../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
-import AvatarRound from "../../../../UI/AvatarRound/AvatarRound";
+import AvatarRound from "../../../../UI/AvatarCustom/AvatarRound/AvatarRound";
 import UserStatus from "../../../../UI/user-status/UserStatus";
 
 const ContactProfile: FC = () => {
