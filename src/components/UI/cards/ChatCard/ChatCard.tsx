@@ -39,17 +39,18 @@ const ChatCard: FC<ChatCardProps> = ({ chat }) => {
         <div className="chat-card-content__profile">
           <div className="chat-card-content__name">{chat.fullname}</div>
           <div className="chat-card-content__time">
-            {isEmptyObj(chat.lastMessage)
+            {chat.lastMessage.createdAt.seconds === 0
               ? "no time"
               : dateFromCreatedAt(chat.lastMessage.createdAt)?.time}
           </div>
         </div>
         <div className="chat-card-content__message">
           <div className="chat-card-content__last-message">
-            {isEmptyObj(chat.lastMessage)
-              ? // <span className="redFont">У вас немає ніяких повідомлень</span>
-                null
-              : chat.lastMessage.text}
+            {chat.lastMessage.createdAt.seconds === 0 ? (
+              <span className="redFont">У вас немає ніяких повідомлень</span>
+            ) : (
+              chat.lastMessage.text
+            )}
           </div>
           <div className="chat-card-content__num">
             <span>5</span>

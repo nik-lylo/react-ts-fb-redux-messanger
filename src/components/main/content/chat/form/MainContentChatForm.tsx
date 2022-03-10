@@ -5,17 +5,12 @@ import CustomLoadButtonSend from "../../../../UI/buttons/CustomLoadButtonSend/Cu
 import "./mainContentChatForm.scss";
 
 const MainContentChatForm: FC = () => {
-  const [inputText, setInputText] = useState<string>("");
-  const { setUploadMessege } = useActions();
-  const { selectedChat, isMessageLoading } = useTypedSelector(
+  const { setUploadMessege, setChatInputText } = useActions();
+  const { selectedChat, isMessageLoading, chatInputText } = useTypedSelector(
     (s) => s.chatReducer
   );
   const myProfile = useTypedSelector((s) => s.profileReducer);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  function rewrite(): void {
-    setInputText("");
-  }
 
   function handleFocus(): void {
     if (inputRef.current) {
@@ -24,15 +19,15 @@ const MainContentChatForm: FC = () => {
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    setInputText(e.target.value);
+    setChatInputText(e.target.value);
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (inputText === "") {
+    if (chatInputText === "") {
       return;
     }
-    setUploadMessege(myProfile, inputText, selectedChat, handleFocus, rewrite);
+    setUploadMessege(myProfile, chatInputText, selectedChat, handleFocus);
   }
   return (
     <form className="main-content-chat-form" onSubmit={handleSubmit}>
@@ -43,7 +38,7 @@ const MainContentChatForm: FC = () => {
           className="main-content-chat-form__input"
           type="text"
           placeholder="Write a message..."
-          value={inputText}
+          value={chatInputText}
           onChange={handleChange}
           disabled={isMessageLoading}
           ref={inputRef}

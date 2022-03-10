@@ -48,15 +48,28 @@ export const AsyncContactActionCreators = {
       filtGlobalContact: IUser[]
     ) =>
     async (dispatch: AppDispatch) => {
+      dispatch(ContactActionCreators.setIsContactLoading(true));
       try {
-        dispatch(ContactActionCreators.setMyContact([...myContact, contact]));
+        const changedContact = {
+          ...contact,
+          lastMessage: {
+            text: "",
+            fromID: "",
+            urlPhoto: "",
+            createdAt: { seconds: 0 },
+            fullname: "",
+          },
+        };
+        dispatch(
+          ContactActionCreators.setMyContact([...myContact, changedContact])
+        );
         dispatch(
           ContactActionCreators.setFilteredMyContact([
             ...filtMyContact,
-            contact,
+            changedContact,
           ])
         );
-        uploadToMyContact(userId, contact);
+        await uploadToMyContact(userId, changedContact);
         const filterClone = filterContactArray(globalContact, contact.userID);
         const filterFilteredClone = filterContactArray(
           filtGlobalContact,
@@ -67,7 +80,11 @@ export const AsyncContactActionCreators = {
           ContactActionCreators.setFilteredGlobalContact(filterFilteredClone)
         );
       } catch (e: any) {
+        console.log(e.message);
+
         dispatch(ContactActionCreators.setContactError(e.message));
+      } finally {
+        dispatch(ContactActionCreators.setIsContactLoading(false));
       }
     },
   setDeleteFromMyContact:

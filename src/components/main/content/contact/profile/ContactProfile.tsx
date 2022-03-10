@@ -1,12 +1,15 @@
 import React, { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
+import { RoutesMainEnum } from "../../../../../lib/utilits/RoutesEnum";
 import AvatarRound from "../../../../UI/AvatarCustom/AvatarRound/AvatarRound";
 import UserStatus from "../../../../UI/user-status/UserStatus";
 
 const ContactProfile: FC = () => {
   const [isMyContact, setIsMyContact] = useState<boolean | null>(null);
-  const { setAllContact, setDeleteFromMyContact } = useActions();
+  const { setAllContact, setDeleteFromMyContact, setSelectedChat } =
+    useActions();
   const {
     selectedContact,
     myContact,
@@ -15,6 +18,21 @@ const ContactProfile: FC = () => {
     filteredMyContact,
   } = useTypedSelector((s) => s.contactReducer);
   const { userID } = useTypedSelector((s) => s.profileReducer);
+  const navigate = useNavigate();
+
+  function handleClickNavigate() {
+    setSelectedChat({
+      ...selectedContact,
+      lastMessage: {
+        text: "",
+        fromID: "",
+        urlPhoto: "",
+        createdAt: { seconds: 0 },
+        fullname: "",
+      },
+    });
+    navigate(RoutesMainEnum.CHAT);
+  }
 
   function defineIsMyContact() {
     const arr = myContact.map((it) => it.userID);
@@ -63,13 +81,14 @@ const ContactProfile: FC = () => {
         <UserStatus hover={false} flag={selectedContact.online} />
       </div>
       {isMyContact ? (
-        <button className="contact-profile__btn">Send Message</button>
+        <button className="contact-profile__btn" onClick={handleClickNavigate}>
+          Send Message
+        </button>
       ) : (
         <button className="contact-profile__btn" onClick={handleClickAdd}>
           Add to friends
         </button>
       )}
-
       {isMyContact && (
         <div className="contact-profile__nav card-nav">
           <button className="card-nav__row">

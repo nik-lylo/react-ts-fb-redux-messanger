@@ -16,8 +16,16 @@ export enum RoutesFullAuthEnum {
 export enum RoutesMainEnum {
   CONTACT = "contact",
   CHAT = "chat",
+  SETTINGS = "settings",
+}
+export enum RoutesMainSettingsEnum {
+  EDIT = "edit",
+  COMMUNITIES = "communities",
+  PROFILE = "profile",
+  SIGN_OUT = "signout",
 }
 export enum RoutesFullMainEnum {
   MAIN_CONTACT = "/main/contact",
   MAIN_CHAT = "/main/chat",
+  MAIN_SETTINGS = "/main/settings",
 }

@@ -17,7 +17,15 @@ const AppRouter: FC = () => {
                     path={child.path}
                     element={<child.element />}
                     key={child.path}
-                  />
+                  >
+                    {child.children?.map((item: IRoute) => (
+                      <Route
+                        path={item.path}
+                        element={<item.element />}
+                        key={item.path}
+                      />
+                    ))}
+                  </Route>
                 ))}
               </Route>
             ))
@@ -38,3 +46,15 @@ const AppRouter: FC = () => {
 };
 
 export default AppRouter;
+
+{
+  /* <Route key={it.path} path={it.path} element={<it.element />}>
+                {it.children?.map((child: IRoute) => (
+                  <Route
+                    path={child.path}
+                    element={<child.element />}
+                    key={child.path}
+                  />
+                ))}
+              </Route> */
+}

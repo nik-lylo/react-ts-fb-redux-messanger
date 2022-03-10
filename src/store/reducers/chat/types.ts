@@ -8,7 +8,7 @@ export interface IChatState {
   chatError: string | null;
   myChatList: IUser[];
   myChatSnapList: IUser[];
-  chatSnap: IUser;
+  chatInputText: string;
   messageSnapList: IMessage[];
   messageList: IMessage[];
 }
@@ -21,7 +21,7 @@ export enum ChatActionEnum {
   SET_MY_CHAT_LIST = "SET_MY_CHAT_LIST",
   SET_MY_CHAT_SNAP_LIST = "SET_MY_CHAT_SNAP_LIST",
   SET_MESSAGE_SNAP_LIST = "SET_MESSAGE_SNAP_LIST",
-  SET_CHAT_SNAP = "SET_CHAT_SNAP",
+  SET_CHAT_INPUT_TEXT = "SET_CHAT_INPUT_TEXT",
   SET_MESSAGE_LIST = "SET_MESSAGE_LIST",
 }
 
@@ -29,9 +29,9 @@ export interface SetSelectedChat {
   type: ChatActionEnum.SET_SELECTED_CHAT;
   payload: IUser;
 }
-export interface SetChatSnap {
-  type: ChatActionEnum.SET_CHAT_SNAP;
-  payload: IUser;
+export interface SetChatInputText {
+  type: ChatActionEnum.SET_CHAT_INPUT_TEXT;
+  payload: string;
 }
 export interface SetChatError {
   type: ChatActionEnum.SET_CHAT_ERROR;
@@ -71,4 +71,4 @@ export type ChatAction =
   | SetMessageSnapList
   | SetMessageList
   | SetMyChatSnapList
-  | SetChatSnap;
+  | SetChatInputText;

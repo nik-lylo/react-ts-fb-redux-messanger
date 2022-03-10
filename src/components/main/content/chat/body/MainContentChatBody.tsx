@@ -4,11 +4,10 @@ import { useActions } from "../../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import MessageCard from "../../../../UI/cards/MessageCard/MessageCard";
 import EmptyMessageWrapper from "../../../../UI/empty_wrapper/EmptyMessageWrapper/EmptyMessageWrapper";
-import NoSelectedChatWrapper from "../../../../UI/empty_wrapper/NoSelectedChatWrapper/NoSelectedChatWrapper";
 import "./mainContentChatBody.scss";
 
 const MainContentChatBody: FC = () => {
-  const { setOnMessageSnapList, setMessageList } = useActions();
+  const { setOnMessageSnapList, setControllMyMessageList } = useActions();
   const { userID } = useTypedSelector((s) => s.profileReducer);
   const { selectedChat, messageSnapList, messageList } = useTypedSelector(
     (s) => s.chatReducer
@@ -30,18 +29,7 @@ const MainContentChatBody: FC = () => {
 
   // !При зміні SnapList ми додаємо нові повідомлення в основний масив повідомлень
   useEffect(() => {
-    if (messageSnapList.length === 0 && isEmptyObj(selectedChat.lastMessage)) {
-      setMessageList(messageSnapList);
-      return;
-    }
-    if (messageSnapList.length === 0) return;
-    if (
-      messageSnapList[messageSnapList.length - 1].fromID !== userID &&
-      messageSnapList[messageSnapList.length - 1].fromID !== selectedChat.userID
-    ) {
-      return;
-    }
-    setMessageList(messageSnapList);
+    setControllMyMessageList(messageSnapList, selectedChat, userID);
   }, [messageSnapList]);
 
   return (

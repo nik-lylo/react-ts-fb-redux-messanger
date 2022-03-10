@@ -11,7 +11,7 @@ const initialState: IChatState = {
   myChatSnapList: [] as IUser[],
   messageSnapList: [] as IMessage[],
   messageList: [] as IMessage[],
-  chatSnap: {} as IUser,
+  chatInputText: "",
 };
 
 export default function chatReducer(
@@ -35,8 +35,8 @@ export default function chatReducer(
       return { ...state, messageList: action.payload };
     case ChatActionEnum.SET_MESSAGE_SNAP_LIST:
       return { ...state, messageSnapList: action.payload };
-    case ChatActionEnum.SET_CHAT_SNAP:
-      return { ...state, chatSnap: action.payload };
+    case ChatActionEnum.SET_CHAT_INPUT_TEXT:
+      return { ...state, chatInputText: action.payload };
     default:
       return state;
   }

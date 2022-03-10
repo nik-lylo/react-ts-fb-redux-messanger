@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import {
   RoutesFullMainEnum,
   RoutesNames,
@@ -7,19 +7,24 @@ import {
 import BarLoader from "../../UI/loader/BarLoader/BarLoader";
 import MainContentChat from "./chat/MainContentChat";
 import MainContactContent from "./contact/MainContactContent";
+import MainContentSettings from "./settings/MainContentSettings";
 
 const MainContent: FC = () => {
   const location = useLocation();
   return (
     <div className="main__content content">
       {(() => {
-        switch (location.pathname) {
-          case RoutesFullMainEnum.MAIN_CONTACT:
-            return <MainContactContent />;
-          case RoutesFullMainEnum.MAIN_CHAT:
-            return <MainContentChat />;
-          case RoutesNames.MAIN:
-            return <BarLoader />;
+        if (location.pathname === RoutesFullMainEnum.MAIN_CONTACT) {
+          return <MainContactContent />;
+        }
+        if (location.pathname === RoutesFullMainEnum.MAIN_CHAT) {
+          return <MainContentChat />;
+        }
+        if (location.pathname.startsWith(RoutesFullMainEnum.MAIN_SETTINGS)) {
+          return <MainContentSettings />;
+        }
+        if (location.pathname === RoutesNames.MAIN) {
+          return <BarLoader />;
         }
       })()}
     </div>

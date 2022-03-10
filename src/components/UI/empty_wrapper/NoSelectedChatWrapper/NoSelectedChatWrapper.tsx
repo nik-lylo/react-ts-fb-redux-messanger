@@ -1,7 +1,13 @@
 import React, { FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { RoutesMainEnum } from "../../../../lib/utilits/RoutesEnum";
 import "./noSelectedChatWrapper.scss";
 
 const NoSelectedChatWrapper: FC = () => {
+  const navigate = useNavigate();
+  function handleClickNavigate(): void {
+    navigate(RoutesMainEnum.CONTACT);
+  }
   return (
     <div className="no-selected-chat-wrapper">
       <div className="no-selected-chat-wrapper__image">
@@ -22,7 +28,10 @@ const NoSelectedChatWrapper: FC = () => {
           <div className="wrapper-buttons__text">Create group</div>
         </div>
         <div className="wrapper-buttons__item">
-          <button className="wrapper-buttons__btn   icon-add-body"></button>
+          <button
+            onClick={handleClickNavigate}
+            className="wrapper-buttons__btn   icon-add-body"
+          ></button>
           <div className="wrapper-buttons__text">Invite friends</div>
         </div>
       </div>

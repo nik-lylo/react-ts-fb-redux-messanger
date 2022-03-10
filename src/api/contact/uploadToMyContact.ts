@@ -13,6 +13,7 @@ export async function uploadToMyContact(myId: string, contact: IUser) {
       contact.userID
     );
     await setDoc(colRef, contact);
+    console.log("sended");
   } catch (e: any) {
     throw new Error("Error uploading new contact to database!!!");
   }

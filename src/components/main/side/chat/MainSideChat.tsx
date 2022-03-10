@@ -1,6 +1,4 @@
-import { log } from "console";
 import React, { FC, useEffect } from "react";
-import { isEmptyObj } from "../../../../lib/helper/isEmptyObj";
 import { useActions } from "../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../lib/hooks/useTypedSelector";
 import { IUser } from "../../../../lib/models/IUser";
@@ -15,6 +13,7 @@ const MainSideChat: FC = () => {
     setSelectedChat,
     setMessageList,
     setMessageSnapList,
+    setSelectedContact,
   } = useActions();
   const { userID } = useTypedSelector((s) => s.profileReducer);
   const { myChatSnapList, myChatList } = useTypedSelector((s) => s.chatReducer);
@@ -23,6 +22,7 @@ const MainSideChat: FC = () => {
   useEffect(() => {
     setOnChatSnapList(userID);
     return () => {
+      setSelectedContact({} as IUser);
       setSelectedChat({} as IUser);
       setMyChatList([]);
       setMessageList([]);

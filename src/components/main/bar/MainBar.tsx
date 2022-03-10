@@ -41,7 +41,14 @@ const MainBar: FC = () => {
             }
           ></Link>
           <Link to={"#"} className="bar-link icon-bell"></Link>
-          <Link to={"#"} className="bar-link icon-gear"></Link>
+          <Link
+            to={RoutesMainEnum.SETTINGS}
+            className={
+              location.pathname.startsWith(RoutesFullMainEnum.MAIN_SETTINGS)
+                ? "bar-link icon-gear-fill link-chosen"
+                : "bar-link icon-gear"
+            }
+          ></Link>
         </div>
       </div>
       <div className="bar__link_bottom bar-link-bottom">

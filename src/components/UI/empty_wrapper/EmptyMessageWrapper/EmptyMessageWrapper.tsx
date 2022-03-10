@@ -1,9 +1,16 @@
 import React, { FC } from "react";
+import { useActions } from "../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../lib/hooks/useTypedSelector";
+import EmptyMessagePin from "./EmptyMessagePin";
 import "./emptyMessageWrapper.scss";
 
 const EmptyMessageWrapper: FC = () => {
   const { selectedChat } = useTypedSelector((s) => s.chatReducer);
+  const { setChatInputText } = useActions();
+  function handleClick(children: string) {
+    setChatInputText(children);
+  }
+
   return (
     <div className="empty-message-wrapper">
       <div className="empty-message-wrapper__img">
@@ -12,19 +19,24 @@ const EmptyMessageWrapper: FC = () => {
           alt="Empty Chat"
         />
       </div>
+
       <div className="empty-message-wrapper__title">No messages yet</div>
       <div className="empty-message-wrapper__subtitle">
         Start a conversation with {selectedChat.name}
       </div>
       <div className="empty-message-wrapper__phrases">
-        <div className="empty-message-wrapper__item">
-          Hello, {selectedChat.name}
-        </div>
-        <div className="empty-message-wrapper__item">Happy to connect!</div>
-        <div className="empty-message-wrapper__item">
+        <EmptyMessagePin
+          handleClick={handleClick}
+        >{`Hello, ${selectedChat.name}`}</EmptyMessagePin>
+        <EmptyMessagePin handleClick={handleClick}>
+          Happy to connect!
+        </EmptyMessagePin>
+        <EmptyMessagePin handleClick={handleClick}>
           What are you working on?
-        </div>
-        <div className="empty-message-wrapper__item">How can I help?</div>
+        </EmptyMessagePin>
+        <EmptyMessagePin handleClick={handleClick}>
+          How can I help?
+        </EmptyMessagePin>
       </div>
     </div>
   );

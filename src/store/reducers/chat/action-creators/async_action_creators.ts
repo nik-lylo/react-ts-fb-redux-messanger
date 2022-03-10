@@ -25,8 +25,7 @@ export const AsyncChatActionCreators = {
       myProfile: IUser,
       mesText: string,
       selectedChat: IUser,
-      handleFocus: () => void,
-      rewrite: () => void
+      handleFocus: () => void
     ) =>
     async (dispatch: AppDispatch) => {
       dispatch(ChatActionCreators.setIsMessageLoading(true));
@@ -60,7 +59,7 @@ export const AsyncChatActionCreators = {
           );
         }
         uploadMessageToFriend(messObj, selectedChat.userID);
-        rewrite();
+        dispatch(ChatActionCreators.setChatInputText(""));
       } catch (e: any) {
         console.log(e.message);
       } finally {

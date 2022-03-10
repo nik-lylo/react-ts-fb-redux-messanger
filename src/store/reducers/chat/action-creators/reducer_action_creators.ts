@@ -3,7 +3,7 @@ import { IUser } from "../../../../lib/models/IUser";
 import {
   ChatActionEnum,
   SetChatError,
-  SetChatSnap,
+  SetChatInputText,
   SetIsChatLoading,
   SetIsMessageLoading,
   SetMessageList,
@@ -46,8 +46,8 @@ export const ChatActionCreators = {
     type: ChatActionEnum.SET_MESSAGE_LIST,
     payload: list,
   }),
-  setChatSnap: (obj: IUser): SetChatSnap => ({
-    type: ChatActionEnum.SET_CHAT_SNAP,
-    payload: obj,
+  setChatInputText: (str: string): SetChatInputText => ({
+    type: ChatActionEnum.SET_CHAT_INPUT_TEXT,
+    payload: str,
   }),
 };

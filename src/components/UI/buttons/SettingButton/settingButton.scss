@@ -1,0 +1,32 @@
+.setting-button {
+  display: flex;
+  padding: 12px 16px 12px 16px;
+  align-items: center;
+  cursor: pointer;
+  &__text {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #171a1f;
+  }
+  &__icon {
+    font-size: 21px;
+    color: #71747a;
+    margin-right: 16px;
+  }
+}
+.setting-button:hover {
+  background: #f2f3f5;
+}
+.setting-button_selected {
+  background: #398fe5 !important;
+  & .setting-button__icon {
+    color: white !important;
+  }
+  & .setting-button__text {
+    color: white !important;
+  }
+}
