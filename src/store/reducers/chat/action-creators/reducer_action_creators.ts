@@ -3,10 +3,13 @@ import { IUser } from "../../../../lib/models/IUser";
 import {
   ChatActionEnum,
   SetChatError,
+  SetChatSnap,
   SetIsChatLoading,
+  SetIsMessageLoading,
   SetMessageList,
   SetMessageSnapList,
   SetMyChatList,
+  SetMyChatSnapList,
   SetSelectedChat,
 } from "../types";
 
@@ -19,12 +22,20 @@ export const ChatActionCreators = {
     type: ChatActionEnum.SET_IS_CHAT_LOADING,
     payload: flag,
   }),
+  setIsMessageLoading: (flag: boolean): SetIsMessageLoading => ({
+    type: ChatActionEnum.SET_IS_MESSAGE_LOADING,
+    payload: flag,
+  }),
   setChatError: (err: null | string): SetChatError => ({
     type: ChatActionEnum.SET_CHAT_ERROR,
     payload: err,
   }),
   setMyChatList: (list: IUser[]): SetMyChatList => ({
     type: ChatActionEnum.SET_MY_CHAT_LIST,
+    payload: list,
+  }),
+  setMyChatSnapList: (list: IUser[]): SetMyChatSnapList => ({
+    type: ChatActionEnum.SET_MY_CHAT_SNAP_LIST,
     payload: list,
   }),
   setMessageSnapList: (list: IMessage[]): SetMessageSnapList => ({
@@ -34,5 +45,9 @@ export const ChatActionCreators = {
   setMessageList: (list: IMessage[]): SetMessageList => ({
     type: ChatActionEnum.SET_MESSAGE_LIST,
     payload: list,
+  }),
+  setChatSnap: (obj: IUser): SetChatSnap => ({
+    type: ChatActionEnum.SET_CHAT_SNAP,
+    payload: obj,
   }),
 };

@@ -36,6 +36,9 @@
     letter-spacing: 0.76px;
     color: #9d9fa3;
   }
+  &__input:disabled {
+    background: rgba(157, 159, 163, 0.384);
+  }
   &__smile {
     position: absolute;
     height: 100%;
@@ -43,15 +46,6 @@
     font-size: 17.5px;
     right: 0px;
     bottom: 0px;
-  }
-  &__send {
-    margin-left: 16px;
-    flex: 0 0 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 21.5px;
   }
   & button {
     display: flex;

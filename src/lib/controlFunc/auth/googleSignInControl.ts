@@ -1,5 +1,6 @@
 import { uploadNewUser } from "../../../api/auth/uploadNewUser";
 import { rewriteTime } from "../../helper/rewriteTime";
+import { IMessage } from "../../models/IMessage";
 import { IUser } from "../../models/IUser";
 
 export async function googleSignInControl(googleUserSnap: any, checkDB: any) {
@@ -30,6 +31,7 @@ export async function googleSignInControl(googleUserSnap: any, checkDB: any) {
           joined: date,
           location: null,
         },
+        lastMessage: {} as IMessage,
       };
       await uploadNewUser(userObj, googleUserSnap.user.uid);
       return userObj;

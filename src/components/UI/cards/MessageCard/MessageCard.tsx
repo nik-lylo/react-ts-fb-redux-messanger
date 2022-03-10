@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { useTypedSelector } from "../../../../lib/hooks/useTypedSelector";
 import { IMessage } from "../../../../lib/models/IMessage";
 import AvatarRound from "../../AvatarCustom/AvatarRound/AvatarRound";
 import "./messageCard.scss";
@@ -16,15 +15,10 @@ const MessageCard: FC<MessageCardProps> = ({ message }) => {
       </div>
       <div className="message-card__body">
         <div className="message-card__info">
-          <div className="message-card__name">{message.fullTime}</div>
-          <div className="message-card__time">18:20</div>
+          <div className="message-card__name">{message.fullname}</div>
+          <div className="message-card__time">{message.time}</div>
         </div>
-        <div className="message-card__text">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate
-          aut, adipisci cum quisquam commodi maiores consequatur excepturi fuga
-          eligendi cupiditate qui facere quo suscipit explicabo iure animi eum
-          optio quam aliquid nobis nemo!
-        </div>
+        <div className="message-card__text">{message.text}</div>
       </div>
     </div>
   );

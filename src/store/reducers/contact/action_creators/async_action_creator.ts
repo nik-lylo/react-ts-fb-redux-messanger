@@ -1,11 +1,15 @@
 import { AppDispatch } from "../../..";
+import { deleteMessages } from "../../../../api/chat/deleteMessages";
+import { fetchMessages } from "../../../../api/chat/fetchMessages";
 import { fetchGlobalContact } from "../../../../api/contact/fetchGlobalContact";
 import { fetchMyContact } from "../../../../api/contact/fetchMyContact";
 import { uploadDeleteFromMyContact } from "../../../../api/contact/uploadDeleteFromMyContact";
 import { uploadToMyContact } from "../../../../api/contact/uploadToMyContact";
 import { filterContactArray } from "../../../../lib/controlFunc/contact/filterContactArray";
 import { filterGlobalContact } from "../../../../lib/controlFunc/contact/filterGlobalContact";
+import { IMessage } from "../../../../lib/models/IMessage";
 import { IUser } from "../../../../lib/models/IUser";
+import { ChatActionCreators } from "../../chat/action-creators/reducer_action_creators";
 import { ContactActionCreators } from "./reducer_action_creator";
 
 export const AsyncContactActionCreators = {
@@ -80,6 +84,8 @@ export const AsyncContactActionCreators = {
           myContact,
           contact.userID
         );
+        const messages: IMessage[] = await fetchMessages(myId, contact.userID);
+        await deleteMessages(myId, contact.userID, messages);
         await uploadDeleteFromMyContact(myId, contact.userID);
         dispatch(ContactActionCreators.setMyContact(filteringMyContact));
         dispatch(
@@ -90,6 +96,7 @@ export const AsyncContactActionCreators = {
           ContactActionCreators.setFilteredGlobalContact(newGlobalContact)
         );
         dispatch(ContactActionCreators.setSelectedContact({} as IUser));
+        dispatch(ChatActionCreators.setMyChatList(filteringMyContact));
       } catch (e: any) {
         dispatch(ContactActionCreators.setContactError(e.message));
       } finally {

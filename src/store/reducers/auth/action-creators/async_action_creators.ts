@@ -9,6 +9,7 @@ import { googleSignInControl } from "../../../../lib/controlFunc/auth/googleSign
 import { firebaseAuth } from "../../../../lib/firebase";
 import { rewriteTime } from "../../../../lib/helper/rewriteTime";
 import { DefaultValue } from "../../../../lib/models/DefaultValue";
+import { IMessage } from "../../../../lib/models/IMessage";
 import { IUser } from "../../../../lib/models/IUser";
 import {
   RoutesFullAuthEnum,
@@ -53,6 +54,7 @@ export const AsyncAuthActionCreators = {
             joined: date,
             location: null,
           },
+          lastMessage: {} as IMessage,
         };
         await uploadNewUser(userObj, newUser.user.uid);
         dispatch(ProfileActionCreators.setNewUser(userObj));

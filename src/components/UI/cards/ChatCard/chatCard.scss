@@ -3,10 +3,6 @@
   padding: 8px 16px 8px 16px;
   width: 100%;
   cursor: pointer;
-  &__avatar {
-  }
-  &__content {
-  }
 }
 .chat-card-content {
   width: 100%;
@@ -58,7 +54,6 @@
     max-height: 27px;
     padding: 10px;
     margin-left: 7px;
-    margin-top: 8px;
   }
   &__num span {
     font-family: SFProText;
@@ -93,4 +88,8 @@
   & .chat-card-content__num span {
     color: #398fe5;
   }
+}
+.redFont {
+  color: crimson;
+  font-weight: 700;
 }

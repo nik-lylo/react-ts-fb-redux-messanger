@@ -1,0 +1,18 @@
+.custom-load-button-send {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: none;
+  color: #71747a !important;
+  margin-left: 16px;
+  flex: 0 0 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21.5px;
+}
+.custom-load-button-send:hover {
+  box-shadow: 0 0 2px 1px #9b9fa74f;
+}

@@ -4,6 +4,8 @@ import AvatarOnline from "../../AvatarCustom/AvatarOnline/AvatarOnline";
 import { useTypedSelector } from "../../../../lib/hooks/useTypedSelector";
 import { useActions } from "../../../../lib/hooks/useActions";
 import { IUser } from "../../../../lib/models/IUser";
+import { isEmptyObj } from "../../../../lib/helper/isEmptyObj";
+import { dateFromCreatedAt } from "../../../../lib/helper/dateFromCreatedAt";
 
 interface ChatCardProps {
   chat: IUser;
@@ -12,6 +14,7 @@ interface ChatCardProps {
 const ChatCard: FC<ChatCardProps> = ({ chat }) => {
   const { selectedChat } = useTypedSelector((s) => s.chatReducer);
   const { setSelectedChat } = useActions();
+
   function handleClick() {
     setSelectedChat(chat);
   }
@@ -35,15 +38,18 @@ const ChatCard: FC<ChatCardProps> = ({ chat }) => {
       <div className="chat-card__content chat-card-content">
         <div className="chat-card-content__profile">
           <div className="chat-card-content__name">{chat.fullname}</div>
-          <div className="chat-card-content__time">18:33</div>
+          <div className="chat-card-content__time">
+            {isEmptyObj(chat.lastMessage)
+              ? "no time"
+              : dateFromCreatedAt(chat.lastMessage.createdAt)?.time}
+          </div>
         </div>
         <div className="chat-card-content__message">
           <div className="chat-card-content__last-message">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum
-            tenetur, officia veniam temporibus culpa alias magnam illum nam
-            aspernatur fugiat nihil totam distinctio, repudiandae ipsa maxime
-            corrupti corporis vitae eveniet odio. Iure officiis laudantium omnis
-            eos, quis magnam aliquid expedita quo vel laborum molestias!
+            {isEmptyObj(chat.lastMessage)
+              ? // <span className="redFont">У вас немає ніяких повідомлень</span>
+                null
+              : chat.lastMessage.text}
           </div>
           <div className="chat-card-content__num">
             <span>5</span>

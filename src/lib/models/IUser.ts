@@ -1,3 +1,5 @@
+import { IMessage } from "./IMessage";
+
 export interface IUser {
   name: string;
   lastname: string;
@@ -6,6 +8,7 @@ export interface IUser {
   urlPhoto: string;
   online: boolean;
   info: IUserInfo;
+  lastMessage: IMessage;
 }
 
 export interface IUserInfo {
