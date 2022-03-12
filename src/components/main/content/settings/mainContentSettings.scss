@@ -1,0 +1,31 @@
+@import url(./profile/settingsProfile.scss);
+@import url(./edit/settingsEdit.scss);
+@import url(./communities/settingsCommunities.scss);
+@import url(./signout/settingsSignOut.scss);
+.main-content-settings {
+  margin: 0 auto;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 60%;
+}
+.settings-title {
+  font-family: SFProDisplay;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.36px;
+  color: #171a1f;
+  margin-bottom: 12px;
+}
+.settings-subtitle {
+  padding: 12px 0px;
+  font-family: SFProText;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 24px;
+  letter-spacing: -0.41px;
+  color: #171a1f;
+}

@@ -1,1 +1,1 @@
- - запушити коміт в репозиторій Git Hub
+git push origin master - запушити коміт в репозиторій Git Hub

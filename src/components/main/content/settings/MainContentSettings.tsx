@@ -10,7 +10,7 @@ const MainContentSettings: FC = () => {
   const location = useLocation();
 
   return (
-    <div>
+    <div className="main-content-settings">
       {(() => {
         if (location.pathname.endsWith(RoutesMainSettingsEnum.EDIT)) {
           return <SettingsEdit />;
