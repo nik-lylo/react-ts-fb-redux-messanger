@@ -7,6 +7,8 @@ import {
   SetEditError,
   SetEditLoading,
   SetAvatarPopupUpdateOpen,
+  SetAvatarUpdateLoading,
+  SetAvatarUpdateError,
 } from "../types";
 
 export const ProfileActionCreators = {
@@ -33,5 +35,13 @@ export const ProfileActionCreators = {
   setPopupAvatarUpdateOpen: (flag: boolean): SetAvatarPopupUpdateOpen => ({
     type: ProfileEnum.SET_POPUP_AVATAR_UPDATE_OPEN,
     payload: flag,
+  }),
+  setAvatarUpdateLoading: (flag: boolean): SetAvatarUpdateLoading => ({
+    type: ProfileEnum.SET_AVATAR_UPDATE_LOADING,
+    payload: flag,
+  }),
+  setAvatarUpdateError: (err: string | null): SetAvatarUpdateError => ({
+    type: ProfileEnum.SET_AVATAR_UPDATE_ERROR,
+    payload: err,
   }),
 };

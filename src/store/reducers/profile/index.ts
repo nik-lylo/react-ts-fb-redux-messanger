@@ -5,7 +5,9 @@ const initialState: IProfileState = {
   popupAvatarUpdateOpen: false,
   birthdayError: null,
   editError: null,
+  avatarUpdateError: null,
   editLoading: false,
+  avatarUpdateLoading: false,
 };
 
 export default function profileReducer(
@@ -25,6 +27,10 @@ export default function profileReducer(
       return { ...state, editLoading: action.payload };
     case ProfileEnum.SET_POPUP_AVATAR_UPDATE_OPEN:
       return { ...state, popupAvatarUpdateOpen: action.payload };
+    case ProfileEnum.SET_AVATAR_UPDATE_ERROR:
+      return { ...state, avatarUpdateError: action.payload };
+    case ProfileEnum.SET_AVATAR_UPDATE_LOADING:
+      return { ...state, avatarUpdateLoading: action.payload };
     default:
       return state;
   }

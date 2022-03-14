@@ -23,7 +23,7 @@ const InputSettings: FC<InputSettingsProps> = ({
   function handleBlur() {
     if (inputType === "year") {
       if (Number(value) < 1950 && value !== "") {
-        setBirthdayError("Рік народження не може бути менше 1950");
+        setBirthdayError("The year of birth cannot be less than 1950");
         setTimeout(() => {
           setBirthdayError(null);
         }, 3000);
@@ -38,7 +38,7 @@ const InputSettings: FC<InputSettingsProps> = ({
     if (inputType === "date") {
       const checking = `${e.target.value}`;
       if (Number(checking) > 31) {
-        setBirthdayError("Не може бути дата народження більше 31");
+        setBirthdayError("There can be no date of birth greater than 31");
         setTimeout(() => {
           setBirthdayError(null);
         }, 3000);
@@ -51,7 +51,7 @@ const InputSettings: FC<InputSettingsProps> = ({
     if (inputType === "year") {
       const checking = `${e.target.value}`;
       if (Number(checking) > 2010) {
-        setBirthdayError("Не може бути рік народження більше 2010");
+        setBirthdayError("Cannot be year of birth more than 2010");
         setTimeout(() => {
           setBirthdayError(null);
         }, 3000);

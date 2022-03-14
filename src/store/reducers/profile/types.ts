@@ -4,8 +4,10 @@ export interface IProfileState {
   user: IUser;
   birthdayError: null | string;
   editError: null | string;
+  avatarUpdateError: null | string;
   editLoading: boolean;
   popupAvatarUpdateOpen: boolean;
+  avatarUpdateLoading: boolean;
 }
 
 export enum ProfileEnum {
@@ -13,7 +15,9 @@ export enum ProfileEnum {
   SET_NEW_USER = "SET_NEW_USER",
   SET_BIRTHDAY_ERROR = "SET_BIRTHDAY_ERROR",
   SET_EDIT_ERROR = "SET_EDIT_ERROR",
+  SET_AVATAR_UPDATE_ERROR = " SET_AVATAR_UPDATE_ERROR",
   SET_EDIT_LOADING = "SET_EDIT_LOADING",
+  SET_AVATAR_UPDATE_LOADING = "SET_AVATAR_UPDATE_LOADING",
   SET_POPUP_AVATAR_UPDATE_OPEN = "SET_POPUP_AVATAR_UPDATE_OPEN ",
 }
 
@@ -47,10 +51,21 @@ export interface SetAvatarPopupUpdateOpen {
   payload: boolean;
 }
 
+export interface SetAvatarUpdateError {
+  type: ProfileEnum.SET_AVATAR_UPDATE_ERROR;
+  payload: string | null;
+}
+export interface SetAvatarUpdateLoading {
+  type: ProfileEnum.SET_AVATAR_UPDATE_LOADING;
+  payload: boolean;
+}
+
 export type ProfileAction =
   | SetPhotoUrl
   | SetNewUser
   | SetBirthdayError
   | SetEditError
   | SetEditLoading
-  | SetAvatarPopupUpdateOpen;
+  | SetAvatarPopupUpdateOpen
+  | SetAvatarUpdateError
+  | SetAvatarUpdateLoading;

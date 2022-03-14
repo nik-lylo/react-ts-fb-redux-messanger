@@ -10,7 +10,6 @@ import { ProfileActionCreators } from "./reducer_action_creators";
 import { fetchUser } from "../../../../api/user/fetchUser";
 import { isEmptyObj } from "../../../../lib/helper/isEmptyObj";
 import { updateProfileMain } from "../../../../api/profile/updateProfileMain";
-import { async } from "@firebase/util";
 
 export const AsyncProfileActionCreators = {
   setProfileUserUrlPhoto:
@@ -32,17 +31,22 @@ export const AsyncProfileActionCreators = {
   setUpdateProfileUserPhoto:
     (userId: string, file: any, rewrite: () => void) =>
     async (dispatch: AppDispatch) => {
-      dispatch(ProfileActionCreators.setEditLoading(true));
+      dispatch(ProfileActionCreators.setAvatarUpdateLoading(true));
       try {
         await uploadPhoto(userId, file);
         const linkPhoto = await downloadPhoto(userId);
         const photoObj = { urlPhoto: linkPhoto };
         await uploadUpdateUser(userId, photoObj);
         dispatch(ProfileActionCreators.setNewPhotoUrl(linkPhoto));
+        dispatch(ProfileActionCreators.setAvatarUpdateError(null));
+        rewrite();
       } catch (e: any) {
-        dispatch(ProfileActionCreators.setEditError(e.message));
+        dispatch(ProfileActionCreators.setAvatarUpdateError(e.message));
+        setTimeout(() => {
+          ProfileActionCreators.setAvatarUpdateError(null);
+        }, 3000);
       } finally {
-        dispatch(ProfileActionCreators.setEditLoading(false));
+        dispatch(ProfileActionCreators.setAvatarUpdateLoading(false));
       }
     },
   setEditUser:
@@ -68,7 +72,6 @@ export const AsyncProfileActionCreators = {
         const userProfile: any = userSnap.data();
         dispatch(ProfileActionCreators.setNewUser(userProfile));
         rewrite();
-        console.log(userProfile);
       } catch (e: any) {
         dispatch(ProfileActionCreators.setEditError(e.message));
       } finally {

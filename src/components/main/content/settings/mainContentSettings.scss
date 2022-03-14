@@ -3,11 +3,15 @@
 @import url(./communities/settingsCommunities.scss);
 @import url(./signout/settingsSignOut.scss);
 .main-content-settings {
-  margin: 0 auto;
   height: 100vh;
-  overflow-y: scroll;
+  margin: 0 auto;
+  overflow-y: auto;
   overflow-x: hidden;
-  width: 60%;
+  &__container {
+    width: 60%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
 }
 .settings-title {
   font-family: SFProDisplay;
@@ -27,5 +31,14 @@
   font-size: 17px;
   line-height: 24px;
   letter-spacing: -0.41px;
+  color: #171a1f;
+}
+.settings-fullname {
+  font-family: SFProDisplay;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.38px;
   color: #171a1f;
 }

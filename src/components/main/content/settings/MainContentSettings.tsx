@@ -11,20 +11,22 @@ const MainContentSettings: FC = () => {
 
   return (
     <div className="main-content-settings">
-      {(() => {
-        if (location.pathname.endsWith(RoutesMainSettingsEnum.EDIT)) {
-          return <SettingsEdit />;
-        }
-        if (location.pathname.endsWith(RoutesMainSettingsEnum.COMMUNITIES)) {
-          return <SettingsCommunities />;
-        }
-        if (location.pathname.endsWith(RoutesMainSettingsEnum.SIGN_OUT)) {
-          return <SettingsSignOut />;
-        }
-        if (location.pathname.endsWith(RoutesMainSettingsEnum.PROFILE)) {
-          return <SettingsProfile />;
-        }
-      })()}
+      <div className="main-content-settings__container">
+        {(() => {
+          if (location.pathname.endsWith(RoutesMainSettingsEnum.EDIT)) {
+            return <SettingsEdit />;
+          }
+          if (location.pathname.endsWith(RoutesMainSettingsEnum.COMMUNITIES)) {
+            return <SettingsCommunities />;
+          }
+          if (location.pathname.endsWith(RoutesMainSettingsEnum.SIGN_OUT)) {
+            return <SettingsSignOut />;
+          }
+          if (location.pathname.endsWith(RoutesMainSettingsEnum.PROFILE)) {
+            return <SettingsProfile />;
+          }
+        })()}
+      </div>
     </div>
   );
 };

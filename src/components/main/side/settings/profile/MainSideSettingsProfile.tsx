@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
+import { isEmptyObj } from "../../../../../lib/helper/isEmptyObj";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import { RoutesMainSettingsEnum } from "../../../../../lib/utilits/RoutesEnum";
 import AvatarRound from "../../../../UI/AvatarCustom/AvatarRound/AvatarRound";
@@ -22,10 +23,10 @@ const MainSideSettingsProfile: FC = () => {
         </div>
         <div className="main-side-settings-profile__info">
           <div className="main-side-settings-profile__name">
-            {user.fullname}
+            {isEmptyObj(user) ? null : user.fullname}
           </div>
           <div className="main-side-settings-profile__mail">
-            {user.info.email}
+            {isEmptyObj(user) ? null : user.info.email}
           </div>
         </div>
       </NavLink>

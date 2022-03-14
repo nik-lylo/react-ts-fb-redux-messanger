@@ -64,10 +64,7 @@ const AuthAddAvatar: FC = () => {
               handleChange(e)
             }
           />
-          <CustomLoadingButton
-            classes={classes.auth_avatar__btn_loading}
-            isLoadingButton={isAuthLoading}
-          >
+          <CustomLoadingButton isLoadingButton={isAuthLoading}>
             Upload
           </CustomLoadingButton>
           <button

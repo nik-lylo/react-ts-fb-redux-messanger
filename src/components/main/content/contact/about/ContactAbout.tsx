@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { isEmptyObj } from "../../../../../lib/helper/isEmptyObj";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import GroupCard from "../../../../UI/cards/GroupCard/GroupCard";
 import ContactAboutInfo from "./info/ContactAboutInfo";
@@ -24,7 +25,7 @@ const ContactAbout: FC = () => {
             />
           )}
 
-          {birthday && (
+          {isEmptyObj(user.info.birthDay) && (
             <ContactAboutInfo icon="icon-birthday" infoText={birthday} />
           )}
         </div>

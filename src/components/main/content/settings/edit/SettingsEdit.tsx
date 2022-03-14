@@ -70,7 +70,7 @@ const SettingsEdit: FC = () => {
     const checkNum = filterBirthdayObject(birthDayObject);
     if (checkNum === 1 || checkNum === 2) {
       setBirthdayError(
-        "Якщо ви хочете змінити вашу дату народження то вам потрібно заповнити всі поля звязані з датою"
+        "If you want to change your date of birth then you need to fill in all the fields related to the date"
       );
       setTimeout(() => setBirthdayError(null), 4000);
       return;
@@ -188,11 +188,8 @@ const SettingsEdit: FC = () => {
           </button>
         </div>
       </div>
-      {popupAvatarUpdateOpen ? (
-        <PopupAvatarUpdate />
-      ) : (
-        <Loader isOpen={editLoading} />
-      )}
+      <PopupAvatarUpdate isOpen={popupAvatarUpdateOpen} />
+      <Loader isOpen={editLoading} />
     </div>
   );
 };
