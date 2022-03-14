@@ -17,7 +17,7 @@ const ContactProfile: FC = () => {
     filteredGlobalContact,
     filteredMyContact,
   } = useTypedSelector((s) => s.contactReducer);
-  const { userID } = useTypedSelector((s) => s.profileReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const navigate = useNavigate();
 
   function handleClickNavigate() {
@@ -43,7 +43,7 @@ const ContactProfile: FC = () => {
   function handleClickDelete() {
     setDeleteFromMyContact(
       selectedContact,
-      userID,
+      user.userID,
       myContact,
       filteredGlobalContact
     );
@@ -52,7 +52,7 @@ const ContactProfile: FC = () => {
   function handleClickAdd() {
     setAllContact(
       selectedContact,
-      userID,
+      user.userID,
       myContact,
       globalContact,
       filteredMyContact,

@@ -9,7 +9,7 @@ const MainContentChatForm: FC = () => {
   const { selectedChat, isMessageLoading, chatInputText } = useTypedSelector(
     (s) => s.chatReducer
   );
-  const myProfile = useTypedSelector((s) => s.profileReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleFocus(): void {
@@ -27,7 +27,7 @@ const MainContentChatForm: FC = () => {
     if (chatInputText === "") {
       return;
     }
-    setUploadMessege(myProfile, chatInputText, selectedChat, handleFocus);
+    setUploadMessege(user, chatInputText, selectedChat, handleFocus);
   }
   return (
     <form className="main-content-chat-form" onSubmit={handleSubmit}>

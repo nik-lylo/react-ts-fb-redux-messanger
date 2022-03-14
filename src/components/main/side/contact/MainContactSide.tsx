@@ -7,10 +7,10 @@ import MainBarContactSearch from "./search/MainBarContactSearch";
 
 const MainContactSide = () => {
   const { setFetchAllContact } = useActions();
-  const { userID } = useTypedSelector((s) => s.profileReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const { isContactLoading } = useTypedSelector((s) => s.contactReducer);
   useEffect(() => {
-    setFetchAllContact(userID);
+    setFetchAllContact(user.userID);
   }, []);
   return (
     <div className="side__contact contact-side">

@@ -12,11 +12,17 @@ export interface IUser {
 }
 
 export interface IUserInfo {
-  birthDay: string | null;
+  birthDay: IBirthday | null;
   email: string;
   hobby: string | null;
   instagram: null | string;
   twitter: null | string;
   joined: string;
   location: null | string;
+}
+
+export interface IBirthday {
+  date: "" | number;
+  month: string;
+  year: "" | number;
 }

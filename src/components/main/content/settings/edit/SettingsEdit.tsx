@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from "react";
+import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import AvatarRound from "../../../../UI/AvatarCustom/AvatarRound/AvatarRound";
@@ -6,11 +6,12 @@ import SimpleButton from "../../../../UI/buttons/SimpleButton/SimpleButton";
 import InputSettings from "../../../../UI/input/InputSettings/InputSettings";
 import SelectMonth from "../../../../UI/select/SelectMonth/SelectMonth";
 import { useSettingsEdit } from "./settings_edit_mui";
-interface BirthDayState {
-  date: "" | number;
-  month: "" | number;
-  year: "" | number;
-}
+import { useActions } from "../../../../../lib/hooks/useActions";
+import { filterBirthdayObject } from "../../../../../lib/controlFunc/profile/filterBirthdayObject";
+import { IGenericObject } from "../../../../../lib/models/ICommon";
+import AlertCustom from "../../../../UI/alert/Alert/AlertCustom";
+import Loader from "../../../../UI/loader/Loader/Loader";
+import PopupAvatarUpdate from "../../../../UI/popup/PopupAvatarUpdate/PopupAvatarUpdate";
 
 const SettingsEdit: FC = () => {
   const [textareaFocus, setTextareaFocus] = useState<boolean>(false);
@@ -23,33 +24,71 @@ const SettingsEdit: FC = () => {
   const [date, setDate] = useState<string>("");
   const [year, setYear] = useState<string>("");
   const [month, setMonth] = useState<string>("");
-
-  const [birthDay, setBirthDay] = useState<BirthDayState>({
-    date: "",
-    month: "",
-    year: "",
-  });
+  const {
+    setEditUser,
+    setBirthdayError,
+    setEditError,
+    setPopupAvatarUpdateOpen,
+  } = useActions();
+  const { user, birthdayError, editError, editLoading, popupAvatarUpdateOpen } =
+    useTypedSelector((s) => s.profileReducer);
+  const classes = useSettingsEdit();
+  function rewrite() {
+    setName("");
+    setLastname("");
+    setLocation("");
+    setInstagram("");
+    setTwitter("");
+    setHobby("");
+    setDate("");
+    setYear("");
+    setMonth("");
+  }
 
   function handleChangeHobby(e: ChangeEvent<HTMLTextAreaElement>) {
     setHobby(e.target.value);
   }
+
+  function handleClickOpen() {
+    setPopupAvatarUpdateOpen(true);
+  }
+
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const infoObject = {
-      name: name,
-      lastname: lastname,
-      location: location,
-      instagram: instagram,
+    const mainObject: IGenericObject = { name, lastname };
+    const infoObject: IGenericObject = {
+      location,
+      instagram,
+      hobby,
       twitter,
     };
-    const birthDayObject = {
+    const birthDayObject: IGenericObject = {
       date: date,
       month: month,
       year: year,
     };
+    const checkNum = filterBirthdayObject(birthDayObject);
+    if (checkNum === 1 || checkNum === 2) {
+      setBirthdayError(
+        "Якщо ви хочете змінити вашу дату народження то вам потрібно заповнити всі поля звязані з датою"
+      );
+      setTimeout(() => setBirthdayError(null), 4000);
+      return;
+    }
+    if (checkNum === 3) {
+      infoObject.birthDay = birthDayObject;
+    }
+    setEditUser(user.userID, infoObject, mainObject, user, rewrite);
   }
-  const classes = useSettingsEdit();
-  const { urlPhoto } = useTypedSelector((s) => s.profileReducer);
+
+  useEffect(() => {
+    return () => {
+      rewrite();
+      setBirthdayError(null);
+      setEditError(null);
+    };
+  }, []);
+
   return (
     <div className="settings-edit">
       <div className="settings-title">Edit Profile</div>
@@ -81,6 +120,7 @@ const SettingsEdit: FC = () => {
           <div className="settinds-edit-content__birthday settings-edit-birthday">
             <div className="settings-edit-birthday__date">
               <InputSettings
+                inputType="date"
                 text="Date"
                 type="number"
                 value={date}
@@ -92,6 +132,7 @@ const SettingsEdit: FC = () => {
             </div>
             <div className="settings-edit-birthday__year">
               <InputSettings
+                inputType="year"
                 text="Year"
                 type="number"
                 value={year}
@@ -99,6 +140,7 @@ const SettingsEdit: FC = () => {
               />
             </div>
           </div>
+          {birthdayError && <AlertCustom>{birthdayError}</AlertCustom>}
           <div className="settings-subtitle">Contact</div>
           <InputSettings
             text="Instagram"
@@ -112,6 +154,7 @@ const SettingsEdit: FC = () => {
             value={twitter}
             setValue={setTwitter}
           />
+
           <div className="settings-subtitle">Hobby</div>
           <div className="settings-edit__textarea settings-edit-textarea">
             <div
@@ -130,17 +173,26 @@ const SettingsEdit: FC = () => {
               onBlur={() => setTextareaFocus(false)}
             ></textarea>
           </div>
+          {editError && <AlertCustom>{editError}</AlertCustom>}
           <div className="settings-edit__submit">
             <SimpleButton text="Save changes" isLoading={false} />
           </div>
         </form>
         <div className="settings-edit__avatar">
-          <AvatarRound urlAvatar={urlPhoto} width="96px" height="96px" />
-          <button className="settings-edit__button-icon">
+          <AvatarRound urlAvatar={user.urlPhoto} width="96px" height="96px" />
+          <button
+            className="settings-edit__button-icon"
+            onClick={handleClickOpen}
+          >
             <PhotoCameraIcon className={classes.settings_edit__icon_photo} />
           </button>
         </div>
       </div>
+      {popupAvatarUpdateOpen ? (
+        <PopupAvatarUpdate />
+      ) : (
+        <Loader isOpen={editLoading} />
+      )}
     </div>
   );
 };

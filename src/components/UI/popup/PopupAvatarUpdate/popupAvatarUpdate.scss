@@ -1,0 +1,50 @@
+.popup-avatar-update {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.48);
+  z-index: 99999;
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    width: 30%;
+    background: white;
+    border-radius: 10px;
+  }
+  &__title {
+    font-family: SFProDisplay;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.36px;
+    color: #171a1f;
+    margin-bottom: 20px;
+  }
+  &__avatar {
+    margin-bottom: 10px;
+  }
+  &__subtitle {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.24px;
+    color: #71747a;
+    margin-bottom: 10px;
+  }
+  &__input {
+    margin-bottom: 20px;
+    width: 130px;
+  }
+}

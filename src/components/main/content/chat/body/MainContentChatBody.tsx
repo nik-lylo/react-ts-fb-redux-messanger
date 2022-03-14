@@ -8,7 +8,7 @@ import "./mainContentChatBody.scss";
 
 const MainContentChatBody: FC = () => {
   const { setOnMessageSnapList, setControllMyMessageList } = useActions();
-  const { userID } = useTypedSelector((s) => s.profileReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const { selectedChat, messageSnapList, messageList } = useTypedSelector(
     (s) => s.chatReducer
   );
@@ -24,12 +24,12 @@ const MainContentChatBody: FC = () => {
   // !При зміні вибраного чату ми змінюємо ID який слухаємо
   useEffect(() => {
     if (!isEmptyObj(selectedChat))
-      setOnMessageSnapList(userID, selectedChat.userID);
+      setOnMessageSnapList(user.userID, selectedChat.userID);
   }, [selectedChat]);
 
   // !При зміні SnapList ми додаємо нові повідомлення в основний масив повідомлень
   useEffect(() => {
-    setControllMyMessageList(messageSnapList, selectedChat, userID);
+    setControllMyMessageList(messageSnapList, selectedChat, user.userID);
   }, [messageSnapList]);
 
   return (

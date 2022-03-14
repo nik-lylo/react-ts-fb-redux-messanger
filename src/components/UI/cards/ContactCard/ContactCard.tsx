@@ -21,7 +21,7 @@ const ContactCard: FC<ContactCardProps> = ({ contact, my }) => {
     selectedContact,
   } = useTypedSelector((s) => s.contactReducer);
 
-  const { userID } = useTypedSelector((s) => s.profileReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
 
   function handleClickSelect() {
     setSelectedContact(contact);
@@ -31,7 +31,7 @@ const ContactCard: FC<ContactCardProps> = ({ contact, my }) => {
     e.stopPropagation();
     setAllContact(
       contact,
-      userID,
+      user.userID,
       myContact,
       globalContact,
       filteredMyContact,

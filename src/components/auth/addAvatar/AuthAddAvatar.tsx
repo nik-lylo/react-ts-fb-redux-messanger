@@ -10,7 +10,7 @@ import { RoutesNames } from "../../../lib/utilits/RoutesEnum";
 
 const AuthAddAvatar: FC = () => {
   const [avatar, setAvatar] = useState(null);
-  const { urlPhoto, userID } = useTypedSelector((s) => s.profileReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const { isAuthLoading, authError } = useTypedSelector((s) => s.authReducer);
   const {
     setProfileUserUrlPhoto,
@@ -31,7 +31,7 @@ const AuthAddAvatar: FC = () => {
       setAuthError("Please select a photo on your computer");
       return;
     }
-    setProfileUserUrlPhoto(userID, avatar);
+    setProfileUserUrlPhoto(user.userID, avatar);
   }
 
   function handleClickNavigate() {
@@ -55,7 +55,7 @@ const AuthAddAvatar: FC = () => {
           onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
         >
           <div className="auth-avatar__avatar">
-            <img src={urlPhoto} alt="My Avatar" />
+            <img src={user.urlPhoto} alt="My Avatar" />
           </div>
           <TextField
             className={classes.auth_avatar__input_file}

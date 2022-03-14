@@ -4,9 +4,9 @@ import GroupCard from "../../../../UI/cards/GroupCard/GroupCard";
 import ContactAboutInfo from "./info/ContactAboutInfo";
 
 const ContactAbout: FC = () => {
-  const { urlPhoto } = useTypedSelector((s) => s.profileReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const { selectedContact } = useTypedSelector((s) => s.contactReducer);
-
+  const birthday = `${selectedContact.info.birthDay?.date}-${selectedContact.info.birthDay?.month}-${selectedContact.info.birthDay?.year}`;
   return (
     <div className="main-content-contact__about contact-about">
       <div className="contact-about__title">About</div>
@@ -24,11 +24,8 @@ const ContactAbout: FC = () => {
             />
           )}
 
-          {selectedContact.info.birthDay && (
-            <ContactAboutInfo
-              icon="icon-birthday"
-              infoText={selectedContact.info.birthDay}
-            />
+          {birthday && (
+            <ContactAboutInfo icon="icon-birthday" infoText={birthday} />
           )}
         </div>
         <div className="contact-about-info__column_right">
@@ -58,7 +55,7 @@ const ContactAbout: FC = () => {
           <div className="about-group__title__number">1</div>
         </div>
         <div className="about-group__container">
-          <GroupCard urlAvatar={urlPhoto} />
+          <GroupCard urlAvatar={user.urlPhoto} />
         </div>
       </div>
     </div>

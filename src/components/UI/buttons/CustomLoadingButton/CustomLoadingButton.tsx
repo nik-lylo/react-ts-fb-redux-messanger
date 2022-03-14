@@ -7,7 +7,7 @@ import { CircularProgress } from "@mui/material";
 interface Loadbutton {
   children: string;
   isLoadingButton: boolean;
-  classes: any;
+  classes?: any;
   handleClick?: () => void;
 }
 

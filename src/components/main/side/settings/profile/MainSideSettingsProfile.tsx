@@ -5,7 +5,7 @@ import { RoutesMainSettingsEnum } from "../../../../../lib/utilits/RoutesEnum";
 import AvatarRound from "../../../../UI/AvatarCustom/AvatarRound/AvatarRound";
 
 const MainSideSettingsProfile: FC = () => {
-  const profile = useTypedSelector((s) => s.profileReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
   return (
     <div className="main-side-settings-profile">
       <div className="main-side-settings-profile__title">Settings</div>
@@ -18,18 +18,14 @@ const MainSideSettingsProfile: FC = () => {
         }
       >
         <div className="main-side-settings-profile__avatar">
-          <AvatarRound
-            width="56px"
-            height="56px"
-            urlAvatar={profile.urlPhoto}
-          />
+          <AvatarRound width="56px" height="56px" urlAvatar={user.urlPhoto} />
         </div>
         <div className="main-side-settings-profile__info">
           <div className="main-side-settings-profile__name">
-            {profile.fullname}
+            {user.fullname}
           </div>
           <div className="main-side-settings-profile__mail">
-            {profile.info.email}
+            {user.info.email}
           </div>
         </div>
       </NavLink>

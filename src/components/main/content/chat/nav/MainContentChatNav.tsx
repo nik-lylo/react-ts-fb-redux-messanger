@@ -1,10 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
-import {
-  RoutesMainEnum,
-  RoutesNames,
-} from "../../../../../lib/utilits/RoutesEnum";
+import { RoutesMainEnum } from "../../../../../lib/utilits/RoutesEnum";
 import AvatarRound from "../../../../UI/AvatarCustom/AvatarRound/AvatarRound";
 import "./mainContentChatNav.scss";
 

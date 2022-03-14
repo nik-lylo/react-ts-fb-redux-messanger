@@ -15,12 +15,12 @@ const MainSideChat: FC = () => {
     setMessageSnapList,
     setSelectedContact,
   } = useActions();
-  const { userID } = useTypedSelector((s) => s.profileReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const { myChatSnapList, myChatList } = useTypedSelector((s) => s.chatReducer);
 
   // !Включаємо слухання нашої колекції друзів
   useEffect(() => {
-    setOnChatSnapList(userID);
+    setOnChatSnapList(user.userID);
     return () => {
       setSelectedContact({} as IUser);
       setSelectedChat({} as IUser);
