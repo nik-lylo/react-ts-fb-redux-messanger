@@ -9,6 +9,7 @@ export interface IUser {
   online: boolean;
   info: IUserInfo;
   lastMessage: IMessage;
+  unread?: number;
 }
 
 export interface IUserInfo {

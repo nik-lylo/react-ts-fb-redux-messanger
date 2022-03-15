@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from "react";
-import { isEmptyObj } from "../../../../../lib/helper/isEmptyObj";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import AvatarRound from "../../../../UI/AvatarCustom/AvatarRound/AvatarRound";
 import InfoUserCard from "../../../../UI/cards/InfoUserCard/InfoUserCard";

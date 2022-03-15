@@ -1,52 +1,60 @@
-import React, { FC } from "react";
-import { isEmptyObj } from "../../../../../lib/helper/isEmptyObj";
+import React, { FC, useEffect, useState } from "react";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import GroupCard from "../../../../UI/cards/GroupCard/GroupCard";
-import ContactAboutInfo from "./info/ContactAboutInfo";
+import InfoUserCard from "../../../../UI/cards/InfoUserCard/InfoUserCard";
 
 const ContactAbout: FC = () => {
   const { user } = useTypedSelector((s) => s.profileReducer);
-  const { selectedContact } = useTypedSelector((s) => s.contactReducer);
-  const birthday = `${selectedContact.info.birthDay?.date}-${selectedContact.info.birthDay?.month}-${selectedContact.info.birthDay?.year}`;
+  const { selectedContact, usersCollectionList } = useTypedSelector(
+    (s) => s.contactReducer
+  );
+  const [birthday, setBirthday] = useState<null | string>(null);
+
+  useEffect(() => {
+    if (usersCollectionList[selectedContact.userID].info.birthDay === null) {
+      setBirthday(null);
+    } else {
+      setBirthday(
+        `${usersCollectionList[selectedContact.userID].info.birthDay?.date}-${
+          usersCollectionList[selectedContact.userID].info.birthDay?.month
+        }-${usersCollectionList[selectedContact.userID].info.birthDay?.year}`
+      );
+    }
+  }, [usersCollectionList]);
   return (
     <div className="main-content-contact__about contact-about">
       <div className="contact-about__title">About</div>
-      <div className="contact-about__text">{selectedContact.info.hobby}</div>
+      <div className="contact-about__text">
+        {usersCollectionList[selectedContact.userID].info.hobby}
+      </div>
       <div className="contact-about__info contact-about-info">
         <div className="contact-about-info__column_left">
-          <ContactAboutInfo
+          <InfoUserCard
             icon="icon-dog-mail"
-            infoText={selectedContact.info.email}
+            infoText={usersCollectionList[selectedContact.userID].info.email}
           />
-          {selectedContact.info.location && (
-            <ContactAboutInfo
-              icon="icon-location"
-              infoText={selectedContact.info.location}
-            />
-          )}
-
-          {isEmptyObj(user.info.birthDay) && (
-            <ContactAboutInfo icon="icon-birthday" infoText={birthday} />
-          )}
+          <InfoUserCard
+            icon="icon-location"
+            infoText={usersCollectionList[selectedContact.userID].info.location}
+          />
+          <InfoUserCard icon="icon-birthday" infoText={birthday} />
         </div>
         <div className="contact-about-info__column_right">
-          {selectedContact.info.instagram && (
-            <ContactAboutInfo
-              icon="icon-mail-contact"
-              infoText={selectedContact.info.instagram}
-            />
-          )}
-
-          {selectedContact.info.twitter && (
-            <ContactAboutInfo
-              icon="icon-twitter"
-              infoText={selectedContact.info.twitter}
-            />
-          )}
-
-          <ContactAboutInfo
+          <InfoUserCard
+            icon="icon-mail-contact"
+            infoText={
+              usersCollectionList[selectedContact.userID].info.instagram
+            }
+          />
+          <InfoUserCard
+            icon="icon-twitter"
+            infoText={usersCollectionList[selectedContact.userID].info.twitter}
+          />
+          <InfoUserCard
             icon="icon-flag"
-            infoText={`Joined ${selectedContact.info.joined}`}
+            infoText={`Joined ${
+              usersCollectionList[selectedContact.userID].info.joined
+            }`}
           />
         </div>
       </div>

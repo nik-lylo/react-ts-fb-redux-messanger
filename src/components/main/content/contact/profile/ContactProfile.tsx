@@ -16,6 +16,7 @@ const ContactProfile: FC = () => {
     globalContact,
     filteredGlobalContact,
     filteredMyContact,
+    usersCollectionList,
   } = useTypedSelector((s) => s.contactReducer);
   const { user } = useTypedSelector((s) => s.profileReducer);
   const navigate = useNavigate();
@@ -69,16 +70,19 @@ const ContactProfile: FC = () => {
     <div className="main-contact-content__profile contact-profile">
       <div className="contact-profile__avatar">
         <AvatarRound
-          urlAvatar={selectedContact.urlPhoto}
+          urlAvatar={usersCollectionList[selectedContact.userID].urlPhoto}
           width="96px"
           height="96px"
         />
       </div>
       <div className="contact-profile__fullname">
-        {selectedContact.fullname}
+        {usersCollectionList[selectedContact.userID].fullname}
       </div>
       <div className="contact-profile__status">
-        <UserStatus hover={false} flag={selectedContact.online} />
+        <UserStatus
+          hover={false}
+          flag={usersCollectionList[selectedContact.userID].online}
+        />
       </div>
       {isMyContact ? (
         <button className="contact-profile__btn" onClick={handleClickNavigate}>

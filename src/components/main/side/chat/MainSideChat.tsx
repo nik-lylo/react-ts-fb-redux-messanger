@@ -16,7 +16,9 @@ const MainSideChat: FC = () => {
     setSelectedContact,
   } = useActions();
   const { user } = useTypedSelector((s) => s.profileReducer);
-  const { myChatSnapList, myChatList } = useTypedSelector((s) => s.chatReducer);
+  const { myChatSnapList, myChatList, selectedChat } = useTypedSelector(
+    (s) => s.chatReducer
+  );
 
   // !Включаємо слухання нашої колекції друзів
   useEffect(() => {
@@ -32,7 +34,12 @@ const MainSideChat: FC = () => {
 
   // !При кожній зміні нашого масива myChatSnapList ми керуємо ним і передаємо дані в основний масив
   useEffect(() => {
-    setControllMyChatList(myChatList, myChatSnapList);
+    setControllMyChatList(
+      myChatList,
+      myChatSnapList,
+      selectedChat,
+      user.userID
+    );
   }, [myChatSnapList]);
 
   return (

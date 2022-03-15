@@ -3,7 +3,6 @@ import changeUserReducer from "./changeUser";
 import chatReducer from "./chat";
 import contactReducer from "./contact";
 import profileReducer from "./profile";
-import settingsReducer from "./settings";
 
 export default {
   authReducer,
@@ -11,5 +10,4 @@ export default {
   changeUserReducer,
   contactReducer,
   chatReducer,
-  settingsReducer,
 };

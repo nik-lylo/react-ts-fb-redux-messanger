@@ -1,13 +1,16 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../../lib/hooks/useActions";
+import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import SimpleButton from "../../../../UI/buttons/SimpleButton/SimpleButton";
 
 const SettingsSignOut: FC = () => {
-  const { setSignOutUser } = useActions();
+  const { setSignOutUser, setUploadUserOnline } = useActions();
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const navigate = useNavigate();
+
   function handleClick() {
-    setSignOutUser(navigate);
+    setSignOutUser(navigate, user.userID);
   }
   return (
     <div className="settings-signout">

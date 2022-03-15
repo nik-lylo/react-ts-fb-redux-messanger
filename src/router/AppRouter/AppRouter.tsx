@@ -46,15 +46,3 @@ const AppRouter: FC = () => {
 };
 
 export default AppRouter;
-
-{
-  /* <Route key={it.path} path={it.path} element={<it.element />}>
-                {it.children?.map((child: IRoute) => (
-                  <Route
-                    path={child.path}
-                    element={<child.element />}
-                    key={child.path}
-                  />
-                ))}
-              </Route> */
-}

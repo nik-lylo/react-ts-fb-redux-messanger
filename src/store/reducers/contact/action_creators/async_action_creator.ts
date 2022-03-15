@@ -80,8 +80,6 @@ export const AsyncContactActionCreators = {
           ContactActionCreators.setFilteredGlobalContact(filterFilteredClone)
         );
       } catch (e: any) {
-        console.log(e.message);
-
         dispatch(ContactActionCreators.setContactError(e.message));
       } finally {
         dispatch(ContactActionCreators.setIsContactLoading(false));

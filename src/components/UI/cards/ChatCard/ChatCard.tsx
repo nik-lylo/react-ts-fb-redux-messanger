@@ -4,19 +4,22 @@ import AvatarOnline from "../../AvatarCustom/AvatarOnline/AvatarOnline";
 import { useTypedSelector } from "../../../../lib/hooks/useTypedSelector";
 import { useActions } from "../../../../lib/hooks/useActions";
 import { IUser } from "../../../../lib/models/IUser";
-import { isEmptyObj } from "../../../../lib/helper/isEmptyObj";
 import { dateFromCreatedAt } from "../../../../lib/helper/dateFromCreatedAt";
+import { uploadUnreadFriend } from "../../../../api/chat/uploadUnreadFriend";
 
 interface ChatCardProps {
   chat: IUser;
+  mainChat: IUser;
 }
 
-const ChatCard: FC<ChatCardProps> = ({ chat }) => {
+const ChatCard: FC<ChatCardProps> = ({ chat, mainChat }) => {
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const { selectedChat } = useTypedSelector((s) => s.chatReducer);
   const { setSelectedChat } = useActions();
 
   function handleClick() {
-    setSelectedChat(chat);
+    uploadUnreadFriend(user.userID, chat.userID);
+    setSelectedChat({ ...chat, unread: 0 });
   }
   return (
     <div
@@ -29,7 +32,7 @@ const ChatCard: FC<ChatCardProps> = ({ chat }) => {
     >
       <div className="chat-card__avatar">
         <AvatarOnline
-          contact={chat}
+          contact={mainChat}
           hover={chat.userID === selectedChat.userID}
           width="56px"
           height="56px"
@@ -37,7 +40,7 @@ const ChatCard: FC<ChatCardProps> = ({ chat }) => {
       </div>
       <div className="chat-card__content chat-card-content">
         <div className="chat-card-content__profile">
-          <div className="chat-card-content__name">{chat.fullname}</div>
+          <div className="chat-card-content__name">{mainChat.fullname}</div>
           <div className="chat-card-content__time">
             {chat.lastMessage.createdAt.seconds === 0
               ? "no time"
@@ -52,9 +55,11 @@ const ChatCard: FC<ChatCardProps> = ({ chat }) => {
               chat.lastMessage.text
             )}
           </div>
-          <div className="chat-card-content__num">
-            <span>5</span>
-          </div>
+          {chat.unread === undefined || chat.unread === 0 ? null : (
+            <div className="chat-card-content__num">
+              <span>{chat.unread}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

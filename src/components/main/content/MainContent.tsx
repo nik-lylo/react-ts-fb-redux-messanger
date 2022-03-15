@@ -1,5 +1,9 @@
-import React, { FC } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import React, { FC, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useActions } from "../../../lib/hooks/useActions";
+import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
+import { IUsersObject } from "../../../lib/models/ICommon";
+import { IUser } from "../../../lib/models/IUser";
 import {
   RoutesFullMainEnum,
   RoutesNames,
@@ -11,6 +15,7 @@ import MainContentSettings from "./settings/MainContentSettings";
 
 const MainContent: FC = () => {
   const location = useLocation();
+
   return (
     <div className="main__content content">
       {(() => {

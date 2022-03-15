@@ -9,21 +9,15 @@ import { fetchUser } from "../../../../api/user/fetchUser";
 export const AuthOnStateActionCreators = {
   setOnAuthStateChange: () => async (dispatch: AppDispatch) => {
     onAuthStateChanged(firebaseAuth, async (user) => {
-      try {
-        if (user) {
-          const userSnap = await fetchUser(user.uid);
-          const userObj = userSnap.data() as IUser;
-          dispatch(ProfileActionCreators.setNewUser(userObj));
-          dispatch(AuthActionCreators.setSnapUserId(user.uid));
-          setTimeout(() => {
-            dispatch(AuthActionCreators.setIsOnAuthStateStarted(true));
-          }, 200);
-        } else {
-          setTimeout(() => {
-            dispatch(AuthActionCreators.setIsOnAuthStateStarted(true));
-          }, 200);
-        }
-      } catch (e: any) {
+      if (user) {
+        const userSnap = await fetchUser(user.uid);
+        const userObj = userSnap.data() as IUser;
+        dispatch(ProfileActionCreators.setNewUser(userObj));
+        dispatch(AuthActionCreators.setSnapUserId(user.uid));
+        setTimeout(() => {
+          dispatch(AuthActionCreators.setIsOnAuthStateStarted(true));
+        }, 200);
+      } else {
         setTimeout(() => {
           dispatch(AuthActionCreators.setIsOnAuthStateStarted(true));
         }, 200);

@@ -47,6 +47,7 @@ export const AsyncChatActionCreators = {
           await uploadToFriendContact(
             {
               ...myProfile,
+              unread: 1,
               lastMessage: messObj,
             },
             selectedChat.userID
