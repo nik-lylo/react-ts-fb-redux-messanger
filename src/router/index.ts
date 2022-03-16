@@ -15,7 +15,7 @@ import Launcher from "../pages/Launcher";
 import MainContactSide from "../components/main/side/contact/MainContactSide";
 import MainSideChat from "../components/main/side/chat/MainSideChat";
 import MainSideSettings from "../components/main/side/settings/MainSideSettings";
-import SettingsCommunities from "../components/main/content/settings/communities/SettingsCommunities";
+import SettingsCommunities from "../components/main/content/settings/group/SettingsGroup";
 import SettingsEdit from "../components/main/content/settings/edit/SettingsEdit";
 import SettingsSignOut from "../components/main/content/settings/signout/SettingsSignOut";
 import SettingsProfile from "../components/main/content/settings/profile/SettingsProfile";
@@ -59,7 +59,7 @@ export const privateRoutes: IRoute[] = [
         children: [
           { path: RoutesMainSettingsEnum.EDIT, element: SettingsEdit },
           {
-            path: RoutesMainSettingsEnum.COMMUNITIES,
+            path: RoutesMainSettingsEnum.GROUP,
             element: SettingsCommunities,
           },
           { path: RoutesMainSettingsEnum.SIGN_OUT, element: SettingsSignOut },

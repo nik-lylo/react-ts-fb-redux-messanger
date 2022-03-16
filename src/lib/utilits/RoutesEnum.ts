@@ -20,9 +20,15 @@ export enum RoutesMainEnum {
 }
 export enum RoutesMainSettingsEnum {
   EDIT = "edit",
-  COMMUNITIES = "communities",
+  GROUP = "group",
   PROFILE = "profile",
   SIGN_OUT = "signout",
+}
+export enum RoutesFullMainSettingsEnum {
+  EDIT = "/main/edit",
+  GROUP = "/main/group",
+  PROFILE = "/main/profile",
+  SIGN_OUT = "/main/signout",
 }
 export enum RoutesFullMainEnum {
   MAIN_CONTACT = "/main/contact",

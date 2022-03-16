@@ -1,4 +1,4 @@
-.select-month {
+.select-custom {
   width: 100%;
   height: 56px;
   position: relative;
@@ -48,4 +48,9 @@
 }
 option {
   cursor: pointer;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }

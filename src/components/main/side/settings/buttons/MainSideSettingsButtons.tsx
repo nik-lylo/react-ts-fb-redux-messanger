@@ -11,9 +11,9 @@ const MainSideSettingsButtons: FC = () => {
         text="Edit profile"
       />
       <SettingsLink
-        to={RoutesMainSettingsEnum.COMMUNITIES}
+        to={RoutesMainSettingsEnum.GROUP}
         icon="icon-web"
-        text="Community"
+        text="Group"
       />
       <div className="main-side-settings-buttons__title">Other</div>
       <SettingsLink

@@ -4,7 +4,6 @@ import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import AvatarRound from "../../../../UI/AvatarCustom/AvatarRound/AvatarRound";
 import SimpleButton from "../../../../UI/buttons/SimpleButton/SimpleButton";
 import InputSettings from "../../../../UI/input/InputSettings/InputSettings";
-import SelectMonth from "../../../../UI/select/SelectMonth/SelectMonth";
 import { useSettingsEdit } from "./settings_edit_mui";
 import { useActions } from "../../../../../lib/hooks/useActions";
 import { filterBirthdayObject } from "../../../../../lib/controlFunc/profile/filterBirthdayObject";
@@ -12,6 +11,7 @@ import { IGenericObject } from "../../../../../lib/models/ICommon";
 import AlertCustom from "../../../../UI/alert/Alert/AlertCustom";
 import Loader from "../../../../UI/loader/Loader/Loader";
 import PopupAvatarUpdate from "../../../../UI/popup/PopupAvatarUpdate/PopupAvatarUpdate";
+import SelectCustom from "../../../../UI/select/SelectCustom/SelectCustom";
 
 const SettingsEdit: FC = () => {
   const [textareaFocus, setTextareaFocus] = useState<boolean>(false);
@@ -33,6 +33,21 @@ const SettingsEdit: FC = () => {
   const { user, birthdayError, editError, editLoading, popupAvatarUpdateOpen } =
     useTypedSelector((s) => s.profileReducer);
   const classes = useSettingsEdit();
+  const monthOptions: string[] = [
+    "",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "July",
+    "June",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   function rewrite() {
     setName("");
     setLastname("");
@@ -128,7 +143,12 @@ const SettingsEdit: FC = () => {
               />
             </div>
             <div className="settings-edit-birthday__month">
-              <SelectMonth value={month} setValue={setMonth} />
+              <SelectCustom
+                value={month}
+                setValue={setMonth}
+                name="Month"
+                optValue={monthOptions}
+              />
             </div>
             <div className="settings-edit-birthday__year">
               <InputSettings
