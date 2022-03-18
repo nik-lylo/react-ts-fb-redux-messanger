@@ -16,8 +16,8 @@ export const AsyncProfileActionCreators = {
     (userId: string, file: any) => async (dispatch: AppDispatch) => {
       dispatch(AuthActionCreators.setIsLoading(true));
       try {
-        await uploadPhoto(userId, file);
-        const linkPhoto = await downloadPhoto(userId);
+        await uploadPhoto(`userPhoto/${userId}`, file);
+        const linkPhoto = await downloadPhoto(`userPhoto/${userId}`);
         const photoObj = { urlPhoto: linkPhoto };
         await uploadUpdateUser(userId, photoObj);
         dispatch(ProfileActionCreators.setNewPhotoUrl(linkPhoto));

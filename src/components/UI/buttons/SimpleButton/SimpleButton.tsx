@@ -2,11 +2,12 @@ import React, { FC } from "react";
 import "./simpleButton.scss";
 interface SimpleButtonProps {
   text: string;
+  type?: any;
   isLoading: boolean;
 }
-const SimpleButton: FC<SimpleButtonProps> = ({ text, isLoading }) => {
+const SimpleButton: FC<SimpleButtonProps> = ({ text, isLoading, type }) => {
   return (
-    <button type="submit" className="simple-button" disabled={isLoading}>
+    <button type={type} className="simple-button" disabled={isLoading}>
       {text}
     </button>
   );

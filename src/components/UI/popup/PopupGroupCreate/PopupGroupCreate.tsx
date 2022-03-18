@@ -1,16 +1,16 @@
-import React, { ChangeEvent, FC, useState } from "react";
-import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import React, { FC, useState } from "react";
 import { useTypedSelector } from "../../../../lib/hooks/useTypedSelector";
-import { useSettingsEdit } from "../../../main/content/settings/edit/settings_edit_mui";
-import AvatarRound from "../../AvatarCustom/AvatarRound/AvatarRound";
 import "./popupGroupCreate.scss";
-import InputSettings from "../../input/InputSettings/InputSettings";
-import SelectCustom from "../../select/SelectCustom/SelectCustom";
-import SimpleButton from "../../buttons/SimpleButton/SimpleButton";
 import { useActions } from "../../../../lib/hooks/useActions";
 import { DefaultValue } from "../../../../lib/models/DefaultValue";
-import { ref } from "firebase/storage";
-import { storage } from "../../../../lib/firebase";
+import PopupGroupCreateStep1 from "./PopupGroupCreateStep1/PopupGroupCreateStep1";
+import PopupGroupCreateStep2 from "./PopupGroupCreateStep2/PopupGroupCreateStep2";
+import PopupGroupCreateStep3 from "./PopupGroupCreateStep3/PopupGroupCreateStep3";
+import StepperGroupAdd from "../../stepper/StepperGroupAdd";
+import { uploadPhoto } from "../../../../api/profile/uploadPhoto";
+import { downloadPhoto } from "../../../../api/profile/downloadPhoto";
+import { IUser } from "../../../../lib/models/IUser";
+import { Timestamp } from "firebase/firestore";
 
 interface PopupGroupCreateProps {
   isOpen: boolean;
@@ -19,20 +19,46 @@ interface PopupGroupCreateProps {
 const PopupGroupCreate: FC<PopupGroupCreateProps> = ({ isOpen }) => {
   const [name, setName] = useState<string>("");
   const [about, setAbout] = useState<string>("");
-  const [groupAvatar, setGroupAvatar] = useState("");
+  const [groupAvatar, setGroupAvatar] = useState<string>(
+    DefaultValue.GROUP__IMAGE
+  );
+  const [instagram, setInstagram] = useState<string>("");
+  const [twitter, setTwitter] = useState<string>("");
+  const [facebook, setFacebook] = useState<string>("");
   const [visibility, setVisibility] = useState<string>("");
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [invitedContacts, setInvitedContacts] = useState<IUser[]>([]);
   const { user } = useTypedSelector((s) => s.profileReducer);
-  const { setOpenPopupCreateGroup } = useActions();
-  const classes = useSettingsEdit();
-  const optionArr: string[] = ["", "Public", "Private"];
+  const { setOpenPopupCreateGroup, setCreateGroup } = useActions();
+
   function handleClickClose() {
     setOpenPopupCreateGroup(false);
+    setStep(1);
   }
 
-  async function handleChange(e: any) {
-    // const storageRef = ref(storage, "images");
-    // await setGroupAvatar(e.currentTarget.files[0]!.name);
-    // console.log(e.currentTarget.files[0]!);
+  async function handleChangeGroupAvatar(e: any) {
+    await uploadPhoto(`groupsPhoto/test.png`, e.currentTarget.files[0]);
+    const linkAvatar = await downloadPhoto(`groupsPhoto/test.png`);
+    setGroupAvatar(linkAvatar);
+  }
+
+  function handleSubmit(e: any) {
+    e.preventDefault();
+    const createObject = {
+      role: "admin",
+      admin: user.userID,
+      private: visibility,
+      name: name,
+      about: about,
+      instagram: instagram,
+      twitter: twitter,
+      facebook: facebook,
+      member_amount: 1,
+      lastMessage: {},
+      createdAt: Timestamp,
+      groupAvatar: groupAvatar,
+    };
+    setCreateGroup(createObject);
   }
 
   return (
@@ -43,49 +69,55 @@ const PopupGroupCreate: FC<PopupGroupCreateProps> = ({ isOpen }) => {
           : "popup-group-create"
       }
     >
-      <form className="popup-group-create__form">
-        <div className="popup-group-create__title">New Group</div>
-        <div className="popup-group-create__avatar">
-          <AvatarRound
-            urlAvatar={DefaultValue.GROUP__IMAGE}
-            width="96px"
-            height="96px"
-          />
-          <label
-            htmlFor="file-input"
-            className="popup-group-create__button-icon"
-          >
-            <PhotoCameraIcon className={classes.settings_edit__icon_photo} />
-          </label>
-          <input type="file" id="file-input" onChange={handleChange} />
+      <form className="popup-group-create__form" onSubmit={handleSubmit}>
+        <div className="popup-group-create__stepper">
+          <StepperGroupAdd step={step} />
         </div>
-        <InputSettings
-          text="Name"
-          type="text"
-          value={name}
-          setValue={setName}
-        />
-        <InputSettings
-          text="About"
-          type="text"
-          value={about}
-          setValue={setAbout}
-        />
-        <SelectCustom
-          name="Visibility"
-          value={visibility}
-          setValue={setVisibility}
-          optValue={optionArr}
-        />
-        <div className="popup-group-create__button">
-          <SimpleButton text="Next" isLoading={false} />
-        </div>
-        <button
-          onClick={handleClickClose}
-          type="reset"
-          className="popup-group-create__close icon-cross"
-        ></button>
+        {step === 1 ? (
+          <>
+            <div className="popup-group-create__title">Main</div>
+            <PopupGroupCreateStep1
+              name={name}
+              about={about}
+              setName={setName}
+              setAbout={setAbout}
+              setStep={setStep}
+              visibility={visibility}
+              setVisibility={setVisibility}
+              groupAvatar={groupAvatar}
+              handleChangeGroupAvatar={handleChangeGroupAvatar}
+            />
+          </>
+        ) : step === 2 ? (
+          <>
+            <div className="popup-group-create__title">Contact</div>
+            <PopupGroupCreateStep2
+              instagram={instagram}
+              twitter={twitter}
+              facebook={facebook}
+              setTwitter={setTwitter}
+              setInstagram={setInstagram}
+              setFacebook={setFacebook}
+              setStep={setStep}
+            />
+          </>
+        ) : step === 3 ? (
+          <>
+            <div className="popup-group-create__title">Invite friends</div>
+            <PopupGroupCreateStep3
+              setStep={setStep}
+              invitedContacts={invitedContacts}
+              setInvitedContacts={setInvitedContacts}
+            />
+          </>
+        ) : null}
       </form>
+
+      <button
+        type="reset"
+        onClick={handleClickClose}
+        className="popup-group-create__close icon-cross"
+      ></button>
     </div>
   );
 };

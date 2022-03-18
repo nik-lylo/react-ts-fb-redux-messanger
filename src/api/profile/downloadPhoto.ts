@@ -1,9 +1,9 @@
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../../lib/firebase";
 
-export async function downloadPhoto(userId: string) {
+export async function downloadPhoto(path: string) {
   try {
-    const storageRef = ref(storage, `userPhoto/${userId}`);
+    const storageRef = ref(storage, path);
     const linkPhoto = await getDownloadURL(storageRef);
     return linkPhoto;
   } catch (e: any) {

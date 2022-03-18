@@ -13,6 +13,7 @@ import { OnActionCreators } from "./chat/action-creators/on_action_creators";
 import { ControllChatActionCreators } from "./chat/action-creators/controll_action_creators";
 import { OnContactActionCreators } from "./contact/action_creators/on_action_creators";
 import { GroupActionCreators } from "./group/action_creators/reducer_action_creators";
+import { AsyncGroupActionCreators } from "./group/action_creators/async_action_creators";
 
 export const allActionCreators = {
   ...AuthActionCreators,
@@ -30,4 +31,5 @@ export const allActionCreators = {
   ...ControllChatActionCreators,
   ...OnContactActionCreators,
   ...GroupActionCreators,
+  ...AsyncGroupActionCreators,
 };

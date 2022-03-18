@@ -25,6 +25,8 @@
   }
   &__button:hover {
     background: #0553a1;
+    transform: rotate(45deg);
+    transition: all 0.2s linear 0s;
   }
   & button {
     color: white;
