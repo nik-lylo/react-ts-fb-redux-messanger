@@ -11,6 +11,7 @@ import {
 import BarLoader from "../../UI/loader/BarLoader/BarLoader";
 import MainContentChat from "./chat/MainContentChat";
 import MainContactContent from "./contact/MainContactContent";
+import MainContentNots from "./nots/MainContentNots";
 import MainContentSettings from "./settings/MainContentSettings";
 
 const MainContent: FC = () => {
@@ -28,8 +29,14 @@ const MainContent: FC = () => {
         if (location.pathname.startsWith(RoutesFullMainEnum.MAIN_SETTINGS)) {
           return <MainContentSettings />;
         }
+        if (
+          location.pathname.startsWith(RoutesFullMainEnum.MAIN_NOTIFICATIONS)
+        ) {
+          return <MainContentNots />;
+        }
+
         if (location.pathname === RoutesNames.MAIN) {
-          return <BarLoader />;
+          return <BarLoader blockSize="32px" />;
         }
       })()}
     </div>

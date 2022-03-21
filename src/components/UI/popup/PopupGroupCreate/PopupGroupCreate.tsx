@@ -10,7 +10,9 @@ import StepperGroupAdd from "../../stepper/StepperGroupAdd";
 import { uploadPhoto } from "../../../../api/profile/uploadPhoto";
 import { downloadPhoto } from "../../../../api/profile/downloadPhoto";
 import { IUser } from "../../../../lib/models/IUser";
-import { Timestamp } from "firebase/firestore";
+import { rewriteTime } from "../../../../lib/helper/rewriteTime";
+import { IGroup } from "../../../../lib/models/IGroup";
+import { IMessage } from "../../../../lib/models/IMessage";
 
 interface PopupGroupCreateProps {
   isOpen: boolean;
@@ -22,13 +24,15 @@ const PopupGroupCreate: FC<PopupGroupCreateProps> = ({ isOpen }) => {
   const [groupAvatar, setGroupAvatar] = useState<string>(
     DefaultValue.GROUP__IMAGE
   );
+  const [avatarFile, setAvatarFile] = useState<any>(null);
   const [instagram, setInstagram] = useState<string>("");
   const [twitter, setTwitter] = useState<string>("");
   const [facebook, setFacebook] = useState<string>("");
-  const [visibility, setVisibility] = useState<string>("");
+  const [visibility, setVisibility] = useState<"Public" | "Private">("Public");
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [invitedContacts, setInvitedContacts] = useState<IUser[]>([]);
   const { user } = useTypedSelector((s) => s.profileReducer);
+  const { groupIsLoading } = useTypedSelector((s) => s.groupReducer);
   const { setOpenPopupCreateGroup, setCreateGroup } = useActions();
 
   function handleClickClose() {
@@ -36,7 +40,20 @@ const PopupGroupCreate: FC<PopupGroupCreateProps> = ({ isOpen }) => {
     setStep(1);
   }
 
+  function rewrite() {
+    setName("");
+    setAbout("");
+    setGroupAvatar(DefaultValue.GROUP__IMAGE);
+    setAvatarFile(null);
+    setTwitter("");
+    setInstagram("");
+    setFacebook("");
+    setVisibility("Public");
+    setInvitedContacts([]);
+  }
+
   async function handleChangeGroupAvatar(e: any) {
+    setAvatarFile(e.currentTarget.files[0]);
     await uploadPhoto(`groupsPhoto/test.png`, e.currentTarget.files[0]);
     const linkAvatar = await downloadPhoto(`groupsPhoto/test.png`);
     setGroupAvatar(linkAvatar);
@@ -44,8 +61,19 @@ const PopupGroupCreate: FC<PopupGroupCreateProps> = ({ isOpen }) => {
 
   function handleSubmit(e: any) {
     e.preventDefault();
-    const createObject = {
-      role: "admin",
+    const newDate = new Date();
+    const date = `${rewriteTime("date", newDate.getDate())}-${rewriteTime(
+      "month",
+      newDate.getMonth()
+    )}-${rewriteTime("year", newDate.getFullYear())}`;
+    const membersArr: string[] = [];
+    invitedContacts.map((item: IUser) => {
+      membersArr.push(item.userID);
+    });
+
+    const createObject: IGroup = {
+      groupAvatar: "",
+      groupId: "",
       admin: user.userID,
       private: visibility,
       name: name,
@@ -54,11 +82,12 @@ const PopupGroupCreate: FC<PopupGroupCreateProps> = ({ isOpen }) => {
       twitter: twitter,
       facebook: facebook,
       member_amount: 1,
-      lastMessage: {},
-      createdAt: Timestamp,
-      groupAvatar: groupAvatar,
+      lastMessage: {} as IMessage,
+      inviting: membersArr,
+      members: [],
+      joined: date,
     };
-    setCreateGroup(createObject);
+    setCreateGroup(createObject, avatarFile, invitedContacts, rewrite, setStep);
   }
 
   return (
@@ -82,6 +111,7 @@ const PopupGroupCreate: FC<PopupGroupCreateProps> = ({ isOpen }) => {
               setName={setName}
               setAbout={setAbout}
               setStep={setStep}
+              setAvatarFile={setAvatarFile}
               visibility={visibility}
               setVisibility={setVisibility}
               groupAvatar={groupAvatar}
@@ -117,6 +147,7 @@ const PopupGroupCreate: FC<PopupGroupCreateProps> = ({ isOpen }) => {
         type="reset"
         onClick={handleClickClose}
         className="popup-group-create__close icon-cross"
+        disabled={groupIsLoading}
       ></button>
     </div>
   );

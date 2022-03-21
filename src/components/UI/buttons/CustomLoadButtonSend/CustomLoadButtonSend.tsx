@@ -16,7 +16,7 @@ const CustomLoadButtonSend: FC<CustomLoadButtonSendProps> = ({ flag }) => {
       }
       type="submit"
     >
-      {flag && <BarLoader />}
+      {flag && <BarLoader blockSize="32px" />}
     </button>
   );
 };

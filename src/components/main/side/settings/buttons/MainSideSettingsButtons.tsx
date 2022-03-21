@@ -1,22 +1,22 @@
 import React, { FC } from "react";
 import { RoutesMainSettingsEnum } from "../../../../../lib/utilits/RoutesEnum";
-import SettingsLink from "../../../../UI/link/SettingsLink/SettingsLink";
+import SideLink from "../../../../UI/link/SideLink/SideLink";
 
 const MainSideSettingsButtons: FC = () => {
   return (
     <div className="main-side-settings-buttons">
-      <SettingsLink
+      <SideLink
         to={RoutesMainSettingsEnum.EDIT}
         icon="icon-pencil"
         text="Edit profile"
       />
-      <SettingsLink
+      <SideLink
         to={RoutesMainSettingsEnum.GROUP}
         icon="icon-web"
         text="Group"
       />
       <div className="main-side-settings-buttons__title">Other</div>
-      <SettingsLink
+      <SideLink
         to={RoutesMainSettingsEnum.SIGN_OUT}
         icon="icon-signout"
         text="Sign out"

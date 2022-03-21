@@ -15,6 +15,7 @@ interface PopupGroupCreateStep1Props {
   about: string;
   setAbout: any;
   setStep: any;
+  setAvatarFile: any;
   visibility: string;
   setVisibility: any;
   groupAvatar: string;
@@ -29,7 +30,9 @@ const PopupGroupCreateStep1: FC<PopupGroupCreateStep1Props> = ({
   setStep,
   visibility,
   setVisibility,
+  setAvatarFile,
   groupAvatar,
+
   handleChangeGroupAvatar,
 }) => {
   const classes = useSettingsEdit();

@@ -1,10 +1,17 @@
 import React, { FC } from "react";
 import "./barLoader.css";
 
-const BarLoader: FC = () => {
+interface BarLoaderProps {
+  blockSize: string;
+}
+
+const BarLoader: FC<BarLoaderProps> = ({ blockSize }) => {
   return (
     <div className="flex-container">
-      <div className="loader"></div>
+      <div
+        className="loader"
+        style={{ width: blockSize, height: blockSize }}
+      ></div>
     </div>
   );
 };

@@ -9,7 +9,9 @@ export interface IUser {
   online: boolean;
   info: IUserInfo;
   lastMessage: IMessage;
-  unread?: number;
+  unread: number;
+  invitationToGroup: string[];
+  myGroup: string[];
 }
 
 export interface IUserInfo {

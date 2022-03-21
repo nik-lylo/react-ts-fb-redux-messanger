@@ -12,6 +12,7 @@ const initialState: IChatState = {
   messageSnapList: [] as IMessage[],
   messageList: [] as IMessage[],
   chatInputText: "",
+  amountUnreadMessages: 0,
 };
 
 export default function chatReducer(
@@ -37,6 +38,8 @@ export default function chatReducer(
       return { ...state, messageSnapList: action.payload };
     case ChatActionEnum.SET_CHAT_INPUT_TEXT:
       return { ...state, chatInputText: action.payload };
+    case ChatActionEnum.SET_AMOUNT_UNREAD_MESSAGES:
+      return { ...state, amountUnreadMessages: action.payload };
     default:
       return state;
   }

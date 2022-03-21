@@ -1,13 +1,13 @@
 .group-card {
   display: flex;
-  padding: 6px 0px;
+  padding: 6px 6px;
+  cursor: pointer;
   &__avatar {
     height: 40px;
     width: 40px;
     margin-right: 16px;
   }
-  &__block {
-  }
+
   &__name {
     font-family: SFProText;
     font-style: normal;

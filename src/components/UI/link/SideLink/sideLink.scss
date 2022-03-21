@@ -1,4 +1,4 @@
-.setting-link {
+.side-link {
   display: flex;
   padding: 12px 16px 12px 16px;
   align-items: center;
@@ -18,15 +18,15 @@
     margin-right: 16px;
   }
 }
-.setting-link:hover {
+.side-link:hover {
   background: #f2f3f5;
 }
-.setting-link_selected {
+.side-link_selected {
   background: #398fe5 !important;
-  & .setting-link__icon {
+  & .side-link__icon {
     color: white !important;
   }
-  & .setting-link__text {
+  & .side-link__text {
     color: white !important;
   }
 }

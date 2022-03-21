@@ -76,6 +76,10 @@
     background: #9b9da1b0;
     color: aliceblue;
   }
+  &__close:disabled {
+    background: #b4b7bba8;
+    color: #171a1f57;
+  }
 }
 .popup-group-create_open {
   visibility: visible !important;

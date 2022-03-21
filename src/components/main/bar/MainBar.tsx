@@ -1,12 +1,32 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { countAmountUnreadMessages } from "../../../lib/controlFunc/chat/countAmountUnreadMessages";
+import { useActions } from "../../../lib/hooks/useActions";
+import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
 import {
   RoutesFullMainEnum,
   RoutesMainEnum,
 } from "../../../lib/utilits/RoutesEnum";
+import Counter from "../../UI/badge/Counter";
 
 const MainBar: FC = () => {
+  const { user } = useTypedSelector((s) => s.profileReducer);
+  const { usersCollectionList } = useTypedSelector((s) => s.contactReducer);
+  const { amountUnreadMessages, myChatSnapList } = useTypedSelector(
+    (s) => s.chatReducer
+  );
+  const { setAmountUnreadMessages } = useActions();
   const location = useLocation();
+
+  useEffect(() => {
+    if (myChatSnapList.length === 0) {
+      return;
+    }
+    const unread = countAmountUnreadMessages(myChatSnapList);
+    console.log(unread);
+    setAmountUnreadMessages(unread);
+  }, [myChatSnapList]);
+
   return (
     <div className="bar" id="con">
       <div className="bar__top-block">
@@ -33,8 +53,37 @@ const MainBar: FC = () => {
                 ? "bar-link  icon-message-fill link-chosen"
                 : "bar-link icon-message-mini"
             }
-          ></Link>
-          <Link to={"#"} className="bar-link icon-bell"></Link>
+          >
+            {amountUnreadMessages !== 0 && (
+              <div className="bar-link__badge">
+                <Counter amount={amountUnreadMessages} />
+              </div>
+            )}
+          </Link>
+          <Link
+            to={RoutesMainEnum.NOTIFICATIONS}
+            className={
+              location.pathname.startsWith(
+                RoutesFullMainEnum.MAIN_NOTIFICATIONS
+              )
+                ? "bar-link icon-bell-fill link-chosen"
+                : "bar-link icon-bell"
+            }
+          >
+            {usersCollectionList[user.userID] === undefined
+              ? null
+              : usersCollectionList[user.userID].invitationToGroup.length !==
+                  0 && (
+                  <div className="bar-link__badge">
+                    <Counter
+                      amount={
+                        usersCollectionList[user.userID].invitationToGroup
+                          .length
+                      }
+                    />
+                  </div>
+                )}
+          </Link>
           <Link
             to={RoutesMainEnum.SETTINGS}
             className={

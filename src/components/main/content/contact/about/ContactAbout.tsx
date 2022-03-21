@@ -64,7 +64,7 @@ const ContactAbout: FC = () => {
           <div className="about-group__title__number">1</div>
         </div>
         <div className="about-group__container">
-          <GroupCard urlAvatar={user.urlPhoto} />
+          <GroupCard urlAvatar={user.urlPhoto} name="Tesla" members={230} />
         </div>
       </div>
     </div>

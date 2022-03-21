@@ -2,6 +2,7 @@
 @import url(./contact/mainContactSide.scss);
 @import url(./chat/mainSideChat.scss);
 @import url(./settings/mainSideSettings.scss);
+@import url(./nots/mainSideNots.scss);
 
 .side-bar {
   @include adaptive-value("flex-basis", 1376, 700, 360, 190);

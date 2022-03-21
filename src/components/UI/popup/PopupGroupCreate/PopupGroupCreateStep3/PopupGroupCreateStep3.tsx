@@ -1,10 +1,11 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { filterContactByString } from "../../../../../lib/controlFunc/contact/filterContactByString";
-import { isEmptyObj } from "../../../../../lib/helper/isEmptyObj";
-import { useActions } from "../../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import { IUser } from "../../../../../lib/models/IUser";
+import AlertCustom from "../../../alert/Alert/AlertCustom";
+import CustomLoadingButton from "../../../buttons/CustomLoadingButton/CustomLoadingButton";
 import SimpleButton from "../../../buttons/SimpleButton/SimpleButton";
+import SimpleButtonLoad from "../../../buttons/SimpleButtonLoad/SimpleButtonLoad";
 import GroupCardAdd from "../../../cards/GroupCardAdd/GroupCardAdd";
 import InputSearch from "../../../input/InputSearch/InputSearch";
 export interface IUserChecked extends IUser {
@@ -25,6 +26,9 @@ const PopupGroupCreateStep3: FC<PopupGroupCreateStep3Props> = ({
   const [usersArray, setUsersArray] = useState<IUser[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
   const { usersCollectionList } = useTypedSelector((s) => s.contactReducer);
+  const { groupIsLoading, createGroupError } = useTypedSelector(
+    (s) => s.groupReducer
+  );
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const filtered = filterContactByString(
@@ -70,11 +74,18 @@ const PopupGroupCreateStep3: FC<PopupGroupCreateStep3Props> = ({
           ))}
         </div>
       </div>
+      {createGroupError && <AlertCustom>{createGroupError}</AlertCustom>}
       <div className="popup-group-create-step3__button">
         <div onClick={handleClickStepMinus}>
           <SimpleButton text="Back" isLoading={false} type="button" />
         </div>
-        <SimpleButton text="Finish" isLoading={false} type="submit" />
+        <SimpleButtonLoad
+          padding="6px 20px"
+          fontSize="16px"
+          type="submit"
+          text="Finish"
+          isLoad={groupIsLoading}
+        />
       </div>
     </>
   );

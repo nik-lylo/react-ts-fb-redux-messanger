@@ -17,7 +17,7 @@ const MainContactSide = () => {
       <MainBarContactSearch />
       {isContactLoading ? (
         <div className="contact-side__loader-block">
-          <BarLoader />
+          <BarLoader blockSize="32px" />
         </div>
       ) : (
         <MainBarContactBody />

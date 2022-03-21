@@ -4,6 +4,7 @@ import ErrorPage from "../pages/ErrorPage";
 import {
   RoutesAuthEnum,
   RoutesMainEnum,
+  RoutesMainNotsEnum,
   RoutesMainSettingsEnum,
   RoutesNames,
 } from "../lib/utilits/RoutesEnum";
@@ -19,6 +20,8 @@ import SettingsCommunities from "../components/main/content/settings/group/Setti
 import SettingsEdit from "../components/main/content/settings/edit/SettingsEdit";
 import SettingsSignOut from "../components/main/content/settings/signout/SettingsSignOut";
 import SettingsProfile from "../components/main/content/settings/profile/SettingsProfile";
+import MainSideNots from "../components/main/side/nots/MainSideNots";
+import NotsInviting from "../components/main/content/nots/inviting/NotsInviting";
 
 export interface IRoute {
   path: string;
@@ -53,6 +56,13 @@ export const privateRoutes: IRoute[] = [
     children: [
       { path: RoutesMainEnum.CONTACT, element: MainContactSide },
       { path: RoutesMainEnum.CHAT, element: MainSideChat },
+      {
+        path: RoutesMainEnum.NOTIFICATIONS,
+        element: MainSideNots,
+        children: [
+          { path: RoutesMainNotsEnum.INVITING, element: NotsInviting },
+        ],
+      },
       {
         path: RoutesMainEnum.SETTINGS,
         element: MainSideSettings,

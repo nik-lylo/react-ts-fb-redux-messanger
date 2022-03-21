@@ -55,6 +55,9 @@ export const AsyncAuthActionCreators = {
             location: null,
           },
           lastMessage: {} as IMessage,
+          unread: 0,
+          invitationToGroup: [],
+          myGroup: [],
         };
         await uploadNewUser(userObj, newUser.user.uid);
         await uploadIsOnline(newUser.user.uid, true);

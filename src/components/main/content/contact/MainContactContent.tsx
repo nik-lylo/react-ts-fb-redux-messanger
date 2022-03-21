@@ -13,7 +13,7 @@ const MainContactContent = () => {
     <div className="main-content__contact content-contact">
       {isContactLoading ? (
         <div className="contact-side__loader-block">
-          <BarLoader />
+          <BarLoader blockSize="32px" />
         </div>
       ) : isEmptyObj(selectedContact) ? (
         <ContactWrapper />

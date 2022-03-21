@@ -2,6 +2,7 @@ import { IMessage } from "../../../../lib/models/IMessage";
 import { IUser } from "../../../../lib/models/IUser";
 import {
   ChatActionEnum,
+  SetAmountUnreadMessages,
   SetChatError,
   SetChatInputText,
   SetIsChatLoading,
@@ -49,5 +50,9 @@ export const ChatActionCreators = {
   setChatInputText: (str: string): SetChatInputText => ({
     type: ChatActionEnum.SET_CHAT_INPUT_TEXT,
     payload: str,
+  }),
+  setAmountUnreadMessages: (num: number): SetAmountUnreadMessages => ({
+    type: ChatActionEnum.SET_AMOUNT_UNREAD_MESSAGES,
+    payload: num,
   }),
 };

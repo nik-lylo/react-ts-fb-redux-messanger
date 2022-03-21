@@ -8,7 +8,6 @@ import "./contactCard.scss";
 
 interface ContactCardProps {
   contact: IUser;
-
   my: boolean;
 }
 

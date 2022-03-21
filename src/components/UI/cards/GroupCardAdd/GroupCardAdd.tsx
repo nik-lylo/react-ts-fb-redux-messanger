@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FC, useState } from "react";
 import "./groupCardAdd.scss";
-import { DefaultValue } from "../../../../lib/models/DefaultValue";
 import AvatarRound from "../../AvatarCustom/AvatarRound/AvatarRound";
 import UserStatus from "../../user-status/UserStatus";
 import { IUser } from "../../../../lib/models/IUser";
@@ -23,14 +22,11 @@ const GroupCardAdd: FC<GroupCardAddProps> = ({
   function handleClick() {
     if (!checked) {
       setInvitedContacts([...invitedContacts, contact]);
-      console.log("add");
     } else {
       const filtered = filterContactArray(invitedContacts, contact.userID);
       setInvitedContacts(filtered);
-      console.log("del");
     }
     setChecked(!checked);
-    console.log(invitedContacts);
   }
 
   return (

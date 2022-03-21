@@ -32,6 +32,9 @@ export async function googleSignInControl(googleUserSnap: any, checkDB: any) {
           location: null,
         },
         lastMessage: {} as IMessage,
+        unread: 0,
+        invitationToGroup: [],
+        myGroup: [],
       };
       await uploadNewUser(userObj, googleUserSnap.user.uid);
       return userObj;

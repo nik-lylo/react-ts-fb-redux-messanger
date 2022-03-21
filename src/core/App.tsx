@@ -7,7 +7,8 @@ import CustomLoader from "../components/UI/loader/CustomLoader/CustomLoader";
 import { isEmptyObj } from "../lib/helper/isEmptyObj";
 import { uploadIsOnline } from "../api/user/uploadIsOnline";
 import { IUser } from "../lib/models/IUser";
-import { IUsersObject } from "../lib/models/ICommon";
+import { IGroupObject, IUsersObject } from "../lib/models/ICommon";
+import { IGroup } from "../lib/models/IGroup";
 
 const App: FC = () => {
   const {
@@ -17,6 +18,9 @@ const App: FC = () => {
     setOnContactSnapList,
     setUsersCollectionList,
     setIsUsersCollectioListLoaded,
+    setGroupCollectionsList,
+    setIsGroupCollectionsListLoaded,
+    setOnGroupSnapList,
   } = useActions();
   const { isOnAuthStateStarted, isOnAuthStateBlocked, userSnapId } =
     useTypedSelector((s) => s.authReducer);
@@ -24,8 +28,25 @@ const App: FC = () => {
   const { isUsersCollectionListLoaded, contactSnapList } = useTypedSelector(
     (s) => s.contactReducer
   );
+  const { groupSnapList, isGroupCollectionListLoaded, groupCollectionList } =
+    useTypedSelector((s) => s.groupReducer);
 
-  // !Ставимо слушатель подій на коллекції "Users"
+  // !При зміні масиву "groupSnapList" ми обновляємо основний масив "GroupCollectionsList"
+  useEffect(() => {
+    const object: IGroupObject = {};
+    groupSnapList.map((item: IGroup) => {
+      object[item.groupId] = item;
+    });
+    setGroupCollectionsList(object);
+    setIsGroupCollectionsListLoaded(true);
+  }, [groupSnapList]);
+
+  // !Ставимо слухач подій на коллекції "Group"
+  useEffect(() => {
+    setOnGroupSnapList();
+  }, []);
+
+  // !Ставимо слухач подій на коллекції "Users"
   useEffect(() => {
     setOnContactSnapList();
   }, []);
@@ -69,7 +90,9 @@ const App: FC = () => {
 
   return (
     <div className="app">
-      {isOnAuthStateStarted && isUsersCollectionListLoaded ? (
+      {isOnAuthStateStarted &&
+      isUsersCollectionListLoaded &&
+      isGroupCollectionListLoaded ? (
         <AppRouter />
       ) : (
         <CustomLoader />

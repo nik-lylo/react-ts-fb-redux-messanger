@@ -11,6 +11,7 @@ export interface IChatState {
   chatInputText: string;
   messageSnapList: IMessage[];
   messageList: IMessage[];
+  amountUnreadMessages: number;
 }
 
 export enum ChatActionEnum {
@@ -23,6 +24,7 @@ export enum ChatActionEnum {
   SET_MESSAGE_SNAP_LIST = "SET_MESSAGE_SNAP_LIST",
   SET_CHAT_INPUT_TEXT = "SET_CHAT_INPUT_TEXT",
   SET_MESSAGE_LIST = "SET_MESSAGE_LIST",
+  SET_AMOUNT_UNREAD_MESSAGES = "SET_AMOUNT_UNREAD_MESSAGES",
 }
 
 export interface SetSelectedChat {
@@ -61,6 +63,10 @@ export interface SetMessageList {
   type: ChatActionEnum.SET_MESSAGE_LIST;
   payload: IMessage[];
 }
+export interface SetAmountUnreadMessages {
+  type: ChatActionEnum.SET_AMOUNT_UNREAD_MESSAGES;
+  payload: number;
+}
 
 export type ChatAction =
   | SetSelectedChat
@@ -71,4 +77,5 @@ export type ChatAction =
   | SetMessageSnapList
   | SetMessageList
   | SetMyChatSnapList
-  | SetChatInputText;
+  | SetChatInputText
+  | SetAmountUnreadMessages;

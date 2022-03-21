@@ -1,3 +1,4 @@
+import { IGroup } from "./IGroup";
 import { IUser } from "./IUser";
 
 export interface IGenericObject {
@@ -6,4 +7,8 @@ export interface IGenericObject {
 
 export interface IUsersObject {
   [key: string]: IUser;
+}
+
+export interface IGroupObject {
+  [key: string]: IGroup;
 }
