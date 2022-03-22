@@ -6,6 +6,8 @@ import { useActions } from "../../../../lib/hooks/useActions";
 import { IUser } from "../../../../lib/models/IUser";
 import { dateFromCreatedAt } from "../../../../lib/helper/dateFromCreatedAt";
 import { uploadUnreadFriend } from "../../../../api/chat/uploadUnreadFriend";
+import { isEmpty } from "@firebase/util";
+import { IGroup } from "../../../../lib/models/IGroup";
 
 interface ChatCardProps {
   chat: IUser;
@@ -15,11 +17,15 @@ interface ChatCardProps {
 const ChatCard: FC<ChatCardProps> = ({ chat, mainChat }) => {
   const { user } = useTypedSelector((s) => s.profileReducer);
   const { selectedChat } = useTypedSelector((s) => s.chatReducer);
-  const { setSelectedChat } = useActions();
+  const { selectedGroup } = useTypedSelector((s) => s.groupReducer);
+  const { setSelectedChat, setSelectedGroup } = useActions();
 
   function handleClick() {
     uploadUnreadFriend(user.userID, chat.userID);
     setSelectedChat({ ...chat, unread: 0 });
+    if (!isEmpty(selectedGroup)) {
+      setSelectedGroup({} as IGroup);
+    }
   }
   return (
     <div

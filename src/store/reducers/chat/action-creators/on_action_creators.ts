@@ -49,4 +49,29 @@ export const OnActionCreators = {
       dispatch(ChatActionCreators.setMyChatSnapList(array));
     });
   },
+
+  setOnMessageGroupSnapList:
+    (groupId: string) => async (dispatch: AppDispatch) => {
+      const collRef = collection(
+        db,
+        CollEnum.GROUPS,
+        groupId,
+        CollEnum.GMESSAGES
+      );
+      const q = query(collRef, orderBy("createdAt"));
+      onSnapshot(q, (snap) => {
+        const array: IMessage[] = [];
+        snap.forEach((doc: any) => {
+          if (doc.data().createdAt === null) return;
+          const dateToday = dateFromCreatedAt(doc.data().createdAt);
+          array.push({
+            ...doc.data(),
+            messageID: doc.id,
+            time: dateToday?.time,
+            fullTime: dateToday?.fulldate,
+          });
+        });
+        dispatch(ChatActionCreators.setMessageGroupSnapList(array));
+      });
+    },
 };

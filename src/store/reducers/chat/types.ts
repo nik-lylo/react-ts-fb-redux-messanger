@@ -1,3 +1,4 @@
+import { IGroup } from "../../../lib/models/IGroup";
 import { IMessage } from "../../../lib/models/IMessage";
 import { IUser } from "../../../lib/models/IUser";
 
@@ -11,6 +12,8 @@ export interface IChatState {
   chatInputText: string;
   messageSnapList: IMessage[];
   messageList: IMessage[];
+  messageGroupSnapList: IMessage[];
+  messageGroupList: IMessage[];
   amountUnreadMessages: number;
 }
 
@@ -22,9 +25,11 @@ export enum ChatActionEnum {
   SET_MY_CHAT_LIST = "SET_MY_CHAT_LIST",
   SET_MY_CHAT_SNAP_LIST = "SET_MY_CHAT_SNAP_LIST",
   SET_MESSAGE_SNAP_LIST = "SET_MESSAGE_SNAP_LIST",
-  SET_CHAT_INPUT_TEXT = "SET_CHAT_INPUT_TEXT",
   SET_MESSAGE_LIST = "SET_MESSAGE_LIST",
+  SET_MESSAGE_GROUP_SNAP_LIST = "SET_MESSAGE_GROUP_SNAP_LIST",
+  SET_MESSAGE_GROUP_LIST = "SET_MESSAGE_GROUP_LIST",
   SET_AMOUNT_UNREAD_MESSAGES = "SET_AMOUNT_UNREAD_MESSAGES",
+  SET_CHAT_INPUT_TEXT = "SET_CHAT_INPUT_TEXT",
 }
 
 export interface SetSelectedChat {
@@ -63,6 +68,14 @@ export interface SetMessageList {
   type: ChatActionEnum.SET_MESSAGE_LIST;
   payload: IMessage[];
 }
+export interface SetMessageGroupSnapList {
+  type: ChatActionEnum.SET_MESSAGE_GROUP_SNAP_LIST;
+  payload: IMessage[];
+}
+export interface SetMessageGroupList {
+  type: ChatActionEnum.SET_MESSAGE_GROUP_LIST;
+  payload: IMessage[];
+}
 export interface SetAmountUnreadMessages {
   type: ChatActionEnum.SET_AMOUNT_UNREAD_MESSAGES;
   payload: number;
@@ -78,4 +91,6 @@ export type ChatAction =
   | SetMessageList
   | SetMyChatSnapList
   | SetChatInputText
-  | SetAmountUnreadMessages;
+  | SetAmountUnreadMessages
+  | SetMessageGroupSnapList
+  | SetMessageGroupList;

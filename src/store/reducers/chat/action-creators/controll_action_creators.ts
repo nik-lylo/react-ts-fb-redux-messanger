@@ -1,6 +1,7 @@
 import { AppDispatch } from "../../..";
 import { uploadUnreadFriend } from "../../../../api/chat/uploadUnreadFriend";
 import { isEmptyObj } from "../../../../lib/helper/isEmptyObj";
+import { IGroup } from "../../../../lib/models/IGroup";
 import { IMessage } from "../../../../lib/models/IMessage";
 import { IUser } from "../../../../lib/models/IUser";
 import { ChatActionCreators } from "./reducer_action_creators";
@@ -109,5 +110,10 @@ export const ControllChatActionCreators = {
         return;
       }
       dispatch(ChatActionCreators.setMessageList(messageSnapList));
+    },
+  setControllMyGroupMessageList:
+    (messageGroupSnapList: IMessage[], selectedGroup: IGroup) =>
+    (dispatch: AppDispatch) => {
+      dispatch(ChatActionCreators.setMessageGroupList(messageGroupSnapList));
     },
 };

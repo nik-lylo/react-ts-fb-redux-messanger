@@ -3,4 +3,5 @@ export enum CollEnum {
   FRIENDS = "Friends",
   MESSAGES = "Messages",
   GROUPS = "Groups",
+  GMESSAGES = "GMessages",
 }

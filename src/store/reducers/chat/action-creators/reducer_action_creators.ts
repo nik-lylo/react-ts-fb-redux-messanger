@@ -7,6 +7,8 @@ import {
   SetChatInputText,
   SetIsChatLoading,
   SetIsMessageLoading,
+  SetMessageGroupList,
+  SetMessageGroupSnapList,
   SetMessageList,
   SetMessageSnapList,
   SetMyChatList,
@@ -45,6 +47,14 @@ export const ChatActionCreators = {
   }),
   setMessageList: (list: IMessage[]): SetMessageList => ({
     type: ChatActionEnum.SET_MESSAGE_LIST,
+    payload: list,
+  }),
+  setMessageGroupSnapList: (list: IMessage[]): SetMessageGroupSnapList => ({
+    type: ChatActionEnum.SET_MESSAGE_GROUP_SNAP_LIST,
+    payload: list,
+  }),
+  setMessageGroupList: (list: IMessage[]): SetMessageGroupList => ({
+    type: ChatActionEnum.SET_MESSAGE_GROUP_LIST,
     payload: list,
   }),
   setChatInputText: (str: string): SetChatInputText => ({

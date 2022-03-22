@@ -8,9 +8,10 @@ import MainContentChatNav from "./nav/MainContentChatNav";
 
 const MainContentChat: FC = () => {
   const { selectedChat } = useTypedSelector((s) => s.chatReducer);
+  const { selectedGroup } = useTypedSelector((s) => s.groupReducer);
   return (
     <div className="main-content-chat">
-      {isEmptyObj(selectedChat) ? (
+      {isEmptyObj(selectedChat) && isEmptyObj(selectedGroup) ? (
         <NoSelectedChatWrapper />
       ) : (
         <>

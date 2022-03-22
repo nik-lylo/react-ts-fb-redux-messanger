@@ -1,14 +1,17 @@
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useRef } from "react";
+import { isEmptyObj } from "../../../../../lib/helper/isEmptyObj";
 import { useActions } from "../../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import CustomLoadButtonSend from "../../../../UI/buttons/CustomLoadButtonSend/CustomLoadButtonSend";
 import "./mainContentChatForm.scss";
 
 const MainContentChatForm: FC = () => {
-  const { setUploadMessege, setChatInputText } = useActions();
+  const { setUploadMessege, setChatInputText, setUploadMessageToGroup } =
+    useActions();
   const { selectedChat, isMessageLoading, chatInputText } = useTypedSelector(
     (s) => s.chatReducer
   );
+  const { selectedGroup } = useTypedSelector((s) => s.groupReducer);
   const { user } = useTypedSelector((s) => s.profileReducer);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -27,7 +30,15 @@ const MainContentChatForm: FC = () => {
     if (chatInputText === "") {
       return;
     }
-    setUploadMessege(user, chatInputText, selectedChat, handleFocus);
+    if (isEmptyObj(selectedChat) && isEmptyObj(selectedGroup)) return;
+    if (isEmptyObj(selectedChat)) {
+      setUploadMessageToGroup(selectedGroup, user, chatInputText, handleFocus);
+      return;
+    }
+    if (isEmptyObj(selectedGroup)) {
+      setUploadMessege(user, chatInputText, selectedChat, handleFocus);
+      return;
+    }
   }
   return (
     <form className="main-content-chat-form" onSubmit={handleSubmit}>

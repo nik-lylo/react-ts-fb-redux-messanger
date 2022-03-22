@@ -8,6 +8,8 @@ export interface IGroupState {
   groupSnapList: IGroup[];
   groupCollectionList: IGroupObject;
   isGroupCollectionListLoaded: boolean;
+  myGroup: IGroup[];
+  selectedGroup: IGroup;
 }
 export enum GroupActionEnum {
   SET_GROUP_IS_LOADING = "SET_GROUP_IS_LOADING",
@@ -16,6 +18,8 @@ export enum GroupActionEnum {
   SET_GROUP_SNAP_LIST = "SET_GROUP_SNAP_LIST",
   SET_IS_GROUP_COLLECTION_LIST_LOADED = "SET_GROUP_COLLECTION_LIST_LOADED",
   SET_GROUP_COLLECTION_LIST = "SET_GROUP_COLLECTION_LIST",
+  SET_MY_GROUP = "SET_MY_GROUP",
+  SET_SELECTED_GROUP = "SET_SELECTED_GROUP",
 }
 export interface SetOpenPopupCreateGroup {
   type: GroupActionEnum.SET_OPEN_POPUP_CREATE_GROUP;
@@ -41,10 +45,21 @@ export interface SetGroupCollectionList {
   type: GroupActionEnum.SET_GROUP_COLLECTION_LIST;
   payload: IGroupObject;
 }
+export interface SetMyGroup {
+  type: GroupActionEnum.SET_MY_GROUP;
+  payload: IGroup[];
+}
+export interface SetSelectedGroup {
+  type: GroupActionEnum.SET_SELECTED_GROUP;
+  payload: IGroup;
+}
+
 export type GroupAction =
   | SetOpenPopupCreateGroup
   | SetCreateGroupError
   | SetGroupIsLoading
   | SetGroupSnapList
   | SetGroupCollectionList
-  | SetIsGroupCollectionListLoaded;
+  | SetIsGroupCollectionListLoaded
+  | SetMyGroup
+  | SetSelectedGroup;

@@ -10,8 +10,11 @@ import { GroupActionCreators } from "./reducer_action_creators";
 import { IUser } from "../../../../lib/models/IUser";
 import { IGroup, IGroupMember } from "../../../../lib/models/IGroup";
 import { updateUserInvitationToGroupAdd } from "../../../../api/group/updateUserInvitationToGroupAdd";
-import { arrayUnion } from "firebase/firestore";
+import { arrayUnion, serverTimestamp } from "firebase/firestore";
 import { uploadUpdateUser } from "../../../../api/user/uploadUpdateUser";
+import { IMessage } from "../../../../lib/models/IMessage";
+import { uploadMessageToGroup } from "../../../../api/group/uploadMessageToGroup";
+import { ChatActionCreators } from "../../chat/action-creators/reducer_action_creators";
 
 export const AsyncGroupActionCreators = {
   setCreateGroup:
@@ -133,6 +136,34 @@ export const AsyncGroupActionCreators = {
         }, 1000);
       } catch (e: any) {
         console.log(e.message);
+      }
+    },
+  setUploadMessageToGroup:
+    (
+      selectedGroup: IGroup,
+      myProfile: IUser,
+      mesText: string,
+      handleFocus: () => void
+    ) =>
+    async (dispatch: AppDispatch) => {
+      dispatch(ChatActionCreators.setIsMessageLoading(true));
+      try {
+        const messObj: IMessage = {
+          text: mesText,
+          fromID: myProfile.userID,
+          urlPhoto: myProfile.urlPhoto,
+          createdAt: serverTimestamp(),
+          fullname: myProfile.fullname,
+        };
+        await uploadMessageToGroup(selectedGroup.groupId, messObj);
+        const lastMessage = { lastMessage: messObj };
+        await updateGroup(selectedGroup.groupId, lastMessage);
+        dispatch(ChatActionCreators.setChatInputText(""));
+      } catch (e: any) {
+        console.log(e.message);
+      } finally {
+        dispatch(ChatActionCreators.setIsMessageLoading(false));
+        handleFocus();
       }
     },
 };

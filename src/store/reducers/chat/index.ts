@@ -1,3 +1,4 @@
+import { IGroup } from "../../../lib/models/IGroup";
 import { IMessage } from "../../../lib/models/IMessage";
 import { IUser } from "../../../lib/models/IUser";
 import { ChatAction, ChatActionEnum, IChatState } from "./types";
@@ -11,6 +12,8 @@ const initialState: IChatState = {
   myChatSnapList: [] as IUser[],
   messageSnapList: [] as IMessage[],
   messageList: [] as IMessage[],
+  messageGroupSnapList: [] as IMessage[],
+  messageGroupList: [] as IMessage[],
   chatInputText: "",
   amountUnreadMessages: 0,
 };
@@ -36,6 +39,10 @@ export default function chatReducer(
       return { ...state, messageList: action.payload };
     case ChatActionEnum.SET_MESSAGE_SNAP_LIST:
       return { ...state, messageSnapList: action.payload };
+    case ChatActionEnum.SET_MESSAGE_GROUP_LIST:
+      return { ...state, messageGroupList: action.payload };
+    case ChatActionEnum.SET_MESSAGE_GROUP_SNAP_LIST:
+      return { ...state, messageGroupSnapList: action.payload };
     case ChatActionEnum.SET_CHAT_INPUT_TEXT:
       return { ...state, chatInputText: action.payload };
     case ChatActionEnum.SET_AMOUNT_UNREAD_MESSAGES:

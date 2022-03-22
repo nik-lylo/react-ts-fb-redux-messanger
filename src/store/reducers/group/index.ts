@@ -1,3 +1,4 @@
+import { IGroup } from "../../../lib/models/IGroup";
 import { GroupAction, GroupActionEnum, IGroupState } from "./types";
 const initialState: IGroupState = {
   openPopupCreateGroup: false,
@@ -5,7 +6,9 @@ const initialState: IGroupState = {
   groupIsLoading: false,
   groupSnapList: [],
   groupCollectionList: {},
+  myGroup: [],
   isGroupCollectionListLoaded: false,
+  selectedGroup: {} as IGroup,
 };
 
 export default function groupReducer(
@@ -25,6 +28,10 @@ export default function groupReducer(
       return { ...state, groupCollectionList: action.payload };
     case GroupActionEnum.SET_IS_GROUP_COLLECTION_LIST_LOADED:
       return { ...state, isGroupCollectionListLoaded: action.payload };
+    case GroupActionEnum.SET_MY_GROUP:
+      return { ...state, myGroup: action.payload };
+    case GroupActionEnum.SET_SELECTED_GROUP:
+      return { ...state, selectedGroup: action.payload };
     default:
       return state;
   }

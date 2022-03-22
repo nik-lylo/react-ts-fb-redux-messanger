@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "../styles/app/app.scss";
 import AppRouter from "../router/AppRouter/AppRouter";
 import { useActions } from "../lib/hooks/useActions";
@@ -11,6 +11,7 @@ import { IGroupObject, IUsersObject } from "../lib/models/ICommon";
 import { IGroup } from "../lib/models/IGroup";
 
 const App: FC = () => {
+  const [isMainReady, setIsMainReady] = useState<boolean>(false);
   const {
     setOnAuthStateChange,
     setDefaultIsAuth,
@@ -21,15 +22,37 @@ const App: FC = () => {
     setGroupCollectionsList,
     setIsGroupCollectionsListLoaded,
     setOnGroupSnapList,
+    setMyGroup,
   } = useActions();
   const { isOnAuthStateStarted, isOnAuthStateBlocked, userSnapId } =
     useTypedSelector((s) => s.authReducer);
   const { user } = useTypedSelector((s) => s.profileReducer);
-  const { isUsersCollectionListLoaded, contactSnapList } = useTypedSelector(
-    (s) => s.contactReducer
-  );
+  const { isUsersCollectionListLoaded, contactSnapList, usersCollectionList } =
+    useTypedSelector((s) => s.contactReducer);
   const { groupSnapList, isGroupCollectionListLoaded, groupCollectionList } =
     useTypedSelector((s) => s.groupReducer);
+
+  // !Коли завантажено "user" і "usersCollectionList" i "groupCollectionList" то ми
+  // !завантажуємо "myGroup" і далі встановлюємо відкриття флажка що відкриває "App"
+  useEffect(() => {
+    if (
+      isOnAuthStateStarted &&
+      isUsersCollectionListLoaded &&
+      isGroupCollectionListLoaded
+    ) {
+      const myGroupArray: IGroup[] = [];
+      usersCollectionList[user.userID].myGroup.map((item: string) => {
+        myGroupArray.push(groupCollectionList[item]);
+      });
+      setMyGroup(myGroupArray);
+      setIsMainReady(true);
+    }
+  }, [
+    isOnAuthStateStarted,
+    isUsersCollectionListLoaded,
+    isGroupCollectionListLoaded,
+    usersCollectionList,
+  ]);
 
   // !При зміні масиву "groupSnapList" ми обновляємо основний масив "GroupCollectionsList"
   useEffect(() => {
@@ -89,15 +112,7 @@ const App: FC = () => {
   }, [user]);
 
   return (
-    <div className="app">
-      {isOnAuthStateStarted &&
-      isUsersCollectionListLoaded &&
-      isGroupCollectionListLoaded ? (
-        <AppRouter />
-      ) : (
-        <CustomLoader />
-      )}
-    </div>
+    <div className="app">{isMainReady ? <AppRouter /> : <CustomLoader />}</div>
   );
 };
 

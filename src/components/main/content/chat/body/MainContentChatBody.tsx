@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { isEmptyObj } from "../../../../../lib/helper/isEmptyObj";
 import { useActions } from "../../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
@@ -7,11 +7,22 @@ import EmptyMessageWrapper from "../../../../UI/empty_wrapper/EmptyMessageWrappe
 import "./mainContentChatBody.scss";
 
 const MainContentChatBody: FC = () => {
-  const { setOnMessageSnapList, setControllMyMessageList } = useActions();
+  const {
+    setOnMessageSnapList,
+    setOnMessageGroupSnapList,
+    setControllMyMessageList,
+    setControllMyGroupMessageList,
+  } = useActions();
   const { user } = useTypedSelector((s) => s.profileReducer);
-  const { selectedChat, messageSnapList, messageList } = useTypedSelector(
-    (s) => s.chatReducer
-  );
+  const { selectedGroup } = useTypedSelector((s) => s.groupReducer);
+
+  const {
+    selectedChat,
+    messageSnapList,
+    messageList,
+    messageGroupList,
+    messageGroupSnapList,
+  } = useTypedSelector((s) => s.chatReducer);
 
   // !При зміні масиву повідомлень прокручується до низу поля за допомогою ScrollIntoView
   const divRef = useRef<HTMLInputElement>(null);
@@ -19,26 +30,55 @@ const MainContentChatBody: FC = () => {
     if (divRef.current) {
       divRef.current.scrollIntoView();
     }
-  }, [messageList]);
+  }, [messageList, messageGroupList]);
 
   // !При зміні вибраного чату ми змінюємо ID який слухаємо
   useEffect(() => {
-    if (!isEmptyObj(selectedChat))
-      setOnMessageSnapList(user.userID, selectedChat.userID);
+    if (isEmptyObj(selectedChat)) {
+      return;
+    }
+    setOnMessageSnapList(user.userID, selectedChat.userID);
   }, [selectedChat]);
+
+  // !При зміні вибраної групи ми змінюємо ID групи яку слухаємо
+  useEffect(() => {
+    if (isEmptyObj(selectedGroup)) {
+      return;
+    }
+    setOnMessageGroupSnapList(selectedGroup.groupId);
+  }, [selectedGroup]);
 
   // !При зміні SnapList ми додаємо нові повідомлення в основний масив повідомлень
   useEffect(() => {
+    if (isEmptyObj(selectedChat)) {
+      return;
+    }
     setControllMyMessageList(messageSnapList, selectedChat, user.userID);
   }, [messageSnapList]);
 
+  // !При зміні SnapGroupList ми додаємо нові повідомлення в основний масив повідомлень
+  useEffect(() => {
+    if (isEmptyObj(selectedGroup)) {
+      return;
+    }
+    setControllMyGroupMessageList(messageGroupSnapList, selectedGroup);
+  }, [messageGroupSnapList]);
+
   return (
     <div className="main-content-chat-body">
-      {messageList.length === 0 ? (
+      {isEmptyObj(selectedChat) ? null : messageList.length === 0 ? (
         <EmptyMessageWrapper />
       ) : (
         messageList.map((message) => (
           <MessageCard key={message.messageID} message={message} />
+        ))
+      )}
+
+      {isEmptyObj(selectedGroup) ? null : messageGroupList.length === 0 ? (
+        <EmptyMessageWrapper />
+      ) : (
+        messageGroupList.map((mess) => (
+          <MessageCard key={mess.messageID} message={mess} />
         ))
       )}
       <div ref={divRef}></div>

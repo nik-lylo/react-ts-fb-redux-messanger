@@ -7,7 +7,9 @@ import {
   SetGroupIsLoading,
   SetGroupSnapList,
   SetIsGroupCollectionListLoaded,
+  SetMyGroup,
   SetOpenPopupCreateGroup,
+  SetSelectedGroup,
 } from "../types";
 
 export const GroupActionCreators = {
@@ -36,5 +38,13 @@ export const GroupActionCreators = {
   ): SetIsGroupCollectionListLoaded => ({
     type: GroupActionEnum.SET_IS_GROUP_COLLECTION_LIST_LOADED,
     payload: flag,
+  }),
+  setMyGroup: (arr: IGroup[]): SetMyGroup => ({
+    type: GroupActionEnum.SET_MY_GROUP,
+    payload: arr,
+  }),
+  setSelectedGroup: (group: IGroup): SetSelectedGroup => ({
+    type: GroupActionEnum.SET_SELECTED_GROUP,
+    payload: group,
   }),
 };

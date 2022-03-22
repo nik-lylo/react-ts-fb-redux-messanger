@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { isEmptyObj } from "../../../../../lib/helper/isEmptyObj";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import { RoutesMainEnum } from "../../../../../lib/utilits/RoutesEnum";
 import AvatarRound from "../../../../UI/AvatarCustom/AvatarRound/AvatarRound";
@@ -7,6 +8,7 @@ import "./mainContentChatNav.scss";
 
 const MainContentChatNav = () => {
   const { selectedChat } = useTypedSelector((s) => s.chatReducer);
+  const { selectedGroup } = useTypedSelector((s) => s.groupReducer);
   const navigate = useNavigate();
 
   function handleClickNavigate(): void {
@@ -18,13 +20,19 @@ const MainContentChatNav = () => {
       <div className="main-content-chat-nav__profile">
         <div className="main-content-chat-nav__avatar">
           <AvatarRound
-            urlAvatar={selectedChat.urlPhoto}
+            urlAvatar={
+              isEmptyObj(selectedChat)
+                ? selectedGroup.groupAvatar
+                : selectedChat.urlPhoto
+            }
             width="40px"
             height="40px"
           />
         </div>
         <div className="main-content-chat-nav__name">
-          {selectedChat.fullname}
+          {isEmptyObj(selectedChat)
+            ? selectedGroup.name
+            : selectedChat.fullname}
         </div>
       </div>
       <div className="main-content-chat-nav__menu">
