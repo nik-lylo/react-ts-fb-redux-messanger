@@ -1,0 +1,57 @@
+.contact-card {
+  width: 100%;
+  display: flex;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+.contact-card_blue {
+  background: #398fe5;
+}
+.contact-card_blue .contact-card__fullname {
+  color: white;
+}
+
+.contact-card_blue:hover {
+  background: #398fe5 !important;
+}
+
+.contact-card_blue:hover button {
+  display: none !important;
+}
+
+.contact-card__content {
+  display: flex;
+  justify-content: space-between;
+  flex: 1 1 auto;
+}
+.content-card__btn {
+  height: 100%;
+  width: 40px;
+  text-align: right;
+  background: none !important;
+  font-size: 21px;
+  color: #71747a;
+  display: none;
+}
+.content-card__btn:hover {
+  color: #248bf2c7;
+}
+
+.contact-card__fullname {
+  font-family: SFProText;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 24px;
+  letter-spacing: -0.24px;
+}
+.contact-card:hover {
+  background: #f2f3f5;
+}
+.contact-card:hover button {
+  display: block;
+}
+.contact-card_choosen {
+  background: #398fe5;
+  color: white !important ;
+}

@@ -1,0 +1,28 @@
+.avatar-input {
+  position: relative;
+  margin: 0px 0px 10px 0px;
+  &__label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #248bf2;
+    outline: 2px solid white;
+    overflow: hidden;
+    position: absolute;
+    right: 22px;
+    top: 55px;
+    cursor: pointer;
+  }
+  &__input {
+    display: none;
+  }
+  &__label:hover {
+    background: #105aa3;
+  }
+}
+.avatar-input__fill {
+  background: goldenrod !important;
+}

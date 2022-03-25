@@ -1,5 +1,5 @@
 @import url("../../../components/main/bar/mainBar.scss");
-@import url("../../../components/main/side/mainSideBar.scss");
+@import url("../../../components/main/side/mainSide.scss");
 @import url("../../../components/main/content/mainContent.scss");
 
 .main {
@@ -27,4 +27,23 @@
   text-align: center;
   letter-spacing: -0.24px;
   color: #71747a;
+}
+// !Заголовки
+.main-24-title {
+  font-family: SFProDisplay;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.36px;
+  color: #171a1f;
+}
+.main-17-title {
+  font-family: SFProText;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 24px;
+  letter-spacing: -0.41px;
+  color: #171a1f;
 }

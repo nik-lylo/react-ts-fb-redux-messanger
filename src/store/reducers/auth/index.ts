@@ -4,6 +4,7 @@ const initialState: IAuthState = {
   userSnapId: null,
   authError: null,
   isAuth: false,
+  isAuthLoading: false,
   isListenerAuthBlocked: false,
   isListenerAuthStarted: false,
 };
@@ -17,6 +18,8 @@ export default function authReducer(
       return { ...state, userSnapId: action.payload };
     case AuthActionEnum.SET_IS_AUTH:
       return { ...state, isAuth: action.payload };
+    case AuthActionEnum.SET_IS_AUTH_LOADING:
+      return { ...state, isAuthLoading: action.payload };
     case AuthActionEnum.SET_AUTH_ERROR:
       return { ...state, authError: action.payload };
     case AuthActionEnum.SET_IS_LISTENER_AUTH_BLOCKED:

@@ -1,9 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { downloadPhoto } from "../../../api/profile/downloadPhoto";
+import { uploadPhoto } from "../../../api/profile/uploadPhoto";
 import { useActions } from "../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
 import { DefaultAvatar } from "../../../lib/models/DefaultValue";
 import AlertCustom from "../../UI/alert/Alert/AlertCustom";
+import AvatarInput from "../../UI/input/AvatarInput/AvatarInput";
 import Loader from "../../UI/loader/Loader/Loader";
 
 const AuthSignUp: FC = () => {
@@ -11,13 +14,26 @@ const AuthSignUp: FC = () => {
   const [lastname, setLastName] = useState<string>("");
   const [mail, setMail] = useState<string>("lulnuk1995@gmail.com");
   const [password, setPassword] = useState<string>("");
+  const [avatarLink, setAvatarLink] = useState<string>(
+    DefaultAvatar.AVATAR_PHOTO
+  );
+  const [avatarFile, setAvatarFile] = useState<any>(null);
+  const { authError, isAuthLoading } = useTypedSelector((s) => s.authReducer);
+  const { setAuthError, setSignUp } = useActions();
   const navigate = useNavigate();
 
   useEffect(() => {
     return function (): void {
-      // setAuthError(null);
+      setAuthError(null);
     };
   }, []);
+
+  async function handleChangeAvatar(e: any) {
+    setAvatarFile(e.currentTarget.files[0]);
+    await uploadPhoto(`avatarCreatePhoto/test.png`, e.currentTarget.files[0]);
+    const linkAvatar = await downloadPhoto(`avatarCreatePhoto/test.png`);
+    setAvatarLink(linkAvatar);
+  }
 
   function handleChange(
     e: string,
@@ -25,16 +41,18 @@ const AuthSignUp: FC = () => {
   ): void {
     setState(e);
   }
+
   function rewrite(): void {
     setName("");
     setLastName("");
     setPassword("");
     setMail("");
+    setAvatarFile(null);
   }
 
   function handleSubmit(e: any): void {
     e.preventDefault();
-    // setSignUpUser(mail, password, name, lastname, rewrite, navigate);
+    setSignUp(mail, password, name, lastname, avatarFile, rewrite, navigate);
   }
 
   function handleClickNavigate(): void {
@@ -43,7 +61,7 @@ const AuthSignUp: FC = () => {
 
   return (
     <div className="auth__signup signup-auth auth__center">
-      <Loader isOpen={false} />
+      <Loader isOpen={isAuthLoading} />
       <button
         className="auth__btnback icon-arrow-left"
         onClick={handleClickNavigate}
@@ -54,7 +72,12 @@ const AuthSignUp: FC = () => {
           Introduce yourself
         </div>
         <div className="signup-auth__avatar">
-          <img src={DefaultAvatar.AVATAR_PHOTO} alt="Default Photo" />
+          <AvatarInput
+            avatarFile={avatarFile}
+            avatarLink={avatarLink}
+            handleChangeAvatar={handleChangeAvatar}
+            size="80px"
+          />
         </div>
         <form
           action="#"
@@ -102,10 +125,10 @@ const AuthSignUp: FC = () => {
             minLength={6}
           />
           <button type="submit" className="auth__link signup-auth__submit ">
-            Next
+            Finish
           </button>
         </form>
-        {/* {authError && <AlertCustom>{authError}</AlertCustom>} */}
+        {authError && <AlertCustom>{authError}</AlertCustom>}
         <div className="signup-auth__text auth__subtitle">
           By creating an account you are accepting our
           <br />

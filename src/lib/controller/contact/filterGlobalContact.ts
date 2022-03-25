@@ -1,11 +1,11 @@
-import { IFriends } from "../../models/IFriends";
+import { IFriends, IFriendsUser } from "../../models/IFriends";
 import { IUser } from "../../models/IUser";
 
 export function filterGlobalContact(
   myId: string,
   globalContact: IUser[],
-  myContact: IFriends[]
-) {
+  myContact: IFriendsUser[]
+): IUser[] {
   const myContactId = myContact.map((it) => it.userID);
   const resultArr = globalContact.filter((item) => {
     if (item.userID === myId) {

@@ -3,16 +3,20 @@ import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
 import { IFriends } from "../../lib/models/IFriends";
 
-export async function uploadToMyContact(myId: string, contact: IFriends) {
+export async function uploadContactToFriends(
+  myId: string,
+  contactId: string,
+  contactObj: IFriends
+) {
   try {
     const colRef = doc(
       db,
       CollectionEnum.USERS,
       myId,
       CollectionEnum.FRIENDS,
-      contact.userID
+      contactId
     );
-    await setDoc(colRef, contact);
+    await setDoc(colRef, contactObj);
   } catch (e: any) {
     throw new Error("Error uploading new contact to database!!!");
   }

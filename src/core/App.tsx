@@ -7,9 +7,8 @@ import { useTypedSelector } from "../lib/hooks/useTypedSelector";
 
 const App: FC = () => {
   const [isAuthReady, setIsAuthReady] = useState<boolean>(false);
-  const { isListenerAuthStarted, userSnapId } = useTypedSelector(
-    (s) => s.authReducer
-  );
+  const { isListenerAuthBlocked, isListenerAuthStarted, userSnapId } =
+    useTypedSelector((s) => s.authReducer);
   const { usersCollectionSnap, isUsersControllerLoaded } = useTypedSelector(
     (s) => s.appReducer
   );
@@ -40,13 +39,16 @@ const App: FC = () => {
     if (!isListenerAuthStarted) {
       return;
     }
+    if (isListenerAuthBlocked) {
+      return;
+    }
     if (userSnapId) {
       setIsAuth(true);
     } else {
       setIsAuth(false);
     }
     setIsAuthReady(true);
-  }, [userSnapId, isListenerAuthStarted]);
+  }, [userSnapId, isListenerAuthStarted, isListenerAuthBlocked]);
 
   return (
     <div className="app">
@@ -60,3 +62,4 @@ const App: FC = () => {
 };
 
 export default App;
+//

@@ -1,4 +1,4 @@
-import { IFriends } from "../../../lib/models/IFriends";
+import { IFriends, IFriendsUser } from "../../../lib/models/IFriends";
 import { IGroup, IGroupObject } from "../../../lib/models/IGroup";
 import { IUser, IUserObject } from "../../../lib/models/IUser";
 
@@ -6,7 +6,7 @@ export interface IAppState {
   usersObjectCollectionList: IUserObject;
   usersCollectionSnap: IUser[];
   friendsCollectionSnap: IFriends[];
-  friendsCollectionList: IFriends[];
+  friendsCollectionList: IFriendsUser[];
   groupsCollectionSnap: IGroup[];
   groupsObjectCollectionList: IGroupObject;
   myGroupsList: IGroup[];
@@ -42,7 +42,7 @@ export interface SetFriendsCollectionSnap {
 }
 export interface SetFriendsCollectionList {
   type: AppActionEnum.SET_FRIENDS_COLLECTION_LIST;
-  payload: IFriends[];
+  payload: IFriendsUser[];
 }
 export interface SetGroupsCollectionSnap {
   type: AppActionEnum.SET_GROUPS_COLLECTION_SNAP;

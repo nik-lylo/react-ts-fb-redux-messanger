@@ -2,6 +2,7 @@ import {
   AuthActionEnum,
   SetAuthError,
   SetIsAuth,
+  SetIsAuthLoading,
   SetIsListenerAuthBlocked,
   SetIsListenerAuthStarted,
   SetUserSnapId,
@@ -14,6 +15,10 @@ export const AuthReducerActionCreators = {
   }),
   setIsAuth: (flag: boolean): SetIsAuth => ({
     type: AuthActionEnum.SET_IS_AUTH,
+    payload: flag,
+  }),
+  setIsAuthLoading: (flag: boolean): SetIsAuthLoading => ({
+    type: AuthActionEnum.SET_IS_AUTH_LOADING,
     payload: flag,
   }),
   setIsListenerAuthStarted: (flag: boolean): SetIsListenerAuthStarted => ({

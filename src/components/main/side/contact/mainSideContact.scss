@@ -1,0 +1,12 @@
+@import url(./search/mainSideContactSearch.scss);
+@import url(./body/mainSideContactBody.scss);
+.main-bar-side-contact {
+  width: 100%;
+  min-height: 100%;
+}
+
+// !можливо корисне
+.contact-side__loader-block {
+  width: 100%;
+  height: calc(100vh - 114px);
+}

@@ -1,0 +1,19 @@
+@import "../../../styles/helper/helper.scss";
+@import url(./chat/mainSideChat.scss);
+@import url(./contact/mainSideContact.scss);
+@import url(./groups/mainSideGroups.scss);
+@import url(./notifications/mainSideNots.scss);
+@import url(./settings/mainSideSettings.scss);
+.side-bar {
+  @include adaptive-value("flex-basis", 1376, 700, 360, 190);
+  flex-grow: 1;
+  flex-shrink: 1;
+  max-width: 360px;
+  min-width: 190px;
+  min-height: 100%;
+  box-shadow: inset -1px 0px 0px rgba(0, 0, 0, 0.08);
+}
+.side-bar__block {
+  width: 100%;
+  height: 100vh;
+}

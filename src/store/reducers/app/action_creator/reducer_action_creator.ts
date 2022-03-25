@@ -1,4 +1,4 @@
-import { IFriends } from "../../../../lib/models/IFriends";
+import { IFriends, IFriendsUser } from "../../../../lib/models/IFriends";
 import { IGroup, IGroupObject } from "../../../../lib/models/IGroup";
 import { IUser, IUserObject } from "../../../../lib/models/IUser";
 import {
@@ -30,7 +30,9 @@ export const AppReducerActionCreators = {
     type: AppActionEnum.SET_FRIENDS_COLLECTION_SNAP,
     payload: arr,
   }),
-  setFriendsCollectionList: (arr: IFriends[]): SetFriendsCollectionList => ({
+  setFriendsCollectionList: (
+    arr: IFriendsUser[]
+  ): SetFriendsCollectionList => ({
     type: AppActionEnum.SET_FRIENDS_COLLECTION_LIST,
     payload: arr,
   }),
@@ -44,7 +46,7 @@ export const AppReducerActionCreators = {
     type: AppActionEnum.SET_GROUPS_OBJECT_COLLECTION_LIST,
     payload: obj,
   }),
-  SetMyGroupList: (arr: IGroup[]): SetMyGroupList => ({
+  setMyGroupList: (arr: IGroup[]): SetMyGroupList => ({
     type: AppActionEnum.SET_MY_GROUP_LIST,
     payload: arr,
   }),

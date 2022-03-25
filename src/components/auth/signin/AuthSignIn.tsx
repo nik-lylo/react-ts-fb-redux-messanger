@@ -3,30 +3,30 @@ import { Link, useNavigate } from "react-router-dom";
 import { RoutesAuthEnum } from "../../../lib/enum/router/RoutesAuthEnum";
 import { RoutesNames } from "../../../lib/enum/router/RoutesEnum";
 import { useActions } from "../../../lib/hooks/useActions";
-
+import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
 import AlertCustom from "../../UI/alert/Alert/AlertCustom";
 import Loader from "../../UI/loader/Loader/Loader";
 
 const AuthSignIn: FC = () => {
-  const [mail, setMail] = useState<string>("lulnuk1995@gmail.com");
+  const [mail, setMail] = useState<string>("lulnuk1997@gmail.com");
   const [password, setPassword] = useState<string>("199519");
-  const { setSignIn } = useActions();
+  const { setSignIn, setAuthError } = useActions();
+  const { authError, isAuthLoading } = useTypedSelector((s) => s.authReducer);
+  const { setSignInGoogle } = useActions();
   const navigate = useNavigate();
 
   useEffect(() => {
     return function (): void {
-      // setAuthError(null);
+      setAuthError(null);
     };
   }, []);
 
   function handleClickGoogleSignIn() {
-    // setGoogleSignIn(navigate);
+    setSignInGoogle(navigate);
   }
-
   function handleClickNavigate() {
     navigate(-1);
   }
-
   function handleChange(
     e: string,
     setState: React.Dispatch<React.SetStateAction<string>>
@@ -35,8 +35,6 @@ const AuthSignIn: FC = () => {
   }
   function handleSubmit(e: any): void {
     e.preventDefault();
-    console.log("w");
-
     setSignIn(mail, password, rewrite, navigate);
   }
   function rewrite(): void {
@@ -46,7 +44,7 @@ const AuthSignIn: FC = () => {
 
   return (
     <div className="auth__signin signin-auth auth__center">
-      <Loader isOpen={false} />
+      <Loader isOpen={isAuthLoading} />
       <button
         onClick={handleClickNavigate}
         className="auth__btnback icon-arrow-left"
@@ -57,11 +55,7 @@ const AuthSignIn: FC = () => {
       <div className="signin-auth__subtitle auth__subtitle">
         You can also sign in with google account
       </div>
-      <form
-        action="#"
-        className="signin-auth__form"
-        onSubmit={(e) => handleSubmit(e)}
-      >
+      <form className="signin-auth__form" onSubmit={(e) => handleSubmit(e)}>
         <input
           value={mail}
           type="email"
@@ -85,13 +79,14 @@ const AuthSignIn: FC = () => {
           Let`s go
         </button>
         <button
+          type="button"
           className="auth__link auth-registr__googlebtn"
           onClick={handleClickGoogleSignIn}
         >
           Sign In with Google
         </button>
       </form>
-      {/* {authError && <AlertCustom>{authError}</AlertCustom>} */}
+      {authError && <AlertCustom>{authError}</AlertCustom>}
       <div className="auth__subtitle signin-auth__text">
         if you are not registered click&nbsp;
         <Link

@@ -3,6 +3,7 @@ export interface IAuthState {
   isListenerAuthStarted: boolean;
   isListenerAuthBlocked: boolean;
   isAuth: boolean;
+  isAuthLoading: boolean;
   authError: string | null;
 }
 
@@ -11,6 +12,7 @@ export enum AuthActionEnum {
   SET_IS_LISTENER_AUTH_STARTED = "SET_IS_LISTENER_AUTH_STARTED",
   SET_IS_LISTENER_AUTH_BLOCKED = "SET_IS_LISTENER_AUTH_BLOCKED",
   SET_IS_AUTH = "SET_IS_AUTH",
+  SET_IS_AUTH_LOADING = "SET_IS_AUTH_LOADING",
   SET_AUTH_ERROR = "SET_AUTH_ERROR",
 }
 
@@ -26,8 +28,13 @@ export interface SetIsListenerAuthBlocked {
   type: AuthActionEnum.SET_IS_LISTENER_AUTH_BLOCKED;
   payload: boolean;
 }
+
 export interface SetIsAuth {
   type: AuthActionEnum.SET_IS_AUTH;
+  payload: boolean;
+}
+export interface SetIsAuthLoading {
+  type: AuthActionEnum.SET_IS_AUTH_LOADING;
   payload: boolean;
 }
 export interface SetAuthError {
@@ -40,4 +47,5 @@ export type AuthAction =
   | SetIsListenerAuthStarted
   | SetIsListenerAuthBlocked
   | SetIsAuth
-  | SetAuthError;
+  | SetAuthError
+  | SetIsAuthLoading;

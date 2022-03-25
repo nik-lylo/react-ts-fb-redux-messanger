@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   RoutesFullMainEnum,
   RoutesMainEnum,
@@ -8,10 +8,10 @@ import { useActions } from "../../../lib/hooks/useActions";
 
 const MainBar: FC = () => {
   const { setSignOut } = useActions();
+  const navigate = useNavigate();
   const location = useLocation();
   function handleClickSignOut() {
-    setSignOut();
-    console.log("hell");
+    setSignOut(navigate);
   }
   return (
     <div className="bar" id="con">

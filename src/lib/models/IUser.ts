@@ -16,7 +16,7 @@ export interface IUserInfo {
   hobby: string | null;
   instagram: null | string;
   twitter: null | string;
-  joined: string;
+  joined: Date;
   location: null | string;
 }
 

@@ -1,5 +1,4 @@
 import { uploadNewUser } from "../../../api/auth/uploadNewUser";
-import { dateFromNewDate } from "../../helper/dateFromNewDate";
 import { IUser } from "../../models/IUser";
 
 export async function googleSignInControl(googleUserSnap: any, checkDB: any) {
@@ -8,7 +7,6 @@ export async function googleSignInControl(googleUserSnap: any, checkDB: any) {
     return user;
   } else {
     try {
-      const newDate = dateFromNewDate(null);
       const fullName = googleUserSnap.user.displayName?.split(" ");
       const userObj: IUser = {
         name: fullName![0],
@@ -23,14 +21,13 @@ export async function googleSignInControl(googleUserSnap: any, checkDB: any) {
           hobby: null,
           instagram: null,
           twitter: null,
-          joined: newDate.date,
+          joined: new Date(),
           location: null,
         },
         invitationToGroup: [],
         myGroup: [],
       };
       await uploadNewUser(userObj, googleUserSnap.user.uid);
-      return userObj;
     } catch (e: any) {
       throw new Error(e.message);
     }

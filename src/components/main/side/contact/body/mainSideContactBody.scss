@@ -1,0 +1,26 @@
+.main-side-contact-body {
+  width: 100%;
+  max-height: calc(100vh - 112px);
+  overflow-y: auto;
+  &__title {
+    padding: 12px 16px;
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: #171a1f;
+  }
+  &__loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  &__alert {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+}
