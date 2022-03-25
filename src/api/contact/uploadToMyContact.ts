@@ -1,15 +1,15 @@
 import { doc, setDoc } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
-import { IUser } from "../../lib/models/IUser";
-import { CollEnum } from "../../lib/utilits/AppEnum";
+import { IFriends } from "../../lib/models/IFriends";
 
-export async function uploadToMyContact(myId: string, contact: IUser) {
+export async function uploadToMyContact(myId: string, contact: IFriends) {
   try {
     const colRef = doc(
       db,
-      CollEnum.USERS,
+      CollectionEnum.USERS,
       myId,
-      CollEnum.FRIENDS,
+      CollectionEnum.FRIENDS,
       contact.userID
     );
     await setDoc(colRef, contact);

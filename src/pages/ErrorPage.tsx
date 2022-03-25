@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
-import { RoutesNames } from "../lib/utilits/RoutesEnum";
+import { RoutesNames } from "../lib/enum/router/RoutesEnum";
 
 const ErrorPage: FC = () => {
   const navigate = useNavigate();

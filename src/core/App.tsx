@@ -1,118 +1,61 @@
 import React, { FC, useEffect, useState } from "react";
 import "../styles/app/app.scss";
 import AppRouter from "../router/AppRouter/AppRouter";
+import CustomLoader from "../components/UI/loader/CustomLoader/CustomLoader";
 import { useActions } from "../lib/hooks/useActions";
 import { useTypedSelector } from "../lib/hooks/useTypedSelector";
-import CustomLoader from "../components/UI/loader/CustomLoader/CustomLoader";
-import { isEmptyObj } from "../lib/helper/isEmptyObj";
-import { uploadIsOnline } from "../api/user/uploadIsOnline";
-import { IUser } from "../lib/models/IUser";
-import { IGroupObject, IUsersObject } from "../lib/models/ICommon";
-import { IGroup } from "../lib/models/IGroup";
 
 const App: FC = () => {
-  const [isMainReady, setIsMainReady] = useState<boolean>(false);
+  const [isAuthReady, setIsAuthReady] = useState<boolean>(false);
+  const { isListenerAuthStarted, userSnapId } = useTypedSelector(
+    (s) => s.authReducer
+  );
+  const { usersCollectionSnap, isUsersControllerLoaded } = useTypedSelector(
+    (s) => s.appReducer
+  );
   const {
-    setOnAuthStateChange,
-    setDefaultIsAuth,
-    setUploadUserOnline,
-    setOnContactSnapList,
-    setUsersCollectionList,
-    setIsUsersCollectioListLoaded,
-    setGroupCollectionsList,
-    setIsGroupCollectionsListLoaded,
-    setOnGroupSnapList,
-    setMyGroup,
+    setListenerAuthState,
+    setListenerUsersCollection,
+    setAppControllerUsersCollection,
+    setIsAuth,
   } = useActions();
-  const { isOnAuthStateStarted, isOnAuthStateBlocked, userSnapId } =
-    useTypedSelector((s) => s.authReducer);
-  const { user } = useTypedSelector((s) => s.profileReducer);
-  const { isUsersCollectionListLoaded, contactSnapList, usersCollectionList } =
-    useTypedSelector((s) => s.contactReducer);
-  const { groupSnapList, isGroupCollectionListLoaded, groupCollectionList } =
-    useTypedSelector((s) => s.groupReducer);
 
-  // !Коли завантажено "user" і "usersCollectionList" i "groupCollectionList" то ми
-  // !завантажуємо "myGroup" і далі встановлюємо відкриття флажка що відкриває "App"
+  // *Включаємо слухач на зміни на зміни активних користувачів
   useEffect(() => {
-    if (
-      isOnAuthStateStarted &&
-      isUsersCollectionListLoaded &&
-      isGroupCollectionListLoaded
-    ) {
-      const myGroupArray: IGroup[] = [];
-      usersCollectionList[user.userID].myGroup.map((item: string) => {
-        myGroupArray.push(groupCollectionList[item]);
-      });
-      setMyGroup(myGroupArray);
-      setIsMainReady(true);
-    }
-  }, [
-    isOnAuthStateStarted,
-    isUsersCollectionListLoaded,
-    isGroupCollectionListLoaded,
-    usersCollectionList,
-  ]);
-
-  // !При зміні масиву "groupSnapList" ми обновляємо основний масив "GroupCollectionsList"
-  useEffect(() => {
-    const object: IGroupObject = {};
-    groupSnapList.map((item: IGroup) => {
-      object[item.groupId] = item;
-    });
-    setGroupCollectionsList(object);
-    setIsGroupCollectionsListLoaded(true);
-  }, [groupSnapList]);
-
-  // !Ставимо слухач подій на коллекції "Group"
-  useEffect(() => {
-    setOnGroupSnapList();
+    setListenerAuthState();
   }, []);
 
-  // !Ставимо слухач подій на коллекції "Users"
+  // *Включаємо слухач на зміни на колекцію "Users"
   useEffect(() => {
-    setOnContactSnapList();
+    setListenerUsersCollection();
   }, []);
 
-  // !При зміні масиву "contactSnapList" ми обновляємо основний масив "UsersCollectionList"
+  // *Якщо при зміні Snap знимку колекції "Users" ми керуємо знимком і зберігаємо його в об'єкті
   useEffect(() => {
-    const object: IUsersObject = {};
-    contactSnapList.map((it: IUser) => {
-      object[it.userID] = it;
-    });
-    setUsersCollectionList(object);
-    setIsUsersCollectioListLoaded(true);
-  }, [contactSnapList]);
+    setAppControllerUsersCollection(usersCollectionSnap);
+  }, [usersCollectionSnap]);
 
-  // ! Ми ставимо "EventListener" "beforeunload" коли змінюється обєкт користувача і коли ми
-  // ! закриваємо сторінку то будевстановлюватися статус user.online "false"
+  // *Коли наш слухач користувача стартував нам потрібно встанувити "isAuth" дивлячись на "userSnapId"
   useEffect(() => {
-    if (!isEmptyObj(user)) {
-      window.addEventListener("beforeunload", (e: BeforeUnloadEvent) => {
-        setUploadUserOnline(user.userID, false);
-      });
+    if (!isListenerAuthStarted) {
+      return;
     }
-  }, [user]);
-
-  // ! Ставимо слухач подій OnAuthStateChange який дивиться чи є активний користувач в браузері
-  useEffect(() => {
-    setOnAuthStateChange();
-  }, []);
-
-  // !ООО тут дуже цікаві маніпуляції з флажками авторизації
-  useEffect(() => {
-    setDefaultIsAuth(isOnAuthStateBlocked, userSnapId);
-  }, [userSnapId]);
-
-  //!Обновлюємо статус user.online true при монтуванні компонента
-  useEffect(() => {
-    if (!isEmptyObj(user)) {
-      uploadIsOnline(user.userID, true);
+    if (userSnapId) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
     }
-  }, [user]);
+    setIsAuthReady(true);
+  }, [userSnapId, isListenerAuthStarted]);
 
   return (
-    <div className="app">{isMainReady ? <AppRouter /> : <CustomLoader />}</div>
+    <div className="app">
+      {isUsersControllerLoaded && isAuthReady ? (
+        <AppRouter />
+      ) : (
+        <CustomLoader />
+      )}
+    </div>
   );
 };
 

@@ -2,9 +2,9 @@ import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
+import { DefaultAvatar } from "../../../lib/models/DefaultValue";
 import AlertCustom from "../../UI/alert/Alert/AlertCustom";
 import Loader from "../../UI/loader/Loader/Loader";
-import { DefaultValue } from "../../../lib/models/DefaultValue";
 
 const AuthSignUp: FC = () => {
   const [name, setName] = useState<string>("");
@@ -12,12 +12,10 @@ const AuthSignUp: FC = () => {
   const [mail, setMail] = useState<string>("lulnuk1995@gmail.com");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
-  const { setSignUpUser, setAuthError } = useActions();
-  const { authError, isAuthLoading } = useTypedSelector((s) => s.authReducer);
 
   useEffect(() => {
     return function (): void {
-      setAuthError(null);
+      // setAuthError(null);
     };
   }, []);
 
@@ -36,7 +34,7 @@ const AuthSignUp: FC = () => {
 
   function handleSubmit(e: any): void {
     e.preventDefault();
-    setSignUpUser(mail, password, name, lastname, rewrite, navigate);
+    // setSignUpUser(mail, password, name, lastname, rewrite, navigate);
   }
 
   function handleClickNavigate(): void {
@@ -45,7 +43,7 @@ const AuthSignUp: FC = () => {
 
   return (
     <div className="auth__signup signup-auth auth__center">
-      <Loader isOpen={isAuthLoading} />
+      <Loader isOpen={false} />
       <button
         className="auth__btnback icon-arrow-left"
         onClick={handleClickNavigate}
@@ -56,7 +54,7 @@ const AuthSignUp: FC = () => {
           Introduce yourself
         </div>
         <div className="signup-auth__avatar">
-          <img src={DefaultValue.AVATAR_PHOTO} alt="Default Photo" />
+          <img src={DefaultAvatar.AVATAR_PHOTO} alt="Default Photo" />
         </div>
         <form
           action="#"
@@ -107,7 +105,7 @@ const AuthSignUp: FC = () => {
             Next
           </button>
         </form>
-        {authError && <AlertCustom>{authError}</AlertCustom>}
+        {/* {authError && <AlertCustom>{authError}</AlertCustom>} */}
         <div className="signup-auth__text auth__subtitle">
           By creating an account you are accepting our
           <br />

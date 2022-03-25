@@ -1,7 +1,8 @@
 import { doc, deleteDoc } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
 import { IMessage } from "../../lib/models/IMessage";
-import { CollEnum } from "../../lib/utilits/AppEnum";
+
 export async function deleteMessages(
   myId: string,
   friendId: string,
@@ -12,11 +13,11 @@ export async function deleteMessages(
       if (mess.messageID) {
         let docRef = doc(
           db,
-          CollEnum.USERS,
+          CollectionEnum.USERS,
           myId,
-          CollEnum.FRIENDS,
+          CollectionEnum.FRIENDS,
           friendId,
-          CollEnum.MESSAGES,
+          CollectionEnum.MESSAGES,
           mess.messageID
         );
         await deleteDoc(docRef);

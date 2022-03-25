@@ -1,13 +1,8 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { useActions } from "../../../lib/hooks/useActions";
-import { RoutesAuthEnum } from "../../../lib/utilits/RoutesEnum";
+import { RoutesAuthEnum } from "../../../lib/enum/router/RoutesAuthEnum";
 
 const AuthMain: FC = () => {
-  const { setIsOnAuthStateBlocked } = useActions();
-  function handleClick() {
-    setIsOnAuthStateBlocked(true);
-  }
   return (
     <div className="auth__main main-auth auth__center">
       <div className="main-auth__logo">
@@ -33,7 +28,6 @@ const AuthMain: FC = () => {
         <Link
           to={RoutesAuthEnum.SIGN_UP}
           className="auth-registr__link auth__link"
-          onClick={handleClick}
         >
           Sign Up
         </Link>

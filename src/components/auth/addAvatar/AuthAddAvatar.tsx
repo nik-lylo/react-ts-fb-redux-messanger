@@ -6,18 +6,10 @@ import CustomLoadingButton from "../../UI/buttons/CustomLoadingButton/CustomLoad
 import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
 import { useActions } from "../../../lib/hooks/useActions";
 import AlertCustom from "../../UI/alert/Alert/AlertCustom";
-import { RoutesNames } from "../../../lib/utilits/RoutesEnum";
 
 const AuthAddAvatar: FC = () => {
   const [avatar, setAvatar] = useState(null);
-  const { user } = useTypedSelector((s) => s.profileReducer);
-  const { isAuthLoading, authError } = useTypedSelector((s) => s.authReducer);
-  const {
-    setProfileUserUrlPhoto,
-    setAuthError,
-    setIsOnAuthStateBlocked,
-    setIsAuth,
-  } = useActions();
+
   const navigate = useNavigate();
   const classes = useAuthStyles();
 
@@ -27,17 +19,18 @@ const AuthAddAvatar: FC = () => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (avatar === null || avatar === undefined) {
-      setAuthError("Please select a photo on your computer");
-      return;
-    }
-    setProfileUserUrlPhoto(user.userID, avatar);
+    // if (avatar === null || avatar === undefined) {
+    //   // setAuthError("Please select a photo on your computer");
+    //   return;
+    // }
+    // if (user === null) return;
+    // setProfileUserUrlPhoto(user.userID, avatar);
   }
 
   function handleClickNavigate() {
-    setIsOnAuthStateBlocked(false);
-    setIsAuth(true);
-    navigate(RoutesNames.LOUNCHER);
+    // setIsOnAuthStateBlocked(false);
+    // setIsAuth(true);
+    // navigate(RoutesNames.LOUNCHER);
   }
 
   return (
@@ -55,7 +48,7 @@ const AuthAddAvatar: FC = () => {
           onSubmit={(e: React.FormEvent<HTMLFormElement>) => handleSubmit(e)}
         >
           <div className="auth-avatar__avatar">
-            <img src={user.urlPhoto} alt="My Avatar" />
+            {/* <img src={user ? user.urlPhoto : ""} alt="My Avatar" /> */}
           </div>
           <TextField
             className={classes.auth_avatar__input_file}
@@ -64,19 +57,19 @@ const AuthAddAvatar: FC = () => {
               handleChange(e)
             }
           />
-          <CustomLoadingButton isLoadingButton={isAuthLoading}>
+          <CustomLoadingButton isLoadingButton={false}>
             Upload
           </CustomLoadingButton>
           <button
             type="button"
-            disabled={isAuthLoading}
+            disabled={false}
             className="auth__link auth-avatar__skip"
             onClick={handleClickNavigate}
           >
             Finish
           </button>
         </form>
-        {authError && <AlertCustom>{authError}</AlertCustom>}
+        {/* {authError && <AlertCustom>{authError}</AlertCustom>} */}
       </div>
     </div>
   );

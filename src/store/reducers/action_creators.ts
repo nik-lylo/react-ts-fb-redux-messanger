@@ -1,37 +1,17 @@
-import { AuthActionCreators } from "./auth/action-creators/reducer_action_creators";
-import { AsyncAuthActionCreators } from "./auth/action-creators/async_action_creators";
-import { AuthOnStateActionCreators } from "./auth/action-creators/on_auth_state_action_creators";
-import { ProfileActionCreators } from "./profile/action-creators/reducer_action_creators";
-import { AsyncProfileActionCreators } from "./profile/action-creators/async_action_creators";
-import { ContactActionCreators } from "./contact/action_creators/reducer_action_creator";
-import { AsyncContactActionCreators } from "./contact/action_creators/async_action_creator";
-import { ControllAuthActionCreators } from "./auth/action-creators/controll_action_creatots";
-import { ControllContactActionCreators } from "./contact/action_creators/controll_action_creator";
-import { ChatActionCreators } from "./chat/action-creators/reducer_action_creators";
-import { AsyncChatActionCreators } from "./chat/action-creators/async_action_creators";
-import { OnActionCreators } from "./chat/action-creators/on_action_creators";
-import { ControllChatActionCreators } from "./chat/action-creators/controll_action_creators";
-import { OnContactActionCreators } from "./contact/action_creators/on_action_creators";
-import { GroupActionCreators } from "./group/action_creators/reducer_action_creators";
-import { AsyncGroupActionCreators } from "./group/action_creators/async_action_creators";
-import { OnGroupActionCreators } from "./group/action_creators/on_action_creators";
+import { AppControllerActionCreators } from "./app/action_creator/controller_action_creator";
+import { AppListenerActionCreators } from "./app/action_creator/listener_action_creators";
+import { AppReducerActionCreators } from "./app/action_creator/reducer_action_creator";
+import { AuthAsyncActionCreators } from "./auth/action_creator/async_action_creator";
+import { AuthListenerActionCreators } from "./auth/action_creator/listener_action_creator";
+import { AuthReducerActionCreators } from "./auth/action_creator/reducer_action_creator";
+import { ProfileReducerActionCreators } from "./profile/action_creator/reducer_action_creator";
 
 export const allActionCreators = {
-  ...AuthActionCreators,
-  ...AsyncAuthActionCreators,
-  ...AuthOnStateActionCreators,
-  ...ProfileActionCreators,
-  ...AsyncProfileActionCreators,
-  ...ContactActionCreators,
-  ...AsyncContactActionCreators,
-  ...ControllAuthActionCreators,
-  ...ControllContactActionCreators,
-  ...ChatActionCreators,
-  ...AsyncChatActionCreators,
-  ...OnActionCreators,
-  ...ControllChatActionCreators,
-  ...OnContactActionCreators,
-  ...GroupActionCreators,
-  ...AsyncGroupActionCreators,
-  ...OnGroupActionCreators,
+  ...AppReducerActionCreators,
+  ...AppListenerActionCreators,
+  ...AppControllerActionCreators,
+  ...AuthReducerActionCreators,
+  ...AuthListenerActionCreators,
+  ...AuthAsyncActionCreators,
+  ...ProfileReducerActionCreators,
 };

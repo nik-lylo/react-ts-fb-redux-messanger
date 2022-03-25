@@ -1,26 +1,26 @@
 import React, { FC, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { RoutesAuthEnum } from "../../../lib/enum/router/RoutesAuthEnum";
+import { RoutesNames } from "../../../lib/enum/router/RoutesEnum";
 import { useActions } from "../../../lib/hooks/useActions";
-import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
-import { RoutesAuthEnum, RoutesNames } from "../../../lib/utilits/RoutesEnum";
+
 import AlertCustom from "../../UI/alert/Alert/AlertCustom";
 import Loader from "../../UI/loader/Loader/Loader";
 
 const AuthSignIn: FC = () => {
   const [mail, setMail] = useState<string>("lulnuk1995@gmail.com");
-  const [password, setPassword] = useState<string>("");
-  const { setSignInUser, setAuthError, setGoogleSignIn } = useActions();
-  const { authError, isAuthLoading } = useTypedSelector((s) => s.authReducer);
+  const [password, setPassword] = useState<string>("199519");
+  const { setSignIn } = useActions();
   const navigate = useNavigate();
 
   useEffect(() => {
     return function (): void {
-      setAuthError(null);
+      // setAuthError(null);
     };
   }, []);
 
   function handleClickGoogleSignIn() {
-    setGoogleSignIn(navigate);
+    // setGoogleSignIn(navigate);
   }
 
   function handleClickNavigate() {
@@ -35,7 +35,9 @@ const AuthSignIn: FC = () => {
   }
   function handleSubmit(e: any): void {
     e.preventDefault();
-    setSignInUser(mail, password, rewrite, navigate);
+    console.log("w");
+
+    setSignIn(mail, password, rewrite, navigate);
   }
   function rewrite(): void {
     setPassword("");
@@ -44,7 +46,7 @@ const AuthSignIn: FC = () => {
 
   return (
     <div className="auth__signin signin-auth auth__center">
-      <Loader isOpen={isAuthLoading} />
+      <Loader isOpen={false} />
       <button
         onClick={handleClickNavigate}
         className="auth__btnback icon-arrow-left"
@@ -89,7 +91,7 @@ const AuthSignIn: FC = () => {
           Sign In with Google
         </button>
       </form>
-      {authError && <AlertCustom>{authError}</AlertCustom>}
+      {/* {authError && <AlertCustom>{authError}</AlertCustom>} */}
       <div className="auth__subtitle signin-auth__text">
         if you are not registered click&nbsp;
         <Link

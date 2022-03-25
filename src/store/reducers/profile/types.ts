@@ -2,70 +2,15 @@ import { IUser } from "../../../lib/models/IUser";
 
 export interface IProfileState {
   user: IUser;
-  birthdayError: null | string;
-  editError: null | string;
-  avatarUpdateError: null | string;
-  editLoading: boolean;
-  popupAvatarUpdateOpen: boolean;
-  avatarUpdateLoading: boolean;
 }
 
-export enum ProfileEnum {
-  SET_PHOTO_URL = "SET_PHOTO_URL",
-  SET_NEW_USER = "SET_NEW_USER",
-  SET_BIRTHDAY_ERROR = "SET_BIRTHDAY_ERROR",
-  SET_EDIT_ERROR = "SET_EDIT_ERROR",
-  SET_AVATAR_UPDATE_ERROR = " SET_AVATAR_UPDATE_ERROR",
-  SET_EDIT_LOADING = "SET_EDIT_LOADING",
-  SET_AVATAR_UPDATE_LOADING = "SET_AVATAR_UPDATE_LOADING",
-  SET_POPUP_AVATAR_UPDATE_OPEN = "SET_POPUP_AVATAR_UPDATE_OPEN ",
+export enum ProfileActionEnum {
+  SET_USER = "SET_USER",
 }
 
-export interface SetPhotoUrl {
-  type: ProfileEnum.SET_PHOTO_URL;
-  payload: string;
-}
-
-export interface SetNewUser {
-  type: ProfileEnum.SET_NEW_USER;
+export interface SetUser {
+  type: ProfileActionEnum.SET_USER;
   payload: IUser;
 }
 
-export interface SetBirthdayError {
-  type: ProfileEnum.SET_BIRTHDAY_ERROR;
-  payload: string | null;
-}
-
-export interface SetEditError {
-  type: ProfileEnum.SET_EDIT_ERROR;
-  payload: string | null;
-}
-
-export interface SetEditLoading {
-  type: ProfileEnum.SET_EDIT_LOADING;
-  payload: boolean;
-}
-
-export interface SetAvatarPopupUpdateOpen {
-  type: ProfileEnum.SET_POPUP_AVATAR_UPDATE_OPEN;
-  payload: boolean;
-}
-
-export interface SetAvatarUpdateError {
-  type: ProfileEnum.SET_AVATAR_UPDATE_ERROR;
-  payload: string | null;
-}
-export interface SetAvatarUpdateLoading {
-  type: ProfileEnum.SET_AVATAR_UPDATE_LOADING;
-  payload: boolean;
-}
-
-export type ProfileAction =
-  | SetPhotoUrl
-  | SetNewUser
-  | SetBirthdayError
-  | SetEditError
-  | SetEditLoading
-  | SetAvatarPopupUpdateOpen
-  | SetAvatarUpdateError
-  | SetAvatarUpdateLoading;
+export type ProfileAction = SetUser;

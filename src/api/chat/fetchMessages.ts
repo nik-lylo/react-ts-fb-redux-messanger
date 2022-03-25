@@ -1,16 +1,17 @@
 import { collection, query, getDocs } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
 import { IMessage } from "../../lib/models/IMessage";
-import { CollEnum } from "../../lib/utilits/AppEnum";
+
 export async function fetchMessages(myId: string, deletedId: string) {
   try {
     const collRef = collection(
       db,
-      CollEnum.USERS,
+      CollectionEnum.USERS,
       myId,
-      CollEnum.FRIENDS,
+      CollectionEnum.FRIENDS,
       deletedId,
-      CollEnum.MESSAGES
+      CollectionEnum.MESSAGES
     );
     const result: IMessage[] = [];
     const q = query(collRef);

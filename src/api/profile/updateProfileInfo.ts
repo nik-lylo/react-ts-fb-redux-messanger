@@ -1,7 +1,8 @@
 import { doc, updateDoc } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
-import { IGenericObject } from "../../lib/models/ICommon";
-import { CollEnum } from "../../lib/utilits/AppEnum";
+import { IGenericObject } from "../../lib/models/DefaultValue";
+
 export async function updateProfileInfo(
   userID: string,
   infoObject: IGenericObject,
@@ -16,7 +17,7 @@ export async function updateProfileInfo(
         result[key] = infoObject[key];
       }
     }
-    const userDoc = doc(db, CollEnum.USERS, userID);
+    const userDoc = doc(db, CollectionEnum.USERS, userID);
     await updateDoc(userDoc, { info: result });
   } catch (e: any) {
     throw new Error("Error update user info!!!");

@@ -1,13 +1,9 @@
+import appReducer from "./app";
 import authReducer from "./auth";
-import chatReducer from "./chat";
-import contactReducer from "./contact";
-import groupReducer from "./group";
 import profileReducer from "./profile";
 
 export default {
+  appReducer,
   authReducer,
   profileReducer,
-  contactReducer,
-  chatReducer,
-  groupReducer,
 };

@@ -1,7 +1,7 @@
 import { collection, addDoc } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
 import { IMessage } from "../../lib/models/IMessage";
-import { CollEnum } from "../../lib/utilits/AppEnum";
 
 export async function uploadMessageToFriend(
   messageObj: IMessage,
@@ -10,11 +10,11 @@ export async function uploadMessageToFriend(
   try {
     const collRef = collection(
       db,
-      CollEnum.USERS,
+      CollectionEnum.USERS,
       selectedId,
-      CollEnum.FRIENDS,
+      CollectionEnum.FRIENDS,
       messageObj.fromID,
-      CollEnum.MESSAGES
+      CollectionEnum.MESSAGES
     );
     await addDoc(collRef, messageObj);
   } catch (e: any) {

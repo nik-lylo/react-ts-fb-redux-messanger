@@ -21,3 +21,7 @@ export interface IGroupMember {
   userId: string;
   joined: any;
 }
+
+export interface IGroupObject {
+  [key: string]: IGroup;
+}

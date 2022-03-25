@@ -1,9 +1,13 @@
 import { addDoc, collection } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
-import { CollEnum } from "../../lib/utilits/AppEnum";
 
 export async function fetchNewGroupId() {
-  const docRef = collection(db, CollEnum.GROUPS);
-  const groupId = await addDoc(docRef, { name: "test" });
-  return groupId.id;
+  try {
+    const docRef = collection(db, CollectionEnum.GROUPS);
+    const groupId = await addDoc(docRef, { name: "test" });
+    return groupId.id;
+  } catch (e: any) {
+    throw new Error(e.message);
+  }
 }

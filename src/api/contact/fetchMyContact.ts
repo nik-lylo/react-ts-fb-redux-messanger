@@ -1,14 +1,19 @@
 import { collection, getDocs, query } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
-import { IUser } from "../../lib/models/IUser";
-import { CollEnum } from "../../lib/utilits/AppEnum";
+import { IFriends } from "../../lib/models/IFriends";
 
 export async function fetchMyContact(myId: string) {
   try {
-    const colChatRef = collection(db, CollEnum.USERS, myId, CollEnum.FRIENDS);
+    const colChatRef = collection(
+      db,
+      CollectionEnum.USERS,
+      myId,
+      CollectionEnum.FRIENDS
+    );
     const queryRef = query(colChatRef);
     const chatSnap = await getDocs(queryRef);
-    const chatArray: IUser[] = [];
+    const chatArray: IFriends[] = [];
     chatSnap.docs.forEach((it: any) => chatArray.push(it.data()));
     return chatArray;
   } catch (e: any) {

@@ -1,22 +1,21 @@
 import { doc, setDoc } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
-import { IUser } from "../../lib/models/IUser";
-import { CollEnum } from "../../lib/utilits/AppEnum";
+import { IFriends } from "../../lib/models/IFriends";
 
 export async function uploadToFriendContact(
-  myProfile: IUser,
+  myFriend: IFriends,
   selectedId: string
 ) {
-  console.log(myProfile);
   try {
     const colRef = doc(
       db,
-      CollEnum.USERS,
+      CollectionEnum.USERS,
       selectedId,
-      CollEnum.FRIENDS,
-      myProfile.userID
+      CollectionEnum.FRIENDS,
+      myFriend.userID
     );
-    await setDoc(colRef, myProfile);
+    await setDoc(colRef, myFriend);
   } catch (e: any) {
     throw new Error("Error uploading new contact to Friend database!!!");
   }

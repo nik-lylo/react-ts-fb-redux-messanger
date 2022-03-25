@@ -1,5 +1,3 @@
-import { IMessage } from "./IMessage";
-
 export interface IUser {
   name: string;
   lastname: string;
@@ -8,8 +6,6 @@ export interface IUser {
   urlPhoto: string;
   online: boolean;
   info: IUserInfo;
-  lastMessage: IMessage;
-  unread: number;
   invitationToGroup: string[];
   myGroup: string[];
 }
@@ -28,4 +24,8 @@ export interface IBirthday {
   date: "" | number;
   month: string;
   year: "" | number;
+}
+
+export interface IUserObject {
+  [key: string]: IUser;
 }

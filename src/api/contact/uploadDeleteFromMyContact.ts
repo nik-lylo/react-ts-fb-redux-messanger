@@ -1,12 +1,19 @@
 import { doc, deleteDoc } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
-import { CollEnum } from "../../lib/utilits/AppEnum";
+
 export async function uploadDeleteFromMyContact(
   myId: string,
   contactId: string
 ) {
   try {
-    const docRef = doc(db, CollEnum.USERS, myId, CollEnum.FRIENDS, contactId);
+    const docRef = doc(
+      db,
+      CollectionEnum.USERS,
+      myId,
+      CollectionEnum.FRIENDS,
+      contactId
+    );
     await deleteDoc(docRef);
   } catch (e: any) {
     throw new Error(

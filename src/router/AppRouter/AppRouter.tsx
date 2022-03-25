@@ -4,7 +4,7 @@ import { IRoute, privateRoutes, publicRoutes } from "..";
 import { useTypedSelector } from "../../lib/hooks/useTypedSelector";
 
 const AppRouter: FC = () => {
-  const { isAuth } = useTypedSelector((state) => state.authReducer);
+  const { isAuth } = useTypedSelector((s) => s.authReducer);
 
   return (
     <>

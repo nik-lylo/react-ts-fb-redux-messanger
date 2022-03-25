@@ -1,7 +1,7 @@
 import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
 import { IMessage } from "../../lib/models/IMessage";
-import { CollEnum } from "../../lib/utilits/AppEnum";
 
 export async function uploadMessageToGroup(
   selectedGroupId: string,
@@ -10,9 +10,9 @@ export async function uploadMessageToGroup(
   try {
     const docRef = collection(
       db,
-      CollEnum.GROUPS,
+      CollectionEnum.GROUPS,
       selectedGroupId,
-      CollEnum.GMESSAGES
+      CollectionEnum.GMESSAGES
     );
     await addDoc(docRef, message);
   } catch (e: any) {

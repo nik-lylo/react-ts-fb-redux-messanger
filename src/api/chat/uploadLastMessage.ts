@@ -1,14 +1,21 @@
 import { doc, updateDoc } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
 import { IMessage } from "../../lib/models/IMessage";
-import { CollEnum } from "../../lib/utilits/AppEnum";
+
 export async function uploadLastMessage(
   myId: string,
   selectedId: string,
   lastMessage: IMessage
 ) {
   try {
-    const docRef = doc(db, CollEnum.USERS, myId, CollEnum.FRIENDS, selectedId);
+    const docRef = doc(
+      db,
+      CollectionEnum.USERS,
+      myId,
+      CollectionEnum.FRIENDS,
+      selectedId
+    );
     await updateDoc(docRef, {
       lastMessage: lastMessage,
     });

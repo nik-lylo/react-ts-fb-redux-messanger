@@ -1,43 +1,36 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { countAmountUnreadMessages } from "../../../lib/controlFunc/chat/countAmountUnreadMessages";
-import { useActions } from "../../../lib/hooks/useActions";
-import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
 import {
   RoutesFullMainEnum,
   RoutesMainEnum,
-} from "../../../lib/utilits/RoutesEnum";
-import Counter from "../../UI/badge/Counter";
+} from "../../../lib/enum/router/RoutesMainEnum";
+import { useActions } from "../../../lib/hooks/useActions";
 
 const MainBar: FC = () => {
-  const { user } = useTypedSelector((s) => s.profileReducer);
-  const { usersCollectionList } = useTypedSelector((s) => s.contactReducer);
-  const { amountUnreadMessages, myChatSnapList } = useTypedSelector(
-    (s) => s.chatReducer
-  );
-  const { setAmountUnreadMessages } = useActions();
+  const { setSignOut } = useActions();
   const location = useLocation();
-
-  useEffect(() => {
-    if (myChatSnapList.length === 0) {
-      return;
-    }
-    const unread = countAmountUnreadMessages(myChatSnapList);
-    console.log(unread);
-    setAmountUnreadMessages(unread);
-  }, [myChatSnapList]);
-
+  function handleClickSignOut() {
+    setSignOut();
+    console.log("hell");
+  }
   return (
     <div className="bar" id="con">
       <div className="bar__top-block">
-        <div className="bar__logo">
+        <div className="bar__logo" onClick={handleClickSignOut}>
           <img
             src={require("../../../assets/image/main/bar/logo-mini.png")}
             alt="logo-mini"
           />
         </div>
         <div className="bar__link_top bar-link-top">
-          <Link to={"#"} className="bar-link icon-compas"></Link>
+          <Link
+            to={RoutesMainEnum.GROUPS}
+            className={
+              location.pathname === RoutesFullMainEnum.MAIN_GROUPS
+                ? "bar-link icon-compas-fill link-chosen"
+                : "bar-link icon-compas"
+            }
+          ></Link>
           <Link
             to={RoutesMainEnum.CONTACT}
             className={
@@ -54,11 +47,11 @@ const MainBar: FC = () => {
                 : "bar-link icon-message-mini"
             }
           >
-            {amountUnreadMessages !== 0 && (
+            {/* {amountUnreadMessages !== 0 && (
               <div className="bar-link__badge">
                 <Counter amount={amountUnreadMessages} />
               </div>
-            )}
+            )} */}
           </Link>
           <Link
             to={RoutesMainEnum.NOTIFICATIONS}
@@ -70,19 +63,19 @@ const MainBar: FC = () => {
                 : "bar-link icon-bell"
             }
           >
-            {usersCollectionList[user.userID] === undefined
+            {/* {usersCollectionList[user!.userID] === undefined
               ? null
-              : usersCollectionList[user.userID].invitationToGroup.length !==
+              : usersCollectionList[user!.userID].invitationToGroup.length !==
                   0 && (
                   <div className="bar-link__badge">
                     <Counter
                       amount={
-                        usersCollectionList[user.userID].invitationToGroup
+                        usersCollectionList[user!.userID].invitationToGroup
                           .length
                       }
                     />
                   </div>
-                )}
+                )} */}
           </Link>
           <Link
             to={RoutesMainEnum.SETTINGS}

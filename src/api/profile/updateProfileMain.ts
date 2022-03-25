@@ -1,7 +1,8 @@
 import { doc, updateDoc } from "firebase/firestore";
+import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
-import { IGenericObject } from "../../lib/models/ICommon";
-import { CollEnum } from "../../lib/utilits/AppEnum";
+import { IGenericObject } from "../../lib/models/DefaultValue";
+
 
 export async function updateProfileMain(
   userID: string,
@@ -11,7 +12,7 @@ export async function updateProfileMain(
   try {
     console.log(mainObject);
     const result: IGenericObject = {};
-    const userRef = doc(db, CollEnum.USERS, userID);
+    const userRef = doc(db, CollectionEnum.USERS, userID);
     if (userMainObject.name === undefined) {
       result.name = mainObject.name;
     } else {
