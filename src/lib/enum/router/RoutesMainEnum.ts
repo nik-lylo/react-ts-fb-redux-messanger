@@ -24,3 +24,9 @@ export enum RoutesFullMainNotsEnum {
 export enum RoutesMainNotsEnum {
   INVITING = "inviting",
 }
+export enum RoutesMainSettingsEnum {
+  PROFILE = "profile",
+  EDIT = "edit",
+  GROUP = "group",
+  SIGN_OUT = "signout",
+}

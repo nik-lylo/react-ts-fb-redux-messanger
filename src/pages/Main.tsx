@@ -8,14 +8,13 @@ import { IUser } from "../lib/models/IUser";
 import "../styles/pages/main/index.scss";
 
 const Main: FC = () => {
-  const [isUserInstalled, setIsUserInstalled] = useState<boolean>(false);
   const { userSnapId } = useTypedSelector((s) => s.authReducer);
   const {
     usersObjectCollectionList,
     groupsCollectionSnap,
     friendsCollectionSnap,
   } = useTypedSelector((s) => s.appReducer);
-  const { user } = useTypedSelector((s) => s.profileReducer);
+  const { user, isUserInstalled } = useTypedSelector((s) => s.profileReducer);
   const {
     setUser,
     setListenerGroupsCollection,
@@ -27,6 +26,7 @@ const Main: FC = () => {
     setMyGroupList,
     setFriendsCollectionList,
     setGroupsObjectCollectionList,
+    setIsUserInstalled,
   } = useActions();
 
   function cleanup() {
@@ -36,6 +36,7 @@ const Main: FC = () => {
     setGroupsObjectCollectionList({});
     setFriendsCollectionList([]);
     setUser({} as IUser);
+    setIsUserInstalled(false);
   }
 
   // *Ставимо слухач на колекцію "Groups"
@@ -88,8 +89,8 @@ const Main: FC = () => {
       <div className="main__container">
         <div className="main__block">
           <MainBar />
-          <MainSide isUserInstalled={isUserInstalled} />
-          <MainContent isUserInstalled={isUserInstalled} />
+          <MainSide />
+          <MainContent />
         </div>
       </div>
     </div>

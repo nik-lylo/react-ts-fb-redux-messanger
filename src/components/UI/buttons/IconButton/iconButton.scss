@@ -1,0 +1,30 @@
+.icon-button {
+  display: flex;
+  padding: 12px 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  width: 100%;
+  background: none;
+  &__icon {
+    margin-right: 16px;
+    background: none;
+    font-size: 21px;
+    color: #71747a;
+  }
+  &__text {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #171a1f;
+  }
+}
+.icon-button:hover {
+  background-color: #d2d7e0b4;
+}
+.icon-button:active {
+  box-shadow: 0px 2px 4px -1px #00000033, 0px 4px 5px 0px #00000024,
+    0px 1px 10px 0px #0000001f;
+}

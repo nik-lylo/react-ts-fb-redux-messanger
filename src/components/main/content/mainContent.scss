@@ -1,4 +1,9 @@
 @import "../../../styles/helper/helper.scss";
+@import url(./contact/mainContentContact.scss);
+@import url(./chat/mainContentChat.scss);
+@import url(./group/mainContentGroup.scss);
+@import url(./notifications/mainContentNots.scss);
+@import url(./settings/mainContentSettings.scss);
 
 .content {
   @include adaptive-value("flex-basis", 1376, 700, 1016, 476);

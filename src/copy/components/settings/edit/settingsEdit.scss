@@ -1,0 +1,94 @@
+.settings-edit {
+  padding: 12px 16px 32px 16px;
+  &__flex {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__content {
+    flex: 1 1 auto;
+    padding-right: 16px;
+  }
+  &__avatar {
+    position: relative;
+  }
+  &__button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #248bf2;
+    outline: 3px solid white;
+    overflow: hidden;
+    position: absolute;
+    right: 19px;
+    top: 72px;
+  }
+  &__button-icon:hover {
+    background: #0258ad;
+  }
+}
+.settings-edit-textarea {
+  width: 100%;
+  position: relative;
+  min-height: 60px;
+  margin-bottom: 30px;
+  &__placeholder {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #9d9fa3;
+  }
+  &__placeholder_focused {
+    position: absolute;
+    top: 6px;
+    left: 16px;
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.08px;
+    color: #71747a;
+  }
+  & textarea {
+    background: rgba(201, 204, 209, 0.24);
+    resize: vertical;
+    min-height: 60px !important;
+    width: 100% !important;
+    outline: none;
+    border-radius: 8px;
+    padding: 25px 16px 16px 16px;
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #171a1f;
+  }
+}
+.settings-edit-birthday {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  &__date {
+    flex: 0 1 96px;
+  }
+  &__month {
+    flex: 0 1 165px;
+  }
+  & select {
+    width: 100%;
+  }
+  &__year {
+    flex: 0 1 128px;
+  }
+}

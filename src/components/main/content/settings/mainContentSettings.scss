@@ -1,0 +1,23 @@
+@import url(./edit/mainContentSettingsEdit.scss);
+@import url(./profile/mainContentSettingsProfile.scss);
+@import url(./signout/mainContentSettingsSignout.scss);
+.main-content-settings {
+  height: 100vh;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  &__container {
+    width: 60%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+}
+.settings-fullname {
+  font-family: SFProDisplay;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.38px;
+  color: #171a1f;
+}

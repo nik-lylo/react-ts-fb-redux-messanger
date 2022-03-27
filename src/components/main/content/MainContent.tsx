@@ -11,14 +11,11 @@ import MainContentNots from "./notifications/MainContentNots";
 import MainContentSettings from "./settings/MainContentSettings";
 import MainWrapper from "./wrapper/MainContentWrapper";
 
-interface MainContentProps {
-  isUserInstalled: boolean;
-}
-
-const MainContent: FC<MainContentProps> = ({ isUserInstalled }) => {
+const MainContent: FC = () => {
   const location = useLocation();
   const { isGroupsControllerLoaded, isFriendsControllerLoaded } =
     useTypedSelector((s) => s.appReducer);
+  const { isUserInstalled } = useTypedSelector((s) => s.profileReducer);
 
   return (
     <div className="main__content content">

@@ -2,10 +2,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 import { CollectionEnum } from "../../lib/enum/collection/CollectionEnum";
 import { db } from "../../lib/firebase";
 
-export async function uploadDeleteFromMyContact(
-  myId: string,
-  contactId: string
-) {
+export async function uploadDeleteContact(myId: string, contactId: string) {
   try {
     const docRef = doc(
       db,

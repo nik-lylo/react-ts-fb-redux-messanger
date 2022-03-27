@@ -1,0 +1,23 @@
+.info-user-card {
+  &__row {
+    display: flex;
+    padding: 12px 0px;
+    width: 100%;
+    align-items: center;
+  }
+  &__icon {
+    margin-right: 16px;
+    color: #71747a;
+    font-size: 21px;
+  }
+
+  &__text {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #171a1f;
+  }
+}

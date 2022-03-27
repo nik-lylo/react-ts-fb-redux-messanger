@@ -7,12 +7,18 @@ import Main from "../pages/Main";
 import Launcher from "../pages/Launcher";
 import { RoutesNames } from "../lib/enum/router/RoutesEnum";
 import { RoutesAuthEnum } from "../lib/enum/router/RoutesAuthEnum";
-import { RoutesMainEnum } from "../lib/enum/router/RoutesMainEnum";
+import {
+  RoutesMainEnum,
+  RoutesMainSettingsEnum,
+} from "../lib/enum/router/RoutesMainEnum";
 import MainSideContact from "../components/main/side/contact/MainSideContact";
 import MainSideChat from "../components/main/side/chat/MainSideChat";
 import MainSideSettings from "../components/main/side/settings/MainSideSettings";
 import MainSideGroups from "../components/main/side/groups/MainSideGroups";
 import MainSideNots from "../components/main/side/notifications/MainSideNots";
+import MainContentSettingsEdit from "../components/main/content/settings/edit/MainContentSettingsEdit";
+import MainContentSettingsProfile from "../components/main/content/settings/profile/MainContentSettingsProfile";
+import MainContentSettingsSignout from "../components/main/content/settings/signout/MainContentSettingsSignout";
 
 export interface IRoute {
   path: string;
@@ -49,6 +55,20 @@ export const privateRoutes: IRoute[] = [
       {
         path: RoutesMainEnum.SETTINGS,
         element: MainSideSettings,
+        children: [
+          {
+            path: RoutesMainSettingsEnum.EDIT,
+            element: MainContentSettingsEdit,
+          },
+          {
+            path: RoutesMainSettingsEnum.PROFILE,
+            element: MainContentSettingsProfile,
+          },
+          {
+            path: RoutesMainSettingsEnum.SIGN_OUT,
+            element: MainContentSettingsSignout,
+          },
+        ],
       },
       { path: RoutesMainEnum.GROUPS, element: MainSideGroups },
       { path: RoutesMainEnum.NOTIFICATIONS, element: MainSideNots },

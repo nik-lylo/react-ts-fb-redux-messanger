@@ -8,7 +8,6 @@ interface SimpleButtonLoadProps {
   type: any;
   isLoad: boolean;
   text: string;
-  // indicatorSize: string;
 }
 
 const SimpleButtonLoad: FC<SimpleButtonLoadProps> = ({
