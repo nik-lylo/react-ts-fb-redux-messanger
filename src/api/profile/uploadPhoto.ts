@@ -6,6 +6,8 @@ export async function uploadPhoto(path: string, file: any) {
     const storageRef = ref(storage, path);
     await uploadBytes(storageRef, file);
   } catch (e: any) {
+    console.log("here");
+
     throw new Error("Error uploading photo.Please try again...");
   }
 }

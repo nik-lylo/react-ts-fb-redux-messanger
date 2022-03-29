@@ -1,7 +1,7 @@
 import { AppDispatch } from "../../..";
 import { uploadDeleteContact } from "../../../../api/contact/uploadDeleteContact";
 import { uploadContactToFriends } from "../../../../api/contact/uploadToMyContact";
-import { DEFAULT_LAST_MESSAGE } from "../../../../lib/models/DefaultValue";
+import { DEFAULT_LAST_MESSAGE_CHAT } from "../../../../lib/models/DefaultValue";
 import { IFriends } from "../../../../lib/models/IFriends";
 import { IUser } from "../../../../lib/models/IUser";
 import { ContactReducerActionCreators } from "./reducer_action_creator";
@@ -13,7 +13,7 @@ export const ContactAsyncActionCreators = {
         const newFriends: IFriends = {
           userID: selectedContact.userID,
           unread: 0,
-          lastMessage: DEFAULT_LAST_MESSAGE,
+          lastMessage: DEFAULT_LAST_MESSAGE_CHAT,
         };
         await uploadContactToFriends(
           user.userID,

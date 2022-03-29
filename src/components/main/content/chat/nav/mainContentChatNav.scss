@@ -1,0 +1,37 @@
+.main-content-chat-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0px 4px 0px;
+  background: white;
+  &__profile {
+    display: flex;
+  }
+  &__name {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0.76px;
+    color: #171a1f;
+  }
+  &__members {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.92px;
+    color: #71747a;
+  }
+  &__menu button {
+    width: 48px;
+    height: 48px;
+    background: none !important;
+    color: #71747a;
+    font-size: 21.5px;
+  }
+  &__menu button:hover {
+    box-shadow: 0 0 2px 1px #9b9fa74f;
+  }
+}

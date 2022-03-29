@@ -1,5 +1,3 @@
-import { IUser } from "../../../lib/models/IUser";
-
 export interface IContactState {
   selectedContact: string | null;
 }

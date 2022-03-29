@@ -1,5 +1,11 @@
 .main-content-settings-edit {
   padding: 12px 16px 32px 16px;
+  &__title {
+    margin-bottom: 15px;
+  }
+  &__subtitle {
+    margin-bottom: 13px;
+  }
   &__flex {
     display: flex;
     justify-content: space-between;
@@ -7,9 +13,6 @@
   &__content {
     flex: 1 1 auto;
     padding-right: 16px;
-  }
-  &__avatar {
-    position: relative;
   }
   &__button-icon {
     display: flex;
@@ -80,10 +83,11 @@
   display: flex;
   justify-content: space-between;
   &__date {
-    flex: 0 1 96px;
+    flex: 0 1 90px;
   }
   &__month {
     flex: 0 1 165px;
+    margin: 0px 12px;
   }
   & select {
     width: 100%;
@@ -91,4 +95,30 @@
   &__year {
     flex: 0 1 128px;
   }
+}
+.settinds-edit-content__submit {
+  width: 100%;
+  padding: 0px 50px;
+  display: flex;
+  justify-content: center;
+}
+.settings-edit-avatar {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  &__text {
+    width: 96px;
+    margin-top: 10px;
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: rgb(241, 119, 119);
+    font-style: italic;
+  }
+}
+.edit-alert {
+  padding: 10px;
 }

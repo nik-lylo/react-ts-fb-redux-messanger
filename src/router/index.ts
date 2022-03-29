@@ -8,6 +8,7 @@ import Launcher from "../pages/Launcher";
 import { RoutesNames } from "../lib/enum/router/RoutesEnum";
 import { RoutesAuthEnum } from "../lib/enum/router/RoutesAuthEnum";
 import {
+  RoutesFullMainNotsEnum,
   RoutesMainEnum,
   RoutesMainSettingsEnum,
 } from "../lib/enum/router/RoutesMainEnum";
@@ -19,6 +20,8 @@ import MainSideNots from "../components/main/side/notifications/MainSideNots";
 import MainContentSettingsEdit from "../components/main/content/settings/edit/MainContentSettingsEdit";
 import MainContentSettingsProfile from "../components/main/content/settings/profile/MainContentSettingsProfile";
 import MainContentSettingsSignout from "../components/main/content/settings/signout/MainContentSettingsSignout";
+import MainContentSettingsGroup from "../components/main/content/settings/group/MainContentSettingsGroup";
+import MainContentNotsInviting from "../components/main/content/notifications/inviting/MainContentNotsInviting";
 
 export interface IRoute {
   path: string;
@@ -65,13 +68,26 @@ export const privateRoutes: IRoute[] = [
             element: MainContentSettingsProfile,
           },
           {
+            path: RoutesMainSettingsEnum.GROUP,
+            element: MainContentSettingsGroup,
+          },
+          {
             path: RoutesMainSettingsEnum.SIGN_OUT,
             element: MainContentSettingsSignout,
           },
         ],
       },
       { path: RoutesMainEnum.GROUPS, element: MainSideGroups },
-      { path: RoutesMainEnum.NOTIFICATIONS, element: MainSideNots },
+      {
+        path: RoutesMainEnum.NOTIFICATIONS,
+        element: MainSideNots,
+        children: [
+          {
+            path: RoutesFullMainNotsEnum.INVITING,
+            element: MainContentNotsInviting,
+          },
+        ],
+      },
     ],
   },
 

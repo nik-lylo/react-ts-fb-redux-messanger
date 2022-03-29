@@ -7,6 +7,7 @@ import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
 import BarLoader from "../../UI/loader/BarLoader/BarLoader";
 import MainContentChat from "./chat/MainContentChat";
 import MainContentContact from "./contact/MainContentContact";
+import MainContentGroup from "./group/MainContentGroup";
 import MainContentNots from "./notifications/MainContentNots";
 import MainContentSettings from "./settings/MainContentSettings";
 import MainWrapper from "./wrapper/MainContentWrapper";
@@ -35,7 +36,7 @@ const MainContent: FC = () => {
           return <MainContentNots />;
         }
         if (location.pathname === RoutesFullMainEnum.MAIN_GROUPS) {
-          return <MainContentNots />;
+          return <MainContentGroup />;
         }
         if (location.pathname === RoutesNames.MAIN) {
           if (

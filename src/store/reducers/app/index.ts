@@ -11,6 +11,7 @@ const initialState: IAppState = {
   isUsersControllerLoaded: false,
   isFriendsControllerLoaded: false,
   isGroupsControllerLoaded: false,
+  hasUserFriend: { checked: false, hasFriend: false },
 };
 
 export default function appReducer(
@@ -38,6 +39,8 @@ export default function appReducer(
       return { ...state, isFriendsControllerLoaded: action.payload };
     case AppActionEnum.SET_IS_GROUPS_CONTROLLER_LOADED:
       return { ...state, isGroupsControllerLoaded: action.payload };
+    case AppActionEnum.SET_HAS_USER_FRIEND:
+      return { ...state, hasUserFriend: action.payload };
     default:
       return state;
   }

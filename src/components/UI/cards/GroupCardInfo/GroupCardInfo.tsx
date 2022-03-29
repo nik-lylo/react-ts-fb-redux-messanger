@@ -8,7 +8,7 @@ interface GroupCardProps {
   members: number;
 }
 
-const GroupCard: FC<GroupCardProps> = ({ urlAvatar, name, members }) => {
+const GroupCardInfo: FC<GroupCardProps> = ({ urlAvatar, name, members }) => {
   return (
     <div className="group-card">
       <div className="group-card__avatar">
@@ -22,4 +22,4 @@ const GroupCard: FC<GroupCardProps> = ({ urlAvatar, name, members }) => {
   );
 };
 
-export default GroupCard;
+export default GroupCardInfo;

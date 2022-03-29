@@ -9,11 +9,11 @@
     height: 25px;
     border-radius: 50%;
     background: #248bf2;
-    outline: 2px solid white;
+    outline: 4px solid white;
     overflow: hidden;
     position: absolute;
     right: 22px;
-    top: 55px;
+    bottom: 0px;
     cursor: pointer;
   }
   &__input {

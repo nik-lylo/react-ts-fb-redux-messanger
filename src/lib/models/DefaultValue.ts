@@ -1,4 +1,4 @@
-import { IMessage } from "./IMessage";
+import { IMessageChat, IMessageGroupChat } from "./IMessage";
 
 export enum DefaultAvatar {
   AVATAR_PHOTO = "https://firebasestorage.googleapis.com/v0/b/messanger-react-type-redux.appspot.com/o/defaultPhoto%2FdefaultAvatar.jpg?alt=media&token=67a0b87e-83e5-4730-a4a3-935b482bc41f",
@@ -9,10 +9,34 @@ export interface IGenericObject {
   [key: string]: any;
 }
 
-export const DEFAULT_LAST_MESSAGE: IMessage = {
+export const DEFAULT_LAST_MESSAGE_CHAT: IMessageChat = {
   text: "__No message",
   urlPhoto: "",
   fromID: "",
   createdAt: new Date(),
   fullname: "",
 };
+export const DEFAULT_LAST_MESSAGE_CHAT_GROUP: IMessageGroupChat = {
+  text: "__No message",
+  urlPhoto: "",
+  fromID: "",
+  fromGroupID: "",
+  createdAt: new Date(),
+  fullname: "",
+};
+
+export const DefaultSelectMonth = [
+  "",
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "July",
+  "June",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];

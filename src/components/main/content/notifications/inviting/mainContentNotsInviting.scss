@@ -1,0 +1,23 @@
+.main-content-nots-inviting {
+  height: 100vh;
+  &__title {
+    padding: 10px 0px 10px 0px;
+  }
+  &__subtitle {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #71747a;
+    margin-bottom: 15px;
+  }
+  &__empty {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

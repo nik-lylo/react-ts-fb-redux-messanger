@@ -1,15 +1,20 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from "react";
-import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import AlertCustom from "../../../../UI/alert/Alert/AlertCustom";
-import AvatarRound from "../../../../UI/avatar/AvatarRound/AvatarRound";
+import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import SimpleButton from "../../../../UI/buttons/SimpleButton/SimpleButton";
-import InputSettings from "../../../../UI/input/InputSettings/InputSettings";
 import { IGenericObject } from "../../../../../lib/models/DefaultValue";
-import SelectCustom from "../../../../UI/select/SelectCustom/SelectCustom";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
+import MCSettingsEditInfo from "./info/MCSettingsEditInfo";
+import MCSettingsEditBirthday from "./birthday/MCSettingsEditBirthday";
+import MCSettingsEditContact from "./contact/MCSettingsEditContact";
+import MCSettingsEditHobby from "./hobby/MCSettingsEditHobby";
+import MCSettingsEditAvatar from "./avatar/MCSettingsEditAvatar";
+import { onChangeAvatar } from "../../../../../api/profile/onChangeAvatar";
+import { filterBirthdayObject } from "../../../../../lib/controller/profile/filterBirthdayObject";
+import { useActions } from "../../../../../lib/hooks/useActions";
+import Loader from "../../../../UI/loader/Loader/Loader";
+import AlertCustom from "../../../../UI/alert/Alert/AlertCustom";
 
 const MainContentSettingsEdit: FC = () => {
-  const [textareaFocus, setTextareaFocus] = useState<boolean>(false);
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const [name, setName] = useState<string>("");
   const [lastname, setLastname] = useState<string>("");
   const [location, setLocation] = useState<string>("");
@@ -19,24 +24,23 @@ const MainContentSettingsEdit: FC = () => {
   const [date, setDate] = useState<string>("");
   const [year, setYear] = useState<string>("");
   const [month, setMonth] = useState<string>("");
+  const [avatarFile, setAvatarFile] = useState<any>(null);
+  const [avatarLink, setAvatarLink] = useState<string>(user.urlPhoto);
 
-  const { user } = useTypedSelector((s) => s.profileReducer);
+  async function handleChangeAvatar(e: any) {
+    setAvatarFile(e.currentTarget.files[0]);
+    const linkAvatar: any = await onChangeAvatar(
+      `changeUserAvatar/${user.userID}`,
+      e.currentTarget.files[0]
+    );
+    setAvatarLink(linkAvatar);
+  }
 
-  const monthOptions: string[] = [
-    "",
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "July",
-    "June",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  const { setSettingsBirthError, setSettingsEditError, setSettingsEditUser } =
+    useActions();
+  const { settingsBirthError, settingsEditError, settingsEditLoaded } =
+    useTypedSelector((s) => s.settingsReducer);
+
   function rewrite() {
     setName("");
     setLastname("");
@@ -47,51 +51,45 @@ const MainContentSettingsEdit: FC = () => {
     setDate("");
     setYear("");
     setMonth("");
+    setAvatarFile(null);
   }
-
-  function handleChangeHobby(e: ChangeEvent<HTMLTextAreaElement>) {
-    setHobby(e.target.value);
-  }
-
-  function handleClickOpen() {
-    //     setPopupAvatarUpdateOpen(true);
-  }
-
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    //     e.preventDefault();
-    //     const mainObject: IGenericObject = { name, lastname };
-    //     const infoObject: IGenericObject = {
-    //       location,
-    //       instagram,
-    //       hobby,
-    //       twitter,
-    //     };
-    //     const birthDayObject: IGenericObject = {
-    //       date: date,
-    //       month: month,
-    //       year: year,
-    //     };
-    //     const checkNum = filterBirthdayObject(birthDayObject);
-    //     if (checkNum === 1 || checkNum === 2) {
-    //       setBirthdayError(
-    //         "If you want to change your date of birth then you need to fill in all the fields related to the date"
-    //       );
-    //       setTimeout(() => setBirthdayError(null), 4000);
-    //       return;
-    //     }
-    //     if (checkNum === 3) {
-    //       infoObject.birthDay = birthDayObject;
-    //     }
-    //     setEditUser(user.userID, infoObject, mainObject, user, rewrite);
+    console.log("wha");
+
+    e.preventDefault();
+    const mainObject: IGenericObject = { name, lastname };
+    const infoObject: IGenericObject = {
+      location,
+      instagram,
+      hobby,
+      twitter,
+    };
+    const birthDayObject: IGenericObject = {
+      date: date,
+      month: month,
+      year: year,
+    };
+    const checkNum = filterBirthdayObject(birthDayObject);
+    if (checkNum === 1 || checkNum === 2) {
+      setSettingsBirthError(
+        "If you want to change your date of birth then you need to fill in all the fields related to the date"
+      );
+      setTimeout(() => setSettingsBirthError(null), 4000);
+      return;
+    }
+    if (checkNum === 3) {
+      infoObject.birthDay = birthDayObject;
+    }
+    setSettingsEditUser(user, infoObject, mainObject, avatarFile, rewrite);
   }
 
-  //   useEffect(() => {
-  //     return () => {
-  //       rewrite();
-  //       setBirthdayError(null);
-  //       setEditError(null);
-  //     };
-  //   }, []);
+  useEffect(() => {
+    return () => {
+      rewrite();
+      setSettingsBirthError(null);
+      setSettingsEditError(null);
+    };
+  }, []);
 
   return (
     <div className="main-content-settings-edit">
@@ -106,103 +104,47 @@ const MainContentSettingsEdit: FC = () => {
           className="main-content-settings-edit__content settinds-edit-content"
           onSubmit={handleSubmit}
         >
-          <InputSettings
-            text="First name"
-            type={"text"}
-            value={name}
-            setValue={setName}
+          <MCSettingsEditInfo
+            name={name}
+            setName={setName}
+            lastname={lastname}
+            setLastname={setLastname}
+            location={location}
+            setLocation={setLocation}
           />
-          <InputSettings
-            text="Last name"
-            type="text"
-            value={lastname}
-            setValue={setLastname}
+          <MCSettingsEditBirthday
+            date={date}
+            setDate={setDate}
+            month={month}
+            setMonth={setMonth}
+            year={year}
+            setYear={setYear}
           />
-          <InputSettings
-            text="Location"
-            type="text"
-            value={location}
-            setValue={setLocation}
+          <MCSettingsEditContact
+            instagram={instagram}
+            setInstagram={setInstagram}
+            twitter={twitter}
+            setTwitter={setTwitter}
           />
-          <div className="main-17-title">Birthday</div>
-          <div className="settinds-edit-content__birthday settings-edit-birthday">
-            <div className="settings-edit-birthday__date">
-              <InputSettings
-                inputType="date"
-                text="Date"
-                type="number"
-                value={date}
-                setValue={setDate}
-              />
+          <MCSettingsEditHobby hobby={hobby} setHobby={setHobby} />
+          {settingsEditError && (
+            <div className="edit-alert">
+              <AlertCustom>{settingsEditError}</AlertCustom>
             </div>
-            <div className="settings-edit-birthday__month">
-              <SelectCustom
-                value={month}
-                setValue={setMonth}
-                name="Month"
-                optValue={monthOptions}
-              />
-            </div>
-            <div className="settings-edit-birthday__year">
-              <InputSettings
-                inputType="year"
-                text="Year"
-                type="number"
-                value={year}
-                setValue={setYear}
-              />
-            </div>
-          </div>
-          {/* {birthdayError && <AlertCustom>{birthdayError}</AlertCustom>} */}
-          <div className="main-17-title">Contact</div>
-          <InputSettings
-            text="Instagram"
-            type="text"
-            value={instagram}
-            setValue={setInstagram}
-          />
-          <InputSettings
-            text="Twitter"
-            type="text"
-            value={twitter}
-            setValue={setTwitter}
-          />
-
-          <div className="main-17-title">Hobby</div>
-          <div className="settinds-edit-content__textarea settings-edit-textarea">
-            <div
-              className={
-                textareaFocus || hobby !== ""
-                  ? "settings-edit-textarea__placeholder_focused"
-                  : "settings-edit-textarea__placeholder"
-              }
-            >
-              Hobby
-            </div>
-            <textarea
-              value={hobby}
-              onChange={(e) => handleChangeHobby(e)}
-              onFocus={() => setTextareaFocus(true)}
-              onBlur={() => setTextareaFocus(false)}
-            ></textarea>
-          </div>
-          {/* {editError && <AlertCustom>{editError}</AlertCustom>} */}
+          )}
           <div className="settinds-edit-content__submit">
-            <SimpleButton text="Save changes" isLoading={false} />
+            <div className="settinds-edit-content__button-cont">
+              <SimpleButton text="Save" isLoading={settingsEditLoaded} />
+            </div>
           </div>
         </form>
-        <div className="main-content-settings-edit__avatar">
-          <AvatarRound urlAvatar={user.urlPhoto} width="96px" height="96px" />
-          <button
-            className="main-content-settings-edit__button-icon"
-            onClick={handleClickOpen}
-          >
-            {/* <PhotoCameraIcon className={classes.settings_edit__icon_photo} /> */}
-          </button>
-        </div>
+        <MCSettingsEditAvatar
+          avatarLink={avatarLink}
+          avatarFile={avatarFile}
+          handleChangeAvatar={handleChangeAvatar}
+        />
       </div>
-      {/* <PopupAvatarUpdate isOpen={popupAvatarUpdateOpen} />
-      <Loader isOpen={editLoading} /> */}
+      <Loader isOpen={settingsEditLoaded} />
     </div>
   );
 };

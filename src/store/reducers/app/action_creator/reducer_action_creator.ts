@@ -1,4 +1,8 @@
-import { IFriends, IFriendsUser } from "../../../../lib/models/IFriends";
+import {
+  IFriends,
+  IFriendsUser,
+  IHasFriendController,
+} from "../../../../lib/models/IFriends";
 import { IGroup, IGroupObject } from "../../../../lib/models/IGroup";
 import { IUser, IUserObject } from "../../../../lib/models/IUser";
 import {
@@ -7,6 +11,7 @@ import {
   SetFriendsCollectionSnap,
   SetGroupsCollectionSnap,
   SetGroupsObjectCollectionList,
+  SetHasUserFriend,
   SetIsFriendsControllerLoaded,
   SetIsGroupsControllerLoaded,
   SetIsUsersControllerLoaded,
@@ -65,5 +70,9 @@ export const AppReducerActionCreators = {
   ): SetIsGroupsControllerLoaded => ({
     type: AppActionEnum.SET_IS_GROUPS_CONTROLLER_LOADED,
     payload: flag,
+  }),
+  setHasUserFriend: (obj: IHasFriendController): SetHasUserFriend => ({
+    type: AppActionEnum.SET_HAS_USER_FRIEND,
+    payload: obj,
   }),
 };

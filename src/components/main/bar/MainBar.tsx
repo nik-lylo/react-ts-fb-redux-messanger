@@ -4,10 +4,15 @@ import {
   RoutesFullMainEnum,
   RoutesMainEnum,
 } from "../../../lib/enum/router/RoutesMainEnum";
+import { isEmptyObj } from "../../../lib/helper/isEmptyObj";
 import { useActions } from "../../../lib/hooks/useActions";
+import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
+import Counter from "../../UI/badge/Counter";
 
 const MainBar: FC = () => {
   const { setSignOut } = useActions();
+  const { amountUnreadMessage } = useTypedSelector((s) => s.chatReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const navigate = useNavigate();
   const location = useLocation();
   function handleClickSignOut() {
@@ -47,11 +52,11 @@ const MainBar: FC = () => {
                 : "bar-link icon-message-mini"
             }
           >
-            {/* {amountUnreadMessages !== 0 && (
+            {amountUnreadMessage !== 0 && (
               <div className="bar-link__badge">
-                <Counter amount={amountUnreadMessages} />
+                <Counter amount={amountUnreadMessage} />
               </div>
-            )} */}
+            )}
           </Link>
           <Link
             to={RoutesMainEnum.NOTIFICATIONS}
@@ -63,19 +68,11 @@ const MainBar: FC = () => {
                 : "bar-link icon-bell"
             }
           >
-            {/* {usersCollectionList[user!.userID] === undefined
-              ? null
-              : usersCollectionList[user!.userID].invitationToGroup.length !==
-                  0 && (
-                  <div className="bar-link__badge">
-                    <Counter
-                      amount={
-                        usersCollectionList[user!.userID].invitationToGroup
-                          .length
-                      }
-                    />
-                  </div>
-                )} */}
+            {!isEmptyObj(user) && user.invitationToGroup.length !== 0 ? (
+              <div className="bar-link__badge">
+                <Counter amount={user.invitationToGroup.length} />
+              </div>
+            ) : null}
           </Link>
           <Link
             to={RoutesMainEnum.SETTINGS}

@@ -1,0 +1,24 @@
+.main-side-chat-header {
+  padding: 0px 0px 16px 16px;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 0px 5px 0px;
+  }
+  &__search {
+    padding: 0px 10px 0px 0px;
+  }
+}
+.chat-side-header-top {
+  &__buttons button {
+    background: none !important;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    color: #71747a;
+  }
+  &__buttons button:hover {
+    box-shadow: 0 0 2px 1px #9b9fa74f;
+  }
+}

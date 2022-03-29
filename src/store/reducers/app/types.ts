@@ -1,4 +1,8 @@
-import { IFriends, IFriendsUser } from "../../../lib/models/IFriends";
+import {
+  IFriends,
+  IFriendsUser,
+  IHasFriendController,
+} from "../../../lib/models/IFriends";
 import { IGroup, IGroupObject } from "../../../lib/models/IGroup";
 import { IUser, IUserObject } from "../../../lib/models/IUser";
 
@@ -13,6 +17,7 @@ export interface IAppState {
   isUsersControllerLoaded: boolean;
   isFriendsControllerLoaded: boolean;
   isGroupsControllerLoaded: boolean;
+  hasUserFriend: IHasFriendController;
 }
 
 export enum AppActionEnum {
@@ -26,6 +31,7 @@ export enum AppActionEnum {
   SET_IS_USERS_CONTROLLER_LOADED = "SET_IS_USERS_CONTROLLER_LOADED",
   SET_IS_FRIENDS_CONTROLLER_LOADED = "SET_IS_FRIENDS_CONTROLLER_LOADED",
   SET_IS_GROUPS_CONTROLLER_LOADED = "SET_IS_GROUPS_CONTROLLER_LOADED",
+  SET_HAS_USER_FRIEND = "SET_HAS_USER_FRIEND",
 }
 
 export interface SetUsersObjectCollectionList {
@@ -64,6 +70,10 @@ export interface SetIsUsersControllerLoaded {
   type: AppActionEnum.SET_IS_USERS_CONTROLLER_LOADED;
   payload: boolean;
 }
+export interface SetHasUserFriend {
+  type: AppActionEnum.SET_HAS_USER_FRIEND;
+  payload: IHasFriendController;
+}
 export interface SetIsGroupsControllerLoaded {
   type: AppActionEnum.SET_IS_GROUPS_CONTROLLER_LOADED;
   payload: boolean;
@@ -79,4 +89,5 @@ export type AppAction =
   | SetMyGroupList
   | SetIsFriendsControllerLoaded
   | SetIsUsersControllerLoaded
-  | SetIsGroupsControllerLoaded;
+  | SetIsGroupsControllerLoaded
+  | SetHasUserFriend;

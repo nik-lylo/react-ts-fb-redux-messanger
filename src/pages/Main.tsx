@@ -13,6 +13,7 @@ const Main: FC = () => {
     usersObjectCollectionList,
     groupsCollectionSnap,
     friendsCollectionSnap,
+    hasUserFriend,
   } = useTypedSelector((s) => s.appReducer);
   const { user, isUserInstalled } = useTypedSelector((s) => s.profileReducer);
   const {
@@ -27,6 +28,7 @@ const Main: FC = () => {
     setFriendsCollectionList,
     setGroupsObjectCollectionList,
     setIsUserInstalled,
+    setHasUserFriend,
   } = useActions();
 
   function cleanup() {
@@ -37,6 +39,7 @@ const Main: FC = () => {
     setFriendsCollectionList([]);
     setUser({} as IUser);
     setIsUserInstalled(false);
+    setHasUserFriend({ checked: false, hasFriend: false });
   }
 
   // *Ставимо слухач на колекцію "Groups"
@@ -78,7 +81,9 @@ const Main: FC = () => {
     if (userSnapId) {
       setAppControllerFriendsCollection(
         friendsCollectionSnap,
-        usersObjectCollectionList
+        usersObjectCollectionList,
+        hasUserFriend,
+        user.userID
       );
     }
     return;

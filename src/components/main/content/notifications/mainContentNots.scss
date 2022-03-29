@@ -1,0 +1,12 @@
+@import url(./inviting/mainContentNotsInviting.scss);
+.main-content-nots {
+  height: 100vh;
+  margin: 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  &__container {
+    width: 60%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+}

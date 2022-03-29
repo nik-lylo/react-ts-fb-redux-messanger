@@ -1,0 +1,36 @@
+.message-card {
+  width: 80%;
+  display: flex;
+  padding: 7px 0px 7px 0px;
+  margin: 7px 0px 7px 0px;
+
+  &__info {
+    display: flex;
+    align-items: center;
+  }
+  &__name {
+    font-family: SFProText;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #0848b8;
+    margin: 0px 9px 0px 0px;
+  }
+  &__time {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: -0.08px;
+    color: #71747a;
+  }
+  &__text {
+    font-family: SFProText;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #171a1f;
+  }
+}

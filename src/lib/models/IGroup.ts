@@ -1,4 +1,4 @@
-import { IMessage } from "./IMessage";
+import { IMessageGroupChat } from "./IMessage";
 
 export interface IGroup {
   groupId: string;
@@ -11,8 +11,8 @@ export interface IGroup {
   twitter: string | null;
   facebook: string | null;
   member_amount: number;
-  joined: string;
-  lastMessage: IMessage;
+  joined: Date;
+  lastMessage: IMessageGroupChat;
   members: IGroupMember[];
   inviting: string[];
 }

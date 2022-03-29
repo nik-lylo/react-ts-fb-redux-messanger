@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { downloadPhoto } from "../../../api/profile/downloadPhoto";
+import { onChangeAvatar } from "../../../api/profile/onChangeAvatar";
 import { uploadPhoto } from "../../../api/profile/uploadPhoto";
 import { useActions } from "../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
@@ -30,8 +31,11 @@ const AuthSignUp: FC = () => {
 
   async function handleChangeAvatar(e: any) {
     setAvatarFile(e.currentTarget.files[0]);
-    await uploadPhoto(`avatarCreatePhoto/test.png`, e.currentTarget.files[0]);
-    const linkAvatar = await downloadPhoto(`avatarCreatePhoto/test.png`);
+    const linkAvatar = await onChangeAvatar(
+      `avatarCreatePhoto/test.png`,
+      e.currentTarget.files[0]
+    );
+    if (linkAvatar === undefined) return;
     setAvatarLink(linkAvatar);
   }
 
