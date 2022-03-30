@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useActions } from "../../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import { IGroup } from "../../../../../lib/models/IGroup";
-import GroupCard from "../../../../UI/cards/GroupCardInfo/GroupCardInfo";
+import GroupCard from "../../../../UI/cards/GroupCardInfo/GroupCard";
 import PopupGroupCreate from "../../../../UI/popup/PopupGroupCreate/PopupGroupCreate";
 
 const MainContentSettingsGroup: FC = () => {
@@ -37,14 +37,7 @@ const MainContentSettingsGroup: FC = () => {
         {user.myGroup.map((groupId: string) => {
           const group: IGroup = groupsObjectCollectionList[groupId];
           if (group.admin === user.userID) {
-            return (
-              <GroupCard
-                key={group.groupId}
-                urlAvatar={group.groupAvatar}
-                name={group.name}
-                members={group.member_amount}
-              />
-            );
+            return <GroupCard key={group.groupId} group={group} />;
           }
         })}
       </div>
@@ -55,14 +48,7 @@ const MainContentSettingsGroup: FC = () => {
         {user.myGroup.map((groupId: string) => {
           const group: IGroup = groupsObjectCollectionList[groupId];
           if (group.admin !== user.userID) {
-            return (
-              <GroupCard
-                key={group.groupId}
-                urlAvatar={group.groupAvatar}
-                name={group.name}
-                members={group.member_amount}
-              />
-            );
+            return <GroupCard key={group.groupId} group={group} />;
           }
         })}
       </div>

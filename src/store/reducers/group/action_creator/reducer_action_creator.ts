@@ -3,6 +3,8 @@ import {
   SetGroupCreateError,
   SetGroupCreateIsLoaded,
   SetOpenPopupCreateGroup,
+  SetOpenPopupEditGroup,
+  SetSelectedGroupInfo,
 } from "../types";
 
 export const GroupReducerActionCreators = {
@@ -17,5 +19,13 @@ export const GroupReducerActionCreators = {
   setGroupCreateError: (err: null | string): SetGroupCreateError => ({
     type: GroupActionEnum.SET_GROUP_CREATE_ERROR,
     payload: err,
+  }),
+  setSelectedGroupInfo: (id: string | null): SetSelectedGroupInfo => ({
+    type: GroupActionEnum.SET_SELECTED_GROUP_INFO,
+    payload: id,
+  }),
+  setOpenPopupEditGroup: (flag: boolean): SetOpenPopupEditGroup => ({
+    type: GroupActionEnum.SET_OPEN_POPUP_EDIT_GROUP,
+    payload: flag,
   }),
 };

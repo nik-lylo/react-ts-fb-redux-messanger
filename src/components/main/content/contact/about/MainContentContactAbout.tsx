@@ -1,9 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { dateFromCreatedAt } from "../../../../../lib/helper/dateFromCreatedAt";
-import { dateFromNewDate } from "../../../../../lib/helper/dateFromNewDate";
 import { parseBirthdayField } from "../../../../../lib/helper/parseBirthdayField";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
-import GroupCardInfo from "../../../../UI/cards/GroupCardInfo/GroupCardInfo";
 import InfoUserCard from "../../../../UI/cards/InfoUserCard/InfoUserCard";
 
 const MainContentContactAbout: FC = () => {
@@ -11,18 +9,6 @@ const MainContentContactAbout: FC = () => {
   const { user } = useTypedSelector((s) => s.profileReducer);
   const { selectedContact } = useTypedSelector((s) => s.contactReducer);
   const { usersObjectCollectionList } = useTypedSelector((s) => s.appReducer);
-
-  // useEffect(() => {
-  //   if (usersCollectionList[selectedContact.userID].info.birthDay === null) {
-  //     setBirthday(null);
-  //   } else {
-  //     setBirthday(
-  //       `${usersCollectionList[selectedContact.userID].info.birthDay?.date}-${
-  //         usersCollectionList[selectedContact.userID].info.birthDay?.month
-  //       }-${usersCollectionList[selectedContact.userID].info.birthDay?.year}`
-  //     );
-  //   }
-  // }, [usersCollectionList]);
   return (
     <div className="main-content-contact-about ">
       <div className="main-content-contact-about__title main-17-title">
@@ -93,7 +79,7 @@ const MainContentContactAbout: FC = () => {
           <div className="contact-about-group__number">1</div>
         </div>
         <div className="contact-about-group__container">
-          <GroupCardInfo urlAvatar={user.urlPhoto} name="Tesla" members={230} />
+          {/* <GroupCardInfo urlAvatar={user.urlPhoto} name="Tesla" members={230} /> */}
         </div>
       </div>
     </div>

@@ -1,0 +1,33 @@
+.main-content-group-profile {
+  max-width: 272px;
+  flex: 1 1 272px;
+  padding: 0px 16px;
+  margin-right: 16px;
+  &__avatar {
+    margin-bottom: 16px;
+  }
+  &__name {
+    font-family: SFProDisplay;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.38px;
+    color: #171a1f;
+    margin-bottom: 4px;
+  }
+  &__members {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #71747a;
+    margin-bottom: 16px;
+  }
+  &__nav {
+    width: 100%;
+    margin-top: 15px;
+  }
+}

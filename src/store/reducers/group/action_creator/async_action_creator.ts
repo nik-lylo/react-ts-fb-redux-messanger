@@ -6,6 +6,7 @@ import { updateUserInvitationToGroupAdd } from "../../../../api/group/updateUser
 import { onChangeAvatar } from "../../../../api/profile/onChangeAvatar";
 import { uploadUpdateUser } from "../../../../api/user/uploadUpdateUser";
 import { filterGroupCreateObject } from "../../../../lib/controller/group/filterGroupCreateObject";
+import { filterGroupEditObject } from "../../../../lib/controller/group/filterGroupEditObject";
 import {
   DefaultAvatar,
   IGenericObject,
@@ -56,6 +57,46 @@ export const GroupAsyncActionCreators = {
         console.log(e.message);
       } finally {
         dispatch(GroupReducerActionCreators.setGroupCreateIsLoaded(false));
+      }
+    },
+  setGroupEdit:
+    (
+      groupId: string,
+      editObject: IGenericObject,
+      avatarFile: any,
+      rewrite: () => void,
+      setEditIsLoaded: any
+    ) =>
+    async (dispatch: AppDispatch) => {
+      console.log(editObject);
+
+      setEditIsLoaded(true);
+      try {
+        let filteredEditObject = filterGroupEditObject(editObject);
+        console.log(filteredEditObject);
+        let newAvatarUrl: string | null = null;
+        if (avatarFile !== null) {
+          let prom = await onChangeAvatar(`groupsPhoto/${groupId}`, avatarFile);
+          if (prom !== undefined) {
+            newAvatarUrl = prom;
+          } else {
+            newAvatarUrl = null;
+          }
+        }
+        if (newAvatarUrl !== null) {
+          if (filteredEditObject === undefined) {
+            filteredEditObject = { groupAvatar: newAvatarUrl };
+          } else {
+            filteredEditObject!.groupAvatar = newAvatarUrl;
+          }
+        }
+        await updateGroup(groupId, filteredEditObject);
+        rewrite();
+      } catch (e: any) {
+        console.log(e.message);
+      } finally {
+        setEditIsLoaded(false);
+        dispatch(GroupReducerActionCreators.setOpenPopupEditGroup(false));
       }
     },
   setAcceptUserToGroup:

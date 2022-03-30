@@ -1,0 +1,83 @@
+.main-content-group-about {
+  flex: 0 1 536px;
+  padding: 16px;
+  &__title {
+    margin-bottom: 12px;
+  }
+  &__text {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #171a1f;
+    margin-bottom: 8px;
+  }
+}
+.group-about-info {
+  display: flex;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  &__left {
+    max-width: 246px;
+    flex: 1 1 auto;
+    margin-right: 16px;
+  }
+  &__right {
+    max-width: 246px;
+    flex: 1 1 auto;
+  }
+}
+.group-about-member-container {
+  &__title {
+    padding: 12px 0px;
+  }
+  &__add {
+    padding: 16px 16px 16px 16px;
+    display: flex;
+    align-items: center;
+  }
+  &__button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #248bf2;
+    border-radius: 50%;
+    margin-right: 16px;
+    cursor: pointer;
+  }
+  &__button:hover {
+    background: #0553a1;
+    transform: rotate(45deg);
+    transition: all 0.2s linear 0s;
+  }
+  &__button button {
+    color: white;
+    font-size: 14px;
+    background: none;
+    transform: rotate(45deg);
+    margin-bottom: -1.5px;
+    margin-left: -1.5px;
+  }
+  &__text {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+    color: #171a1f;
+  }
+  &__number {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 24px;
+    letter-spacing: -0.41px;
+    color: #9d9fa3;
+  }
+}

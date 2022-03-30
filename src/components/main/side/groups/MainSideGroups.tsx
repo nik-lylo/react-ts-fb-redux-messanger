@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+
 import MainSideGroupsBody from "./body/MainSideGroupsBody";
 import MainSideGroupsHeader from "./header/MainSideGroupsHeader";
 
@@ -12,3 +13,5 @@ const MainSideGroups: FC = () => {
 };
 
 export default MainSideGroups;
+
+//

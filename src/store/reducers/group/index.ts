@@ -4,6 +4,8 @@ const initialState: IGroupState = {
   openPopupCreateGroup: false,
   groupCreateError: null,
   groupCreateIsLoaded: false,
+  selectedGroupInfo: null,
+  openPopupEditGroup: false,
 };
 
 export default function groupReducer(
@@ -17,6 +19,10 @@ export default function groupReducer(
       return { ...state, groupCreateError: action.payload };
     case GroupActionEnum.SET_GROUP_CREATE_IS_LOADED:
       return { ...state, groupCreateIsLoaded: action.payload };
+    case GroupActionEnum.SET_SELECTED_GROUP_INFO:
+      return { ...state, selectedGroupInfo: action.payload };
+    case GroupActionEnum.SET_OPEN_POPUP_EDIT_GROUP:
+      return { ...state, openPopupEditGroup: action.payload };
     default:
       return state;
   }
