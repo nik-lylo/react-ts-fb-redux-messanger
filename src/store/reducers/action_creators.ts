@@ -11,6 +11,7 @@ import { ChatReducerActionCreators } from "./chat/action_creator/reducer_action_
 import { ContactAsyncActionCreators } from "./contact/action_creator/async_action_creators";
 import { ContactReducerActionCreators } from "./contact/action_creator/reducer_action_creator";
 import { GroupAsyncActionCreators } from "./group/action_creator/async_action_creator";
+import { GroupAsyncControllerActionCreators } from "./group/action_creator/async_controll_action_creator";
 import { GroupReducerActionCreators } from "./group/action_creator/reducer_action_creator";
 import { ProfileReducerActionCreators } from "./profile/action_creator/reducer_action_creator";
 import { SettingsAsyncActionCreators } from "./settings/action_creator/async_action_creator";
@@ -30,6 +31,7 @@ export const allActionCreators = {
   ...SettingsAsyncActionCreators,
   ...GroupReducerActionCreators,
   ...GroupAsyncActionCreators,
+  ...GroupAsyncControllerActionCreators,
   ...ChatReducerActionCreators,
   ...ChatControllerActionCreators,
   ...ChatListenerActionCreators,

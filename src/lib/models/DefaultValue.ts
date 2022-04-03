@@ -1,3 +1,4 @@
+import { IGroup } from "./IGroup";
 import { IMessageChat, IMessageGroupChat } from "./IMessage";
 
 export enum DefaultAvatar {
@@ -24,6 +25,22 @@ export const DEFAULT_LAST_MESSAGE_CHAT_GROUP: IMessageGroupChat = {
   createdAt: new Date(),
   fullname: "",
 };
+export const DEFAULT_DELETED_GROUP: IGroup = {
+  groupId: "",
+  groupAvatar: DefaultAvatar.GROUP__IMAGE,
+  admin: "",
+  private: "Private",
+  name: "Deleted Group",
+  about: null,
+  instagram: null,
+  twitter: null,
+  facebook: null,
+  member_amount: 0,
+  joined: new Date(),
+  lastMessage: DEFAULT_LAST_MESSAGE_CHAT_GROUP,
+  members: [],
+  inviting: [],
+};
 
 export const DefaultSelectMonth = [
   "",
@@ -40,3 +57,9 @@ export const DefaultSelectMonth = [
   "November",
   "December",
 ];
+
+export interface IMuiSnackBarProps {
+  open: boolean;
+  text: string;
+  status: "success" | "error" | "info" | "warning";
+}

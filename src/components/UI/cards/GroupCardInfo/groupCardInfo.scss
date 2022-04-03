@@ -1,4 +1,4 @@
-.group-card {
+.group-card-info {
   display: flex;
   padding: 6px 20px 6px 16px;
   cursor: pointer;
@@ -16,7 +16,7 @@
     font-family: SFProText;
     font-style: italic;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 24px;
     letter-spacing: -0.24px;
     color: #171a1f;
@@ -39,19 +39,7 @@
     letter-spacing: -0.24px;
     color: #71747a;
   }
-}
-.group-card:hover {
-  background: #dfe0e28e;
-}
-.group-card_selected {
-  background: #398fe5 !important;
-  & .group-card__name {
-    color: white;
-  }
-  & .group-card__amount {
-    color: aliceblue;
-  }
-  & .group-card__status {
-    color: aliceblue;
+  &:hover {
+    background: #dfe0e28e;
   }
 }

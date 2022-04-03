@@ -1,0 +1,23 @@
+.button-close-popup {
+  position: absolute;
+  background: none;
+  color: #dbdfe7;
+  right: 25px;
+  top: 25px;
+  font-size: 30px;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    box-shadow: 0 0px 7px 2px rgba(255, 254, 254, 0.158);
+  }
+  &:active {
+    background: #9b9da1b0;
+    color: aliceblue;
+  }
+  &:disabled {
+    background: #b4b7bba8;
+    color: #171a1f57;
+  }
+}

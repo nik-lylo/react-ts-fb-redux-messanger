@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { useTypedSelector } from "../../../../../../lib/hooks/useTypedSelector";
-import ContactCard from "../../../../../UI/cards/ContactCard/ContactCard";
+
+import ContactCardInfo from "../../../../../UI/cards/ContactCardInfo/ContactCardInfo";
 import "../mainContentGroupAbout.scss";
 
 const MCGAboutAdminContainer: FC = () => {
@@ -10,17 +11,16 @@ const MCGAboutAdminContainer: FC = () => {
 
   return (
     <div>
-      <div className="group-about-member-container__title main-17-title">
+      <div className="group-about-member-container__admintitle main-17-title">
         Admin
       </div>
       {selectedGroupInfo && (
-        <ContactCard
+        <ContactCardInfo
           contact={
             usersObjectCollectionList[
               groupsObjectCollectionList[selectedGroupInfo].admin
             ]
           }
-          my={true}
         />
       )}
     </div>

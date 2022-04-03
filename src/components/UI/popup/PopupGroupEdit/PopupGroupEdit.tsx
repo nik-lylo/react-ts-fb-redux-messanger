@@ -3,6 +3,8 @@ import { onChangeAvatar } from "../../../../api/profile/onChangeAvatar";
 import { useActions } from "../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../lib/hooks/useTypedSelector";
 import { IGenericObject } from "../../../../lib/models/DefaultValue";
+import ButtonClosePopup from "../../buttons/ButtonClosePopup/ButtonClosePopup";
+import SimpleButtonCancel from "../../buttons/SimpleButtonCancel/SimpleButtonCancel";
 import SimpleButtonLoad from "../../buttons/SimpleButtonLoad/SimpleButtonLoad";
 import AvatarInput from "../../input/AvatarInput/AvatarInput";
 import InputSettings from "../../input/InputSettings/InputSettings";
@@ -128,14 +130,13 @@ const PopupGroupEdit: FC<PopupGroupEditProps> = ({ isOpen }) => {
           />
         </div>
         <div className="popup-group-edit__buttons">
-          <button
-            className="popup-group-edit__cancel"
-            type="button"
-            onClick={handleClose}
+          <SimpleButtonCancel
+            text="Cancel"
             disabled={editIsLoaded}
-          >
-            Cancel
-          </button>
+            fontSize="15px"
+            padding="8px 24px"
+            handleClick={handleClose}
+          />
           <div className="popup-group-edit__submit">
             <SimpleButtonLoad
               type="submit"
@@ -147,12 +148,7 @@ const PopupGroupEdit: FC<PopupGroupEditProps> = ({ isOpen }) => {
           </div>
         </div>
       </form>
-      <button
-        type="button"
-        onClick={handleClose}
-        className="popup-group-edit__close icon-cross"
-        disabled={editIsLoaded}
-      ></button>
+      <ButtonClosePopup handleClose={handleClose} disabled={editIsLoaded} />
     </div>
   );
 };

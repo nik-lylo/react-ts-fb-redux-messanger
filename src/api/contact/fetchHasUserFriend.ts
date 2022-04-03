@@ -12,6 +12,7 @@ export async function fetchHasUserFriend(myId: string) {
   try {
     const snapArr = [];
     let hasFriend = false;
+
     const querySnapshot = await getDocs(collectionRef);
     querySnapshot.forEach((doc) => {
       snapArr.push(doc.data());

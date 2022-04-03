@@ -29,9 +29,30 @@
     flex: 1 1 auto;
   }
 }
+
+.ml15 {
+  margin-right: 15px;
+}
+
 .group-about-member-container {
-  &__title {
+  &__admintitle {
     padding: 12px 0px;
+  }
+  &__links {
+    display: flex;
+  }
+
+  &__title {
+    cursor: pointer;
+    padding: 12px 0px;
+    color: #71747ab6 !important;
+  }
+  &__title:hover {
+    color: #171a1f !important;
+  }
+
+  &__selected {
+    color: #171a1f !important;
   }
   &__add {
     padding: 16px 16px 16px 16px;

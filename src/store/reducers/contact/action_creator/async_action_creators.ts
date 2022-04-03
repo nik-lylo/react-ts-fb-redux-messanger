@@ -8,7 +8,8 @@ import { ContactReducerActionCreators } from "./reducer_action_creator";
 
 export const ContactAsyncActionCreators = {
   setAddContact:
-    (user: IUser, selectedContact: IUser) => async (dispatch: AppDispatch) => {
+    (user: IUser, selectedContact: IUser, flagSetNull: boolean) =>
+    async (dispatch: AppDispatch) => {
       try {
         const newFriends: IFriends = {
           userID: selectedContact.userID,
@@ -20,6 +21,9 @@ export const ContactAsyncActionCreators = {
           selectedContact.userID,
           newFriends
         );
+        if (flagSetNull) {
+          dispatch(ContactReducerActionCreators.setSelectedContact(null));
+        }
       } catch (e: any) {
         console.log(e.message);
       }

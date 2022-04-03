@@ -23,7 +23,7 @@ const ContactCard: FC<ContactCardProps> = ({ contact, my }) => {
 
   function handleClickAdd(e: React.MouseEvent<HTMLButtonElement>) {
     e.stopPropagation();
-    setAddContact(user, contact);
+    setAddContact(user, contact, false);
   }
 
   return (

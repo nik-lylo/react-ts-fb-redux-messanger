@@ -8,6 +8,7 @@ interface SimpleButtonLoadProps {
   type: any;
   isLoad: boolean;
   text: string;
+  handleClick?: () => void;
 }
 
 const SimpleButtonLoad: FC<SimpleButtonLoadProps> = ({
@@ -16,9 +17,13 @@ const SimpleButtonLoad: FC<SimpleButtonLoadProps> = ({
   type,
   isLoad,
   text,
+  handleClick = null,
 }) => {
   return (
     <button
+      onClick={() => {
+        handleClick && handleClick();
+      }}
       type={type}
       disabled={isLoad}
       className={

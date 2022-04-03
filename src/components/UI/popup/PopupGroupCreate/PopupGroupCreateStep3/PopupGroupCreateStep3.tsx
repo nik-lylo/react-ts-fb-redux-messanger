@@ -66,7 +66,6 @@ const PopupGroupCreateStep3: FC<PopupGroupCreateStep3Props> = ({
           />
         </div>
         <AddToGroupList
-          myId={user.userID}
           usersArray={usersArray}
           invitedList={invitedContacts}
           setInvitedList={setInvitedContacts}

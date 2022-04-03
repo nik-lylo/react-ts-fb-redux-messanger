@@ -28,6 +28,9 @@ export const GroupAsyncActionCreators = {
       dispatch(GroupReducerActionCreators.setGroupCreateIsLoaded(true));
       try {
         const filteredCreateObj: any = filterGroupCreateObject(createObj);
+        filteredCreateObj.inviting = invitedFriends.map((it) => it.userID);
+        console.log(filteredCreateObj);
+
         const groupId = await fetchNewGroupId();
         let photoUrl: string = DefaultAvatar.GROUP__IMAGE;
         if (avatarFile !== null) {
@@ -68,12 +71,9 @@ export const GroupAsyncActionCreators = {
       setEditIsLoaded: any
     ) =>
     async (dispatch: AppDispatch) => {
-      console.log(editObject);
-
       setEditIsLoaded(true);
       try {
         let filteredEditObject = filterGroupEditObject(editObject);
-        console.log(filteredEditObject);
         let newAvatarUrl: string | null = null;
         if (avatarFile !== null) {
           let prom = await onChangeAvatar(`groupsPhoto/${groupId}`, avatarFile);
@@ -175,6 +175,27 @@ export const GroupAsyncActionCreators = {
         }, 1000);
       } catch (e: any) {
         console.log(e.message);
+      }
+    },
+  setInviteUserToGroup:
+    (
+      invitedFriends: IUser[],
+      selectedGroup: string,
+      invitingUploadArray: string[],
+      setIsInviteLoaded: any,
+      rewrite: () => void
+    ) =>
+    async (dispatch: AppDispatch) => {
+      setIsInviteLoaded(true);
+      try {
+        const uploadGroupObject = { inviting: invitingUploadArray };
+        await updateGroup(selectedGroup, uploadGroupObject);
+        await updateUserInvitationToGroupAdd(invitedFriends, selectedGroup);
+        rewrite();
+      } catch (e: any) {
+        console.log(e.message);
+      } finally {
+        setIsInviteLoaded(false);
       }
     },
 };

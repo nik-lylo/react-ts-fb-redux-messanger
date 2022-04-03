@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { RoutesMainEnum } from "../../../../../lib/enum/router/RoutesMainEnum";
 import { useActions } from "../../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import AvatarRound from "../../../../UI/avatar/AvatarRound/AvatarRound";
@@ -14,11 +15,12 @@ const MainContentContactProfile: FC = () => {
   const { friendsCollectionList, usersObjectCollectionList } = useTypedSelector(
     (s) => s.appReducer
   );
-  const { setDeleteContact } = useActions();
+  const { setDeleteContact, setAddContact, setSelectedChat } = useActions();
   const navigate = useNavigate();
 
   function handleClickNavigate() {
-    // navigate(RoutesMainEnum.CHAT);
+    navigate(RoutesMainEnum.CHAT);
+    setSelectedChat(selectedContact);
   }
 
   function defineIsMyContact() {
@@ -33,7 +35,10 @@ const MainContentContactProfile: FC = () => {
     setDeleteContact(user.userID, selectedContact);
   }
 
-  function handleClickAdd() {}
+  function handleClickAdd() {
+    if (selectedContact === null) return;
+    setAddContact(user, usersObjectCollectionList[selectedContact], true);
+  }
 
   useEffect(() => {
     defineIsMyContact();
@@ -61,14 +66,22 @@ const MainContentContactProfile: FC = () => {
           online={
             selectedContact
               ? usersObjectCollectionList[selectedContact].online
-              : false
+              : true
           }
         />
       </div>
       {isMyContact ? (
-        <SimpleButton text="Send Message" isLoading={false} />
+        <SimpleButton
+          text="Send Message"
+          isLoading={false}
+          handleClick={handleClickNavigate}
+        />
       ) : (
-        <SimpleButton text=" Add to friends" isLoading={false} />
+        <SimpleButton
+          text=" Add to friends"
+          isLoading={false}
+          handleClick={handleClickAdd}
+        />
       )}
       {isMyContact && (
         <div className="main-content-contact-profile__nav content-contact-profile-nav">

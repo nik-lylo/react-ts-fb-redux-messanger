@@ -7,6 +7,8 @@ export async function updateGroup(groupId: string, groupObject: any) {
     const docRef = doc(db, CollectionEnum.GROUPS, groupId);
     await updateDoc(docRef, groupObject);
   } catch (err: any) {
-    throw new Error(err.message);
+    console.log(err.message);
+
+    throw new Error("Error update group!!!");
   }
 }

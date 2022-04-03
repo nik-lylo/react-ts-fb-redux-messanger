@@ -38,7 +38,6 @@ const MainContactSide: FC = () => {
   // !При зміні нашого масиву шо фільтрований вище і основного масиву з Друзями ми а також строки
   // !яку вводимо в інпут і Фільтруємо ці масиви стосовно строки
   useEffect(() => {
-    setIsGlobalContactLoaded(false);
     if (filterString === "") {
       setFilteredFriendsContact([...friendsCollectionList]);
       setFilteredGlobalContact([...globalContact]);
@@ -47,6 +46,7 @@ const MainContactSide: FC = () => {
       }, 300);
       return;
     } else {
+      setIsGlobalContactLoaded(false);
       setFilteredGlobalContact(
         filterContactUserByString(filterString, globalContact)
       );

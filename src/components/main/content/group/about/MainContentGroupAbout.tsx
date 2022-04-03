@@ -3,10 +3,12 @@ import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 
 import MCGAboutAdminContainer from "./admin_container/MCGAboutAdminContainer";
 import MCGAboutInfo from "./info/MCGAboutInfo";
-import MCGMember from "./member/MCGMember";
+import MCGAboutMember from "./member/MCGAboutMember";
 
 const MainContentGroupAbout: FC = () => {
-  const { selectedGroupInfo } = useTypedSelector((s) => s.groupReducer);
+  const { selectedGroupInfo, roleInGroup } = useTypedSelector(
+    (s) => s.groupReducer
+  );
   const { groupsObjectCollectionList } = useTypedSelector((s) => s.appReducer);
 
   return (
@@ -18,7 +20,7 @@ const MainContentGroupAbout: FC = () => {
       </div>
       <MCGAboutInfo />
       <MCGAboutAdminContainer />
-      <MCGMember />
+      {roleInGroup && roleInGroup !== "guest" && <MCGAboutMember />}
     </div>
   );
 };

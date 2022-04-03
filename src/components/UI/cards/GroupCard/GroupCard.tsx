@@ -3,8 +3,8 @@ import { useActions } from "../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../lib/hooks/useTypedSelector";
 import { IGroup } from "../../../../lib/models/IGroup";
 import AvatarRound from "../../avatar/AvatarRound/AvatarRound";
-
 import "./groupCard.scss";
+
 interface GroupCardProps {
   group: IGroup;
 }

@@ -1,16 +1,16 @@
 .textarea-settings {
   width: 100%;
   position: relative;
-  min-height: 60px;
+  min-height: 50px;
   margin-bottom: 10px;
   &__placeholder {
     position: absolute;
-    top: 16px;
+    top: 12px;
     left: 16px;
     font-family: SFProText;
     font-style: normal;
     font-weight: normal;
-    font-size: 17px;
+    font-size: 13px;
     line-height: 24px;
     letter-spacing: -0.24px;
     color: #9d9fa3;
@@ -22,7 +22,7 @@
     font-family: SFProText;
     font-style: normal;
     font-weight: normal;
-    font-size: 13px;
+    font-size: 10px;
     line-height: 18px;
     letter-spacing: -0.08px;
     color: #71747a;
@@ -38,7 +38,7 @@
     font-family: SFProText;
     font-style: normal;
     font-weight: normal;
-    font-size: 15px;
+    font-size: 13px;
     line-height: 24px;
     letter-spacing: -0.24px;
     color: #171a1f;

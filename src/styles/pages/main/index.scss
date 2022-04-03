@@ -47,3 +47,17 @@
   letter-spacing: -0.41px;
   color: #171a1f;
 }
+// !Немає результату блок
+.main-no-match {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  font-family: SFProText;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 24px;
+  letter-spacing: -0.41px;
+  color: #171a1fd0;
+}

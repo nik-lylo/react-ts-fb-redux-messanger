@@ -4,6 +4,7 @@ import AppRouter from "../router/AppRouter/AppRouter";
 import CustomLoader from "../components/UI/loader/CustomLoader/CustomLoader";
 import { useActions } from "../lib/hooks/useActions";
 import { useTypedSelector } from "../lib/hooks/useTypedSelector";
+import { uploadUpdateUser } from "../api/user/uploadUpdateUser";
 
 const App: FC = () => {
   const [isAuthReady, setIsAuthReady] = useState<boolean>(false);
@@ -12,6 +13,7 @@ const App: FC = () => {
   const { usersCollectionSnap, isUsersControllerLoaded } = useTypedSelector(
     (s) => s.appReducer
   );
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const {
     setListenerAuthState,
     setListenerUsersCollection,
@@ -19,7 +21,17 @@ const App: FC = () => {
     setIsAuth,
   } = useActions();
 
-  // *Включаємо слухач на зміни на зміни активних користувачів
+  // ! Ми ставимо "EventListener" "beforeunload" коли змінюється обєкт користувача і коли ми
+  // ! закриваємо сторінку то будевстановлюватися статус user.online "false"
+  useEffect(() => {
+    if (user) {
+      window.addEventListener("beforeunload", (e: BeforeUnloadEvent) => {
+        uploadUpdateUser(user.userID, { online: new Date() });
+      });
+    }
+  }, [user]);
+
+  // *Включаємо слухач на зміни активних користувачів
   useEffect(() => {
     setListenerAuthState();
   }, []);
@@ -44,6 +56,7 @@ const App: FC = () => {
     }
     if (userSnapId) {
       setIsAuth(true);
+      uploadUpdateUser(userSnapId, { online: true });
     } else {
       setIsAuth(false);
     }

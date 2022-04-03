@@ -1,0 +1,25 @@
+.delete-group-chat-card {
+  display: flex;
+  padding: 8px 16px 8px 16px;
+  width: 100%;
+  cursor: pointer;
+  height: 80px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(245, 69, 69);
+  row-gap: 12px;
+  &__text {
+    text-align: center;
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: -0.24px;
+    color: white;
+  }
+}
+.delete-group-chat-card:hover {
+  background-color: rgb(248, 9, 9);
+}

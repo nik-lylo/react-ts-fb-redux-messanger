@@ -4,7 +4,7 @@ export interface IUser {
   fullname: string;
   userID: string;
   urlPhoto: string;
-  online: boolean;
+  online: true | Date;
   info: IUserInfo;
   invitationToGroup: string[];
   myGroup: string[];

@@ -11,6 +11,8 @@ export async function uploadDeleteContact(myId: string, contactId: string) {
       CollectionEnum.FRIENDS,
       contactId
     );
+    console.log("delete");
+
     await deleteDoc(docRef);
   } catch (e: any) {
     throw new Error(

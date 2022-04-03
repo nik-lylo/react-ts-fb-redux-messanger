@@ -3,10 +3,9 @@ import { dateFromCreatedAt } from "../../../../../lib/helper/dateFromCreatedAt";
 import { parseBirthdayField } from "../../../../../lib/helper/parseBirthdayField";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import InfoUserCard from "../../../../UI/cards/InfoUserCard/InfoUserCard";
+import MCCAboutMutualGroup from "./mutual_group/MCCAboutMutualGroup";
 
 const MainContentContactAbout: FC = () => {
-  const [birthday, setBirthday] = useState<null | string>(null);
-  const { user } = useTypedSelector((s) => s.profileReducer);
   const { selectedContact } = useTypedSelector((s) => s.contactReducer);
   const { usersObjectCollectionList } = useTypedSelector((s) => s.appReducer);
   return (
@@ -73,15 +72,7 @@ const MainContentContactAbout: FC = () => {
           />
         </div>
       </div>
-      <div className="main-content-contact-about__group contact-about-group">
-        <div className="contact-about-group__title">
-          <div className="contact-about-group__text">Mutual groups</div>
-          <div className="contact-about-group__number">1</div>
-        </div>
-        <div className="contact-about-group__container">
-          {/* <GroupCardInfo urlAvatar={user.urlPhoto} name="Tesla" members={230} /> */}
-        </div>
-      </div>
+      <MCCAboutMutualGroup />
     </div>
   );
 };

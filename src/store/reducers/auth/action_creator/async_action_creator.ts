@@ -6,6 +6,7 @@ import { uploadNewUser } from "../../../../api/auth/uploadNewUser";
 import { downloadPhoto } from "../../../../api/profile/downloadPhoto";
 import { uploadPhoto } from "../../../../api/profile/uploadPhoto";
 import { fetchUser } from "../../../../api/user/fetchUser";
+import { uploadUpdateUser } from "../../../../api/user/uploadUpdateUser";
 import { googleSignInControl } from "../../../../lib/controller/auth/googleSignInControl";
 import { RoutesNames } from "../../../../lib/enum/router/RoutesEnum";
 import { firebaseAuth } from "../../../../lib/firebase";
@@ -92,13 +93,15 @@ export const AuthAsyncActionCreators = {
       dispatch(AuthReducerActionCreators.setIsAuthLoading(false));
     }
   },
-  setSignOut: (navigate: any) => async (dispatch: AppDispatch) => {
-    try {
-      await signOut(firebaseAuth);
-      navigate(RoutesNames.LOUNCHER);
-    } catch (e: any) {
-      console.log(e.message);
-    } finally {
-    }
-  },
+  setSignOut:
+    (navigate: any, userID: string) => async (dispatch: AppDispatch) => {
+      try {
+        await uploadUpdateUser(userID, { online: new Date() });
+        await signOut(firebaseAuth);
+        navigate(RoutesNames.LOUNCHER);
+      } catch (e: any) {
+        console.log(e.message);
+      } finally {
+      }
+    },
 };

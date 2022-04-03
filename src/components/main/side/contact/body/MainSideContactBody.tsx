@@ -20,9 +20,7 @@ const MainSideContactBody: FC<MainSideContactBodyProps> = ({
   return (
     <div className="main-side-contact-body">
       {filterFriendsList.length === 0 && filterGlobalList.length === 0 && (
-        <div className="main-17-title main-side-contact-body__alert">
-          You have no match
-        </div>
+        <div className="main-no-match">You have no match</div>
       )}
       {isLoaded ? (
         filterFriendsList.map((item: IUser) => (

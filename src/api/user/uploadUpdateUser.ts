@@ -6,6 +6,8 @@ export async function uploadUpdateUser(userId: string, obj: {}) {
     const userUrlRef = doc(db, "Users", userId);
     await updateDoc(userUrlRef, obj);
   } catch (e: any) {
-    throw new Error("Error communicating with database.Please try again...");
+    console.log(e.message);
+
+    throw new Error("Error update user!!!");
   }
 }

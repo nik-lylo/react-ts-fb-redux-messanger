@@ -12,6 +12,7 @@ const MainContentChat: FC = () => {
     (s) => s.chatReducer
   );
   const { user } = useTypedSelector((s) => s.profileReducer);
+  const { groupsObjectCollectionList } = useTypedSelector((s) => s.appReducer);
   const {
     setListenerChatMessage,
     setListenerChatGroupMessage,

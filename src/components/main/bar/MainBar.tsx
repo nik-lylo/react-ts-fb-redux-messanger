@@ -16,7 +16,7 @@ const MainBar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   function handleClickSignOut() {
-    setSignOut(navigate);
+    setSignOut(navigate, user.userID);
   }
   return (
     <div className="bar" id="con">

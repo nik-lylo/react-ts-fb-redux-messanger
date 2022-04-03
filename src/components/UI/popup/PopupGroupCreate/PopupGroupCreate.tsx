@@ -13,6 +13,7 @@ import { IUser } from "../../../../lib/models/IUser";
 import { IGroup } from "../../../../lib/models/IGroup";
 import StepperGroupAdd from "../../stepper/StepperGroupAdd";
 import { onChangeAvatar } from "../../../../api/profile/onChangeAvatar";
+import ButtonClosePopup from "../../buttons/ButtonClosePopup/ButtonClosePopup";
 
 interface PopupGroupCreateProps {
   isOpen: boolean;
@@ -136,13 +137,10 @@ const PopupGroupCreate: FC<PopupGroupCreateProps> = ({ isOpen }) => {
           </>
         ) : null}
       </form>
-
-      <button
-        type="reset"
-        onClick={handleClickClose}
-        className="popup-group-create__close icon-cross"
+      <ButtonClosePopup
+        handleClose={handleClickClose}
         disabled={groupCreateIsLoaded}
-      ></button>
+      />
     </div>
   );
 };

@@ -5,7 +5,12 @@ const initialState: IGroupState = {
   groupCreateError: null,
   groupCreateIsLoaded: false,
   selectedGroupInfo: null,
+  statusSelectedGroup: "Public",
   openPopupEditGroup: false,
+  openPopupAddGroup: false,
+  roleInGroup: null,
+  groupChangeIsLoaded: false,
+  groupSnackbarProps: { open: false, text: "", status: "success" },
 };
 
 export default function groupReducer(
@@ -23,6 +28,16 @@ export default function groupReducer(
       return { ...state, selectedGroupInfo: action.payload };
     case GroupActionEnum.SET_OPEN_POPUP_EDIT_GROUP:
       return { ...state, openPopupEditGroup: action.payload };
+    case GroupActionEnum.SET_OPEN_POPUP_ADD_GROUP:
+      return { ...state, openPopupAddGroup: action.payload };
+    case GroupActionEnum.SET_ROLE_IN_GROUP:
+      return { ...state, roleInGroup: action.payload };
+    case GroupActionEnum.SET_STATUS_SELECTED_GROUP:
+      return { ...state, statusSelectedGroup: action.payload };
+    case GroupActionEnum.SET_GROUP_CHANGE_IS_LOADED:
+      return { ...state, groupChangeIsLoaded: action.payload };
+    case GroupActionEnum.SET_GROUP_SNACKBAR_PROPS:
+      return { ...state, groupSnackbarProps: action.payload };
     default:
       return state;
   }

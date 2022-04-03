@@ -8,6 +8,7 @@ import { dateFromCreatedAt } from "../../../../lib/helper/dateFromCreatedAt";
 import { IUser } from "../../../../lib/models/IUser";
 import { isEmpty } from "@firebase/util";
 import AvatarRound from "../../avatar/AvatarRound/AvatarRound";
+import DeleteGroupChatCard from "../DeletedGroupChatCard/DeleteGroupChatCard";
 
 interface ChatGroupCardProps {
   group: IGroup;
@@ -21,10 +22,18 @@ const ChatGroupCard: FC<ChatGroupCardProps> = ({ group }) => {
   const { setSelectedChat, setSelectedChatGroup } = useActions();
 
   function handleClick() {
+    if (group.admin === "") {
+      console.log("No Group");
+      return;
+    }
     setSelectedChatGroup(group.groupId);
     if (selectedChat !== null) {
       setSelectedChat(null);
     }
+  }
+
+  if (group.admin === "") {
+    return <DeleteGroupChatCard deletedId={group.groupId} />;
   }
 
   return (

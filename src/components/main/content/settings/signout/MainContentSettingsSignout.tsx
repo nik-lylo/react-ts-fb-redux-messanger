@@ -5,10 +5,11 @@ import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import SimpleButton from "../../../../UI/buttons/SimpleButton/SimpleButton";
 
 const MainContentSettingsSignout: FC = () => {
+  const { user } = useTypedSelector((s) => s.profileReducer);
   const { setSignOut } = useActions();
   const navigate = useNavigate();
   function handleClick() {
-    setSignOut(navigate);
+    setSignOut(navigate, user.userID);
   }
   return (
     <div className="main-content-settings-signout">

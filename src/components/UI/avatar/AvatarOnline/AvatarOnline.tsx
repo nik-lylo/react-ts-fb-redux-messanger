@@ -24,7 +24,9 @@ const AvatarOnline: FC<AvatarOnlineProps> = ({
           : "contact-card__avatar"
       }
     >
-      {contact.online && <div className="contact-card_indicator"></div>}
+      {contact.online === true && (
+        <div className="contact-card_indicator"></div>
+      )}
       <div className="contact-card__avatar__container">
         <img src={contact.urlPhoto} alt="Avatar" />
       </div>

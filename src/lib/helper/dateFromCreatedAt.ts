@@ -7,7 +7,8 @@ export function dateFromCreatedAt(createdAt: any) {
     "min",
     date.getMinutes()
   )}`;
-  const fulldate = `${rewriteTime("date", date.getDay())}/${rewriteTime(
+
+  const fulldate = `${rewriteTime("date", date.getDate())}/${rewriteTime(
     "month",
     date.getMonth()
   )}/${rewriteTime("year", date.getFullYear())}`;

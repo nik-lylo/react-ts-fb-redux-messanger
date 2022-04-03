@@ -1,6 +1,7 @@
 import { AppDispatch } from "../../..";
 import { fetchHasUserFriend } from "../../../../api/contact/fetchHasUserFriend";
 import { isEmptyObj } from "../../../../lib/helper/isEmptyObj";
+import { DEFAULT_DELETED_GROUP } from "../../../../lib/models/DefaultValue";
 import {
   IFriends,
   IFriendsUser,
@@ -31,12 +32,16 @@ export const AppControllerActionCreators = {
       groupsCollectionSnap.map((item: IGroup) => {
         result[item.groupId] = item;
       });
-      if (isEmptyObj(result) && user.myGroup.length !== 0) {
-        return;
-      }
+      // if (isEmptyObj(result) && user.myGroup.length !== 0) {
+      //   return;
+      // }
       if (user.myGroup.length > 0) {
         user.myGroup.forEach((item: string) => {
-          myGroupList.push(result[item]);
+          if (result[item] === undefined) {
+            myGroupList.push({ ...DEFAULT_DELETED_GROUP, groupId: item });
+          } else {
+            myGroupList.push(result[item]);
+          }
         });
       }
 
@@ -55,18 +60,20 @@ export const AppControllerActionCreators = {
       try {
         let unread: number = 0;
         const result: IFriendsUser[] = [];
-        let hasFriendLoacal = hasUserFriend;
+        let hasFriendLocal = hasUserFriend;
 
-        if (!hasUserFriend.checked) {
+        if (friendsCollectionSnap.length === 0) {
           const fetchHasFriend = await fetchHasUserFriend(myId);
           dispatch(AppReducerActionCreators.setHasUserFriend(fetchHasFriend));
-          hasFriendLoacal = fetchHasFriend;
+          hasFriendLocal = fetchHasFriend;
         }
-        if (hasFriendLoacal.checked && hasFriendLoacal.hasFriend) {
+
+        if (hasFriendLocal.checked && hasFriendLocal.hasFriend) {
           if (friendsCollectionSnap.length === 0) {
             return;
           }
         }
+
         if (friendsCollectionSnap.length !== 0) {
           friendsCollectionSnap.map((item: IFriends) => {
             unread = unread + item.unread;
@@ -77,7 +84,6 @@ export const AppControllerActionCreators = {
             });
           });
         }
-
         dispatch(AppReducerActionCreators.setFriendsCollectionList(result));
         dispatch(AppReducerActionCreators.setIsFriendsControllerLoaded(true));
         dispatch(ChatReducerActionCreators.setAmountUnreadMessage(unread));

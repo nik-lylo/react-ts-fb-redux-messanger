@@ -78,7 +78,7 @@ const Main: FC = () => {
 
   // *При зміні "Snap" колекції "Friends" ми контролюємо його
   useEffect(() => {
-    if (userSnapId) {
+    if (userSnapId && user.userID) {
       setAppControllerFriendsCollection(
         friendsCollectionSnap,
         usersObjectCollectionList,
@@ -86,8 +86,9 @@ const Main: FC = () => {
         user.userID
       );
     }
+
     return;
-  }, [friendsCollectionSnap]);
+  }, [friendsCollectionSnap, usersObjectCollectionList]);
 
   return (
     <div className="main">

@@ -1,0 +1,22 @@
+.contact-card-info {
+  width: 100%;
+  display: flex;
+  padding: 9px 16px;
+  cursor: pointer;
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    flex: 1 1 auto;
+  }
+  &__fullname {
+    font-family: SFProText;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: -0.24px;
+  }
+}
+.contact-card-info:hover {
+  background: #f2f3f5;
+}
