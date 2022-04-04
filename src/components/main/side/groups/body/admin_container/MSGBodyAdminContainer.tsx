@@ -1,13 +1,23 @@
 import React, { FC, useEffect, useState } from "react";
+import { filterGroupByString } from "../../../../../../lib/controller/group/filterGroupByString";
+import { useActions } from "../../../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../../../lib/hooks/useTypedSelector";
 import { IGroup } from "../../../../../../lib/models/IGroup";
 import GroupCard from "../../../../../UI/cards/GroupCard/GroupCard";
+import BarLoader from "../../../../../UI/loader/BarLoader/BarLoader";
 import "../mainSideGroupsBody.scss";
 
-const MSGBodyAdminContainer: FC = ({}) => {
-  const { groupsObjectCollectionList } = useTypedSelector((s) => s.appReducer);
-  const { user } = useTypedSelector((s) => s.profileReducer);
+interface MSGBodyAdminContainerProps {
+  searchInput: string;
+}
 
+const MSGBodyAdminContainer: FC<MSGBodyAdminContainerProps> = ({
+  searchInput,
+}) => {
+  const { groupsObjectCollectionList } = useTypedSelector((s) => s.appReducer);
+  const { groupSearchLoader } = useTypedSelector((s) => s.groupReducer);
+  const { user } = useTypedSelector((s) => s.profileReducer);
+  const { setGroupSearchLoader } = useActions();
   const [adminGroupList, setAdminGroupList] = useState<IGroup[]>([]);
 
   useEffect(() => {
@@ -18,8 +28,14 @@ const MSGBodyAdminContainer: FC = ({}) => {
         array.push(group);
       }
     });
-    setAdminGroupList(array);
-  }, [user.myGroup, groupsObjectCollectionList]);
+    if (searchInput === "") {
+      setAdminGroupList(array);
+      setGroupSearchLoader(false);
+      return;
+    }
+    const arrayFiltered = filterGroupByString(array, searchInput);
+    setAdminGroupList(arrayFiltered);
+  }, [user.myGroup, groupsObjectCollectionList, searchInput]);
 
   return (
     <>

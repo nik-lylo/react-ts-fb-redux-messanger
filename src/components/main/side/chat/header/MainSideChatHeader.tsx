@@ -1,13 +1,20 @@
 import React, { FC, useState } from "react";
 import InputSearch from "../../../../UI/input/InputSearch/InputSearch";
 
-const MainSideChatHeader: FC = () => {
-  const [filterStr, setFilterStr] = useState<string>("");
+interface MainSideChatHeaderProps {
+  seachInput: string;
+  setSearchInput: any;
+}
+
+const MainSideChatHeader: FC<MainSideChatHeaderProps> = ({
+  seachInput,
+  setSearchInput,
+}) => {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setFilterStr(e.target.value);
+    setSearchInput(e.target.value);
   }
   function clearInput() {
-    setFilterStr("");
+    setSearchInput("");
   }
   return (
     <div className="main-side-chat-header">
@@ -20,7 +27,7 @@ const MainSideChatHeader: FC = () => {
       </div>
       <div className="main-side-chat-header__search">
         <InputSearch
-          inputValue={filterStr}
+          inputValue={seachInput}
           handleChange={handleChange}
           handleClick={clearInput}
         />

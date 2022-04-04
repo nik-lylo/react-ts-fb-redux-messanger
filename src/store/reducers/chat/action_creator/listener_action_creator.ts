@@ -1,4 +1,11 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  endAt,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { AppDispatch } from "../../..";
 import { CollectionEnum } from "../../../../lib/enum/collection/CollectionEnum";
 import { db } from "../../../../lib/firebase";
@@ -21,7 +28,7 @@ export const ChatListenerActionCreators = {
         CollectionEnum.MESSAGES
       );
 
-      const q = query(collectionRef, orderBy("createdAt"));
+      const q = query(collectionRef, orderBy("createdAt"), limit(10));
       onSnapshot(q, (snap) => {
         const array: IMessageChat[] = [];
         snap.forEach((doc: any) => {

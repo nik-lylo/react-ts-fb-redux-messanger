@@ -24,7 +24,6 @@ const MCCAboutMutualGroup: FC = () => {
       usersObjectCollectionList[selectedContact].myGroup
     );
     setMutualGroup(mutualFind);
-    console.log("mutual");
   }, [selectedContact]);
 
   return (

@@ -3,6 +3,7 @@ import { AppDispatch } from "../../..";
 import { deleteGroup } from "../../../../api/group/deleteGroup";
 import { updateGroup } from "../../../../api/group/updateGroup";
 import { uploadUpdateUser } from "../../../../api/user/uploadUpdateUser";
+import { deleteAllGroupMessage } from "../../../../lib/controller/group/deleteAllGroupMessage";
 import { deleteAllInvitingInUser } from "../../../../lib/controller/group/deleteAllInvitingInUser";
 import { IGroup, IGroupMember } from "../../../../lib/models/IGroup";
 import { IUser } from "../../../../lib/models/IUser";
@@ -83,6 +84,7 @@ export const GroupAsyncControllerActionCreators = {
         const myGroupArray: string[] = user.myGroup.filter(
           (it) => it !== group.groupId
         );
+        await deleteAllGroupMessage(group.groupId);
         await deleteAllInvitingInUser(group);
         await uploadUpdateUser(user.userID, { myGroup: myGroupArray });
         await deleteGroup(group.groupId);

@@ -1,6 +1,7 @@
 import { AppDispatch } from "../../..";
 import { uploadDeleteContact } from "../../../../api/contact/uploadDeleteContact";
 import { uploadContactToFriends } from "../../../../api/contact/uploadToMyContact";
+import { deleteAllFriendMessage } from "../../../../lib/controller/contact/deleteAllFriendMessage";
 import { DEFAULT_LAST_MESSAGE_CHAT } from "../../../../lib/models/DefaultValue";
 import { IFriends } from "../../../../lib/models/IFriends";
 import { IUser } from "../../../../lib/models/IUser";
@@ -29,13 +30,17 @@ export const ContactAsyncActionCreators = {
       }
     },
   setDeleteContact:
-    (myId: string, selectedContact: string) =>
+    (myId: string, selectedContact: string, setDeleteContactLoader: any) =>
     async (dispatch: AppDispatch) => {
+      setDeleteContactLoader(true);
       try {
+        await deleteAllFriendMessage(myId, selectedContact);
         await uploadDeleteContact(myId, selectedContact);
         dispatch(ContactReducerActionCreators.setSelectedContact(null));
       } catch (e: any) {
         console.log(e.message);
+      } finally {
+        setDeleteContactLoader(false);
       }
     },
 };

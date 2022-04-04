@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { dateFromCreatedAt } from "../../../../../lib/helper/dateFromCreatedAt";
 import { parseBirthdayField } from "../../../../../lib/helper/parseBirthdayField";
 import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";

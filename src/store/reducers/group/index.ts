@@ -11,6 +11,7 @@ const initialState: IGroupState = {
   roleInGroup: null,
   groupChangeIsLoaded: false,
   groupSnackbarProps: { open: false, text: "", status: "success" },
+  groupSearchLoader: false,
 };
 
 export default function groupReducer(
@@ -38,6 +39,8 @@ export default function groupReducer(
       return { ...state, groupChangeIsLoaded: action.payload };
     case GroupActionEnum.SET_GROUP_SNACKBAR_PROPS:
       return { ...state, groupSnackbarProps: action.payload };
+    case GroupActionEnum.SET_GROUP_SEARCH_LOADER:
+      return { ...state, groupSearchLoader: action.payload };
     default:
       return state;
   }

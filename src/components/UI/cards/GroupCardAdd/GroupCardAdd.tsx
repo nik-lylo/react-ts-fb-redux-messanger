@@ -43,7 +43,7 @@ const GroupCardAdd: FC<GroupCardAddProps> = ({
         <div className="group-card-add__info">
           <div className="group-card-add__fullname">{contact.fullname}</div>
           <div className="group-card-add__status">
-            <UserStatus online={contact.online} hover={false} />
+            <UserStatus user={contact} hover={false} />
           </div>
         </div>
       </div>

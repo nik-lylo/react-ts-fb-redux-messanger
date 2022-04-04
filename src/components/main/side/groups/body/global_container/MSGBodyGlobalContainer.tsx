@@ -1,10 +1,17 @@
 import React, { FC, useEffect, useState } from "react";
+import { filterGroupByString } from "../../../../../../lib/controller/group/filterGroupByString";
 import { useTypedSelector } from "../../../../../../lib/hooks/useTypedSelector";
 import { IGroup } from "../../../../../../lib/models/IGroup";
 import GroupCard from "../../../../../UI/cards/GroupCard/GroupCard";
 import "../mainSideGroupsBody.scss";
 
-const MSGBodyGlobalContainer = () => {
+interface MSGBodyGlobalContainerProps {
+  searchInput: string;
+}
+
+const MSGBodyGlobalContainer: FC<MSGBodyGlobalContainerProps> = ({
+  searchInput,
+}) => {
   const { groupsObjectCollectionList } = useTypedSelector((s) => s.appReducer);
   const { user } = useTypedSelector((s) => s.profileReducer);
 
@@ -17,8 +24,13 @@ const MSGBodyGlobalContainer = () => {
       if (check) return;
       array.push(item);
     });
-    setGlobalGroupList(array);
-  }, [user.myGroup, groupsObjectCollectionList]);
+    if (searchInput === "") {
+      setGlobalGroupList(array);
+      return;
+    }
+    const arrayFiltered = filterGroupByString(array, searchInput);
+    setGlobalGroupList(arrayFiltered);
+  }, [user.myGroup, groupsObjectCollectionList, searchInput]);
 
   return (
     <>

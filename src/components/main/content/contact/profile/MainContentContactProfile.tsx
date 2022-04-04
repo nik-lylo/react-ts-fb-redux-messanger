@@ -6,10 +6,13 @@ import { useTypedSelector } from "../../../../../lib/hooks/useTypedSelector";
 import AvatarRound from "../../../../UI/avatar/AvatarRound/AvatarRound";
 import IconButton from "../../../../UI/buttons/IconButton/IconButton";
 import SimpleButton from "../../../../UI/buttons/SimpleButton/SimpleButton";
+import Loader from "../../../../UI/loader/Loader/Loader";
 import UserStatus from "../../../../UI/user-status/UserStatus";
 
 const MainContentContactProfile: FC = () => {
   const [isMyContact, setIsMyContact] = useState<boolean | null>(null);
+  const [deleteContactLoader, setDeleteContactLoader] =
+    useState<boolean>(false);
   const { user } = useTypedSelector((s) => s.profileReducer);
   const { selectedContact } = useTypedSelector((s) => s.contactReducer);
   const { friendsCollectionList, usersObjectCollectionList } = useTypedSelector(
@@ -32,7 +35,7 @@ const MainContentContactProfile: FC = () => {
 
   function handleClickDelete() {
     if (selectedContact === null) return;
-    setDeleteContact(user.userID, selectedContact);
+    setDeleteContact(user.userID, selectedContact, setDeleteContactLoader);
   }
 
   function handleClickAdd() {
@@ -63,11 +66,7 @@ const MainContentContactProfile: FC = () => {
       <div className="main-content-contact-profile__status">
         <UserStatus
           hover={false}
-          online={
-            selectedContact
-              ? usersObjectCollectionList[selectedContact].online
-              : true
-          }
+          user={usersObjectCollectionList[selectedContact!]}
         />
       </div>
       {isMyContact ? (
@@ -97,6 +96,7 @@ const MainContentContactProfile: FC = () => {
           />
         </div>
       )}
+      <Loader isOpen={deleteContactLoader} />
     </div>
   );
 };

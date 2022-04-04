@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useTypedSelector } from "../../../../lib/hooks/useTypedSelector";
 import { IFriendsUser } from "../../../../lib/models/IFriends";
 import { dateFromCreatedAt } from "../../../../lib/helper/dateFromCreatedAt";
@@ -25,6 +25,13 @@ const ChatCard: FC<ChatCardProps> = ({ chat }) => {
       setSelectedChatGroup(null);
     }
   }
+
+  useEffect(() => {
+    if (selectedChat === chat.userID) {
+      uploadUnreadFriend(user.userID, chat.userID);
+    }
+  }, [chat.unread]);
+
   return (
     <div
       onClick={handleClick}
@@ -59,7 +66,9 @@ const ChatCard: FC<ChatCardProps> = ({ chat }) => {
               chat.lastMessage.text
             )}
           </div>
-          {chat.unread === undefined || chat.unread === 0 ? null : (
+          {chat.unread === undefined ||
+          chat.unread === 0 ||
+          selectedChat === chat.userID ? null : (
             <div className="chat-card-content__num">
               <span>{chat.unread}</span>
             </div>

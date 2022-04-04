@@ -47,7 +47,7 @@ const ContactCard: FC<ContactCardProps> = ({ contact, my }) => {
           <div className="contact-card__status">
             <UserStatus
               hover={contact.userID === selectedContact}
-              online={contact.online}
+              user={contact}
             />
           </div>
         </div>

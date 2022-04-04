@@ -21,7 +21,7 @@ const ContactCardInfo: FC<ContactCardInfoProps> = ({ contact }) => {
         <div className="contact-card-info__block">
           <div className="contact-card-info__fullname">{contact.fullname}</div>
           <div className="contact-card-info__status">
-            <UserStatus hover={false} online={contact.online} />
+            <UserStatus hover={false} user={contact} />
           </div>
         </div>
       </div>

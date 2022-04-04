@@ -1,13 +1,18 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import MainSideGroupsBody from "./body/MainSideGroupsBody";
 import MainSideGroupsHeader from "./header/MainSideGroupsHeader";
 
 const MainSideGroups: FC = () => {
+  const [searchInput, setSearchInput] = useState<string>("");
+
   return (
     <div className="main-side-groups">
-      <MainSideGroupsHeader />
-      <MainSideGroupsBody />
+      <MainSideGroupsHeader
+        inputValue={searchInput}
+        setInputValue={setSearchInput}
+      />
+      <MainSideGroupsBody searchInput={searchInput} />
     </div>
   );
 };

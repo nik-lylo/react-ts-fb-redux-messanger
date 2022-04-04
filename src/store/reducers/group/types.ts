@@ -12,6 +12,7 @@ export interface IGroupState {
   roleInGroup: GroupRoleType;
   groupChangeIsLoaded: boolean;
   groupSnackbarProps: IMuiSnackBarProps;
+  groupSearchLoader: boolean;
 }
 
 export enum GroupActionEnum {
@@ -25,6 +26,7 @@ export enum GroupActionEnum {
   SET_STATUS_SELECTED_GROUP = "SET_STATUS_SELECTED_GROUP",
   SET_GROUP_CHANGE_IS_LOADED = "SET_GROUP_CHANGE_IS_LOADED",
   SET_GROUP_SNACKBAR_PROPS = "SET_GROUP_SNACKBAR_PROPS",
+  SET_GROUP_SEARCH_LOADER = "SET_GROUP_SEARCH_LOADER",
 }
 
 export interface SetOpenPopupCreateGroup {
@@ -67,6 +69,10 @@ export interface SetGroupSnackbarProps {
   type: GroupActionEnum.SET_GROUP_SNACKBAR_PROPS;
   payload: IMuiSnackBarProps;
 }
+export interface SetGroupSearchLoader {
+  type: GroupActionEnum.SET_GROUP_SEARCH_LOADER;
+  payload: boolean;
+}
 
 export type GroupAction =
   | SetOpenPopupCreateGroup
@@ -78,4 +84,5 @@ export type GroupAction =
   | SetRoleInGroup
   | SetStatusSelectedGroup
   | SetGroupChangeIsLoaded
-  | SetGroupSnackbarProps;
+  | SetGroupSnackbarProps
+  | SetGroupSearchLoader;

@@ -5,6 +5,7 @@ import {
   SetGroupChangeIsLoaded,
   SetGroupCreateError,
   SetGroupCreateIsLoaded,
+  SetGroupSearchLoader,
   SetGroupSnackbarProps,
   SetOpenPopupAddGroup,
   SetOpenPopupCreateGroup,
@@ -56,5 +57,9 @@ export const GroupReducerActionCreators = {
   setGroupSnackbarProps: (props: IMuiSnackBarProps): SetGroupSnackbarProps => ({
     type: GroupActionEnum.SET_GROUP_SNACKBAR_PROPS,
     payload: props,
+  }),
+  setGroupSearchLoader: (flag: boolean): SetGroupSearchLoader => ({
+    type: GroupActionEnum.SET_GROUP_SEARCH_LOADER,
+    payload: flag,
   }),
 };
