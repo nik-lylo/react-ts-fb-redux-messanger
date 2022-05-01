@@ -5,6 +5,7 @@ import CustomLoader from "../components/UI/loader/CustomLoader/CustomLoader";
 import { useActions } from "../lib/hooks/useActions";
 import { useTypedSelector } from "../lib/hooks/useTypedSelector";
 import { uploadUpdateUser } from "../api/user/uploadUpdateUser";
+import { isEmptyObj } from "../lib/helper/isEmptyObj";
 
 const App: FC = () => {
   const [isAuthReady, setIsAuthReady] = useState<boolean>(false);
@@ -24,7 +25,7 @@ const App: FC = () => {
   // ! Ми ставимо "EventListener" "beforeunload" коли змінюється обєкт користувача і коли ми
   // ! закриваємо сторінку то будевстановлюватися статус user.online "false"
   useEffect(() => {
-    if (user) {
+    if (!isEmptyObj(user)) {
       window.addEventListener("beforeunload", (e: BeforeUnloadEvent) => {
         uploadUpdateUser(user.userID, { online: new Date() });
       });

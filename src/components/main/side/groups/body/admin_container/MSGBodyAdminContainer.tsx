@@ -4,7 +4,7 @@ import { useActions } from "../../../../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../../../../lib/hooks/useTypedSelector";
 import { IGroup } from "../../../../../../lib/models/IGroup";
 import GroupCard from "../../../../../UI/cards/GroupCard/GroupCard";
-import BarLoader from "../../../../../UI/loader/BarLoader/BarLoader";
+
 import "../mainSideGroupsBody.scss";
 
 interface MSGBodyAdminContainerProps {
@@ -15,7 +15,6 @@ const MSGBodyAdminContainer: FC<MSGBodyAdminContainerProps> = ({
   searchInput,
 }) => {
   const { groupsObjectCollectionList } = useTypedSelector((s) => s.appReducer);
-  const { groupSearchLoader } = useTypedSelector((s) => s.groupReducer);
   const { user } = useTypedSelector((s) => s.profileReducer);
   const { setGroupSearchLoader } = useActions();
   const [adminGroupList, setAdminGroupList] = useState<IGroup[]>([]);

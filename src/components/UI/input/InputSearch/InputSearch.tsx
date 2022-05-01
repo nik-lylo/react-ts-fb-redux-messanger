@@ -31,5 +31,4 @@ const InputSearch: FC<InputSearchProps> = ({
     </div>
   );
 };
-
 export default InputSearch;

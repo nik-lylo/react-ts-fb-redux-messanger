@@ -10,7 +10,7 @@ import {
 import { IGroup, IGroupObject } from "../../../../lib/models/IGroup";
 import { IUser, IUserObject } from "../../../../lib/models/IUser";
 import { ChatReducerActionCreators } from "../../chat/action_creator/reducer_action_creator";
-import { AppActionEnum } from "../types";
+
 import { AppReducerActionCreators } from "./reducer_action_creator";
 
 export const AppControllerActionCreators = {
@@ -32,9 +32,6 @@ export const AppControllerActionCreators = {
       groupsCollectionSnap.map((item: IGroup) => {
         result[item.groupId] = item;
       });
-      // if (isEmptyObj(result) && user.myGroup.length !== 0) {
-      //   return;
-      // }
       if (user.myGroup.length > 0) {
         user.myGroup.forEach((item: string) => {
           if (result[item] === undefined) {
@@ -44,7 +41,6 @@ export const AppControllerActionCreators = {
           }
         });
       }
-
       dispatch(AppReducerActionCreators.setGroupsObjectCollectionList(result));
       dispatch(AppReducerActionCreators.setMyGroupList(myGroupList));
       dispatch(AppReducerActionCreators.setIsGroupsControllerLoaded(true));

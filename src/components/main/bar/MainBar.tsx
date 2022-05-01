@@ -1,32 +1,25 @@
 import React, { FC } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   RoutesFullMainEnum,
   RoutesMainEnum,
 } from "../../../lib/enum/router/RoutesMainEnum";
 import { isEmptyObj } from "../../../lib/helper/isEmptyObj";
-import { useActions } from "../../../lib/hooks/useActions";
 import { useTypedSelector } from "../../../lib/hooks/useTypedSelector";
 import Counter from "../../UI/badge/Counter";
 
 const MainBar: FC = () => {
-  const { setSignOut } = useActions();
   const { amountUnreadMessage } = useTypedSelector((s) => s.chatReducer);
   const { user } = useTypedSelector((s) => s.profileReducer);
-  const navigate = useNavigate();
   const location = useLocation();
-  function handleClickSignOut() {
-    setSignOut(navigate, user.userID);
-  }
+
   return (
     <div className="bar" id="con">
       <div className="bar__top-block">
-        <div className="bar__logo" onClick={handleClickSignOut}>
-          <img
-            src={require("../../../assets/image/main/bar/logo-mini.png")}
-            alt="logo-mini"
-          />
-        </div>
+        <img
+          src={require("../../../assets/image/main/bar/logo-mini.png")}
+          alt="logo-mini"
+        />
         <div className="bar__link_top bar-link-top">
           <Link
             to={RoutesMainEnum.GROUPS}

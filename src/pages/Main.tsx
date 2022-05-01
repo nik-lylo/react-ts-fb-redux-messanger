@@ -44,9 +44,7 @@ const Main: FC = () => {
 
   // *Ставимо слухач на колекцію "Groups"
   useEffect(() => {
-    if (userSnapId) {
-      setListenerGroupsCollection();
-    }
+    setListenerGroupsCollection();
     return () => {
       cleanup();
     };
@@ -66,8 +64,6 @@ const Main: FC = () => {
     setIsUserInstalled(true);
   }, [usersObjectCollectionList]);
 
-  useEffect(() => {}, []);
-
   // *При зміні "Snap" коллекції "Groups" ми контролюємо масив "Snap" колекції і далі
   // *встановлюємо в "MyGroupList" і в об'єкт з групами
   useEffect(() => {
@@ -86,7 +82,6 @@ const Main: FC = () => {
         user.userID
       );
     }
-
     return;
   }, [friendsCollectionSnap, usersObjectCollectionList]);
 
